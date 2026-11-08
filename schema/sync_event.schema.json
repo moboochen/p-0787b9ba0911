@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://moboochen.github.io/p-0787b9ba0911/schema/sync_event.schema.json",
+  "title": "ReviewSyncEvent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["event_id", "type", "occurred_at", "payload"],
+  "properties": {
+    "event_id": {"type": "string", "minLength": 8},
+    "type": {
+      "enum": [
+        "baseline_imported",
+        "email_parsed",
+        "proposal_created",
+        "script_created",
+        "script_approved",
+        "artifact_created",
+        "QC_completed",
+        "publication_verified"
+      ]
+    },
+    "occurred_at": {"type": "string", "description": "ISO-8601 with Asia/Taipei offset"},
+    "payload": {"type": "object"}
+  },
+  "description": "One idempotent workflow event. Re-applying the same event_id is a no-op. script_created cannot approve. script_approved does not authorize a cut or publication. QC_completed never sets publish_approved. publication_verified changes only the named platform. email_parsed kind=publish sets publish_approved only when artifact_id matches and both QC checks pass."
+}

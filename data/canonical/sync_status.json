@@ -1,0 +1,24 @@
+{
+  "canonical_revision": "ddbccd4bdc313adcc155b007af07c1c787c2190467a0192532e5548e7ca4d8b6",
+  "built_revision": "ddbccd4bdc313adcc155b007af07c1c787c2190467a0192532e5548e7ca4d8b6",
+  "last_successful_sync": null,
+  "pending": {
+    "revision": "ddbccd4bdc313adcc155b007af07c1c787c2190467a0192532e5548e7ca4d8b6",
+    "reason": "公開網址還沒有這個修訂"
+  },
+  "error": {
+    "at": "2026-11-09T02:59:32+08:00",
+    "message": "公開頁修訂不符",
+    "saw": null,
+    "expected": "ddbccd4bdc313adcc155b007af07c1c787c2190467a0192532e5548e7ca4d8b6"
+  },
+  "outbox": [
+    {
+      "revision": "ddbccd4bdc313adcc155b007af07c1c787c2190467a0192532e5548e7ca4d8b6",
+      "event_ids": [
+        "baseline-ddbccd4bdc313adc"
+      ],
+      "verified": false
+    }
+  ]
+}
