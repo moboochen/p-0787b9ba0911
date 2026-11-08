@@ -85,6 +85,9 @@ def write_jsonl(path: Path, rows: list[dict]) -> None:
     atomic_write(path, text)
 
 
+STAGE_ORDER = ("persisted", "built", "pushed_branch", "pull_request", "merged", "deployed", "verified")
+
+
 def empty_status() -> dict:
     return {
         "canonical_revision": None,
@@ -93,7 +96,25 @@ def empty_status() -> dict:
         "pending": None,
         "error": None,
         "outbox": [],
+        "stages": {name: None for name in STAGE_ORDER},
     }
+
+
+def note_stage(status: dict, name: str, revision, **extra) -> None:
+    """Record one pipeline stage. Later stages are not implied by earlier ones."""
+    if name not in STAGE_ORDER:
+        raise ValueError(name)
+    stages = status.setdefault("stages", {n: None for n in STAGE_ORDER})
+    for n in STAGE_ORDER:
+        stages.setdefault(n, None)
+    stages[name] = {"at": rv.now_taipei(), "revision": revision, **extra}
+    if name in ("persisted", "built"):
+        verified = stages.get("verified") or {}
+        if verified.get("revision") not in (None, revision):
+            stages["verified"] = None
+            stages["deployed"] = None
+            stages["merged"] = None
+            status["last_successful_sync"] = None
 
 
 def applied_ids(root: Path) -> set[str]:
@@ -229,9 +250,11 @@ def apply_bundle(root: Path, bundle: dict, html_path: Path) -> dict:
             remember_outbox(status, revision, event["event_id"])
     status["error"] = None
     status["pending"] = {"revision": revision, "reason": "資料已寫入，公開網址尚未驗證"}
+    note_stage(status, "persisted", revision)
     try:
         built = write_page(html_path, model, stills, status)
         status["built_revision"] = built
+        note_stage(status, "built", built)
     except Exception as exc:  # noqa: BLE001
         status["error"] = {"at": rv.now_taipei(), "message": "build failed: " + str(exc)}
         status["built_revision"] = None
@@ -252,6 +275,7 @@ def build_only(root: Path, html_path: Path) -> dict:
         built = write_page(html_path, model, stills, status)
         status["built_revision"] = built
         status["error"] = None
+        note_stage(status, "built", built)
         if status.get("last_successful_sync") and status.get("pending") is None:
             pass
         else:
@@ -283,6 +307,8 @@ def verify(root: Path, url: str) -> dict:
         status["pending"] = None
         status["error"] = None
         status["outbox"] = [row for row in status.get("outbox") or [] if row.get("revision") != saw]
+        note_stage(status, "deployed", saw, url=url)
+        note_stage(status, "verified", saw, url=url)
     else:
         status["error"] = {"at": rv.now_taipei(), "message": "公開頁修訂不符", "saw": saw, "expected": local}
         status["pending"] = {"revision": local, "reason": "公開網址還沒有這個修訂"}
@@ -316,9 +342,12 @@ def deploy(root: Path, branch: str, dry_run: bool) -> dict:
         dumpj(paths(root)["status"], status)
         sys.stderr.write(out)
         raise SystemExit(proc.returncode)
-    status["pending"] = {"revision": status.get("built_revision"), "reason": "分支已推送，尚未合併，也尚未驗證公開網址"}
+    status["pending"] = {"revision": status.get("built_revision"), "reason": "分支已推送。GitHub Pages 只發佈 main，這不是已部署。"}
     status["error"] = None
-    # A push is not a verified deploy.
+    note_stage(status, "pushed_branch", status.get("built_revision"), branch=branch, publishes_pages=False)
+    status["stages"]["merged"] = None
+    status["stages"]["deployed"] = None
+    status["stages"]["verified"] = None
     status["last_successful_sync"] = None
     dumpj(paths(root)["status"], status)
     print(json.dumps({"pushed_branch": branch, "last_successful_sync": None, "pending": status["pending"]}, ensure_ascii=False))
@@ -384,6 +413,9 @@ def main(argv: list[str] | None = None) -> int:
     dep.add_argument("--dry-run", action="store_true")
 
     sub.add_parser("self-check")
+    imp = sub.add_parser("import-safe")
+    imp.add_argument("--file", required=True)
+    imp.add_argument("--html", default=str(PAGE))
     args = parser.parse_args(argv)
     root = Path(args.root)
     if args.cmd == "pack-bundle":
@@ -411,6 +443,32 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     if args.cmd == "self-check":
         return self_check(root)
+    if args.cmd == "import-safe":
+        p = paths(root)
+        model = loadj(p["model"], None)
+        if not model:
+            raise SystemExit("no canonical model")
+        doc = json.loads(Path(args.file).read_text(encoding="utf-8"))
+        effect = rv.import_safe_site(model, doc)
+        dumpj(p["model"], model)
+        status = loadj(p["status"], empty_status())
+        revision = rv.revision_of(model)
+        status["canonical_revision"] = revision
+        note_stage(status, "persisted", revision, event="safe-import")
+        built = write_page(Path(args.html), model, loadj(p["stills"], {}), status)
+        status["built_revision"] = built
+        note_stage(status, "built", built)
+        status["pending"] = {"revision": revision, "reason": "安全匯入已寫入並建頁，公開網址尚未驗證"}
+        status["last_successful_sync"] = None
+        status["error"] = None
+        remember_outbox(status, revision, "safe-import")
+        dumpj(p["status"], status)
+        applied = read_jsonl(p["applied"])
+        if not any(r.get("event_id") == "safe-import-20261109" for r in applied):
+            applied.append({"event_id": "safe-import-20261109", "type": "safe_import", "applied_at": rv.now_taipei(), "effect": effect})
+            write_jsonl(p["applied"], applied)
+        print(json.dumps({"revision": revision, "effect": effect, "last_successful_sync": None}, ensure_ascii=False))
+        return 0
     return 2
 
 

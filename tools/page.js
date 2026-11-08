@@ -28,9 +28,14 @@
     if (it.section !== "cut") return false;
     return ["yt", "fb", "ig"].some(function (k) { return it.platforms && it.platforms[k] && it.platforms[k].published; });
   }
+  function hasApprovedVersion(it) {
+    if (it.flags && it.flags.script_approved) return true;
+    return (it.approved_versions || []).some(function (v) { return v.script_approved; });
+  }
   function pool(tab) {
     return DATA.items.filter(function (it) {
       if (tab === "published") return inPublished(it);
+      if (tab === "approved") return hasApprovedVersion(it);
       if (tab === "cut") return it.section === "cut";
       return it.section === tab;
     });
@@ -44,9 +49,10 @@
     if (!it.platforms) return "";
     return '<div class="chips">' + ["yt", "fb", "ig"].map(function (k) {
       var p = it.platforms[k];
-      if (p.published) return '<span class="chip on">' + esc(p.label) + " 已發佈 " + esc(p.date || "") + " " + esc(p.source || "") + "</span>";
-      var extra = p.source ? "（" + p.source + "）" : "";
-      return '<span class="chip off">' + esc(p.label) + " 未發" + esc(extra) + "</span>";
+      var extra = p.source ? " " + p.source : "";
+      if (p.verification === "published" || p.published) return '<span class="chip on">' + esc(p.label) + " 已發佈 " + esc(p.date || "") + esc(extra) + "</span>";
+      if (p.verification === "not_published") return '<span class="chip off">' + esc(p.label) + " 未發" + esc(extra) + "</span>";
+      return '<span class="chip wait">' + esc(p.label) + " 未核實" + esc(extra) + "</span>";
     }).join("") + "</div>";
   }
   var QCNAME = { not_run: "未跑", absent: "沒有台帳", stale: "身份不符", fail: "失敗", pass: "通過", warn_unaccepted: "警告未接受", warn_accepted: "警告已接受", not_pass: "未通過" };
@@ -86,7 +92,8 @@
     if (m.doc) h += '<div><a href="' + esc(m.doc) + '" target="_blank" rel="noopener">文案</a></div>';
     if (m.subs && m.subs.length) h += "<details><summary>字幕 " + m.subs.length + " 行</summary><div>" + m.subs.map(function (s) { return '<div data-spoken="1">' + esc(s) + "</div>"; }).join("") + "</div></details>";
     else if (it.kind === "cut") h += '<p class="miss">沒有字幕可顯示，不補假字幕。</p>';
-    if (m.copy) h += "<details><summary>既有說明文字（不是新的發佈動作）</summary><pre class=\"excerpt\">" + esc(m.copy) + "</pre></details>";
+    if (m.playback_note) h += '<p class="note">' + esc(m.playback_note) + "</p>";
+    if (m.copy) h += "<details><summary>文案（公開匯入保留的部分，不是發佈動作）</summary><pre class=\"excerpt\">" + esc(m.copy) + "</pre></details>";
     return h;
   }
   function show(it, ep, q) {
@@ -94,6 +101,12 @@
     if (!q) return true;
     var blob = [it.title, it.ep, it.id, it.speaker, it.episode_title].join(" ").toLowerCase();
     return blob.indexOf(q) >= 0;
+  }
+  function versionCard(it, v) {
+    return '<article class="card" data-id="' + esc(it.id) + '" data-approved-version="' + esc(v.text_sha256) + '"><h2>' +
+      esc(it.ep || "") + "｜" + esc(it.title || it.id) + "｜已核准版本</h2><p class=\"note\">核准只涵蓋這一份文字" +
+      (v.source ? "（" + esc(v.source) + "）" : "") + "。現在這張卡的文字不同，沒有標成核准。檔案時間對不上只讓 QC 失效，不會取消這份舊核准。</p>" +
+      sentences({ sentences: v.sentences || [] }) + "</article>";
   }
   function card(it) {
     var d = drafts();
@@ -109,6 +122,10 @@
     if (it.historical) h += '<p class="note">歷史信件：' + esc(it.historical.decision) + "（" + esc(it.historical.at || "") + "）。" + esc(it.historical.note) + "</p>";
     (it.related_notes || []).forEach(function (n) { h += '<p class="note">' + esc(n) + "</p>"; });
     if (it.cut_file_note) h += '<p class="note">' + esc(it.cut_file_note) + "</p>";
+    if (it.approval_scope) h += '<p class="note">核准範圍：' + esc(it.approval_scope) + (it.approved_at ? " · " + esc(it.approved_at) : "") + (it.version_label ? " · " + esc(it.version_label) : "") + "</p>";
+    if (it.script_note) h += '<p class="note">' + esc(it.script_note) + "</p>";
+    if (it.subtitle_note) h += '<p class="note">' + esc(it.subtitle_note) + "</p>";
+    if (it.withheld_label) h += '<p class="note">' + esc(it.withheld_label) + "</p>";
     if (it.schedule_label) h += '<p class="meta">舊排程標籤（唯讀，這次沒改）：' + esc(it.schedule_label) + "</p>";
     h += '<p class="meta">身份 ' + esc(it.artifact && it.artifact.id) + (it.artifact && it.artifact.mtime_taipei ? " · 檔案時間 " + esc(it.artifact.mtime_taipei) + " 台北" : "") + "</p>";
     h += media(it);
@@ -149,12 +166,26 @@
     var intros = {
       new: "預設只看還沒選的新提案。勾選只會留在這台瀏覽器，不會變成選片核准。",
       script: "這裡是已選、但腳本還在審的項目。Cake C1–C5 是完整雙語初稿，不是已審核。",
-      approved: "已核准的腳本才會在這裡。選片和初稿不會進來。",
+      approved: "這裡只放某一版文字已被核准的腳本。文字若已改，舊版留在這裡，新版留在腳本待審，不會兩版都標成核准。選片和發佈「可發」不是腳本核准。",
       cut: "已剪、還沒在所有平台發完的成片。可以預覽；QC 沒過不能放行。已發的平台照樣標出來，沒發的平台不會被藏起來。",
       published: "已發佈平台的封存。預設不在第一個分頁。還有平台沒發的，仍留在成片待審。",
       recon: "沒核對成獨立成片的檔案。不是可發卡片。"
     };
-    document.getElementById("list").innerHTML = '<p class="intro">' + intros[TAB] + "</p>" + (list.map(card).join("") || '<p class="miss">這一頁沒有符合的項目。</p>');
+    var body;
+    if (TAB === "approved") {
+      body = list.map(function (it) {
+        var parts = [];
+        if (it.flags && it.flags.script_approved) parts.push(card(it));
+        (it.approved_versions || []).forEach(function (v) {
+          if (v.script_approved && v.text_sha256 !== it.current_text_sha) parts.push(versionCard(it, v));
+        });
+        return parts.join("");
+      }).join("");
+    } else body = list.map(card).join("");
+    var empty = TAB === "approved"
+      ? '<p class="miss">還沒有可顯示的已核准腳本。review_20261026 與 review_EP198_finance_20261027 的原文不在這份資料裡，不能把選片或舊的發佈「可發」填進來。下一份對到文字版本的 JSON 可以補上。</p>'
+      : '<p class="miss">這一頁沒有符合的項目。</p>';
+    document.getElementById("list").innerHTML = '<p class="intro">' + intros[TAB] + "</p>" + (body || empty);
     document.querySelectorAll(".tabs button").forEach(function (b) {
       var n = pool(b.dataset.tab).length;
       b.classList.toggle("on", b.dataset.tab === TAB);

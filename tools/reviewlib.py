@@ -309,11 +309,42 @@ def flags(selected=False, script=False, cut=False, publish=False) -> dict:
     }
 
 
+def platform_slot(label: str, published=False, date=None, source=None, url=None, confirmed_absent=False) -> dict:
+    """published needs positive evidence. YouTube is manually uploaded, so a missing
+    detection is unverified, not proof it was never posted."""
+    url = https_url(url) if isinstance(url, str) else None
+    if published and (url or date or source):
+        verification = "published"
+        published = True
+    elif confirmed_absent:
+        verification = "not_published"
+        published = False
+    else:
+        verification = "unverified"
+        published = False
+    return {
+        "label": label,
+        "published": published,
+        "verification": verification,
+        "date": date,
+        "source": source,
+        "url": url,
+    }
+
+
 def empty_platforms() -> dict:
     return {
-        k: {"label": lab, "published": False, "date": None, "source": None, "url": None}
+        k: platform_slot(lab)
         for k, lab in (("yt", "YouTube"), ("fb", "Facebook"), ("ig", "Instagram"))
     }
+
+
+def script_text_sha(sentences) -> str:
+    rows = []
+    for s in sentences or []:
+        lines = s.get("lines") or ([s["zh"]] if s.get("zh") else [])
+        rows.append([s.get("start"), s.get("end"), lines])
+    return sha256_text(dumps(rows))
 
 
 def hms_to_seconds(text: str) -> int | None:
@@ -374,13 +405,26 @@ def parse_pick_ids(text: str) -> list[str]:
 
 
 def platforms_from_legacy(raw: dict) -> dict:
-    plats = empty_platforms()
+    labels = {"yt": "YouTube", "fb": "Facebook", "ig": "Instagram"}
+    plats = {}
     for key in ("yt", "fb", "ig"):
         src = (raw or {}).get(key) or {}
-        plats[key]["published"] = bool(src.get("ok"))
-        plats[key]["date"] = src.get("date")
-        plats[key]["source"] = src.get("src")
-        plats[key]["url"] = https_url(src.get("url"))
+        ok = bool(src.get("ok"))
+        # Only an explicit absence flag is "未發". YouTube in particular is uploaded by hand.
+        confirmed = bool(src.get("confirmed_absent")) or src.get("src") in ("confirmed_absent", "not_published")
+        if key == "yt":
+            confirmed = bool(src.get("confirmed_absent"))
+        source = src.get("src")
+        if key == "yt" and not ok and not confirmed:
+            source = source or "沒有已核實的未發紀錄。YouTube 由人工上傳，偵測不到不等於未發。"
+        plats[key] = platform_slot(
+            labels[key],
+            published=ok,
+            date=src.get("date"),
+            source=source,
+            url=src.get("url"),
+            confirmed_absent=confirmed and not ok,
+        )
     return plats
 
 
@@ -550,12 +594,13 @@ def build_baseline(paths: dict) -> tuple[dict, dict]:
         ep = rel.split("/", 1)[0]
         plats = empty_platforms()
         if f.get("reported_fb_ig_published_20261029"):
-            for key in ("fb", "ig"):
-                plats[key]["published"] = True
-                plats[key]["date"] = "2026-10-29"
-                plats[key]["source"] = "對話紀錄，未寫入舊 state"
-            plats["yt"]["published"] = False
-            plats["yt"]["source"] = "沒有 YouTube 發佈證據，不猜測"
+            for key, lab in (("fb", "Facebook"), ("ig", "Instagram")):
+                plats[key] = platform_slot(lab, published=True, date="2026-10-29", source="對話紀錄，未寫入舊 state")
+            plats["yt"] = platform_slot(
+                "YouTube",
+                published=False,
+                source="沒有已核實的未發紀錄。YouTube 由人工上傳，不能把沒偵測到當成未發。",
+            )
         gate = file_qc(f)
         iid = "cut:" + rel
         items[iid] = {
@@ -586,7 +631,7 @@ def build_baseline(paths: dict) -> tuple[dict, dict]:
                 "doc": None,
                 "subs": [],
                 "copy": None,
-                "missing": "沒有可公開的預覽網址。盤點到的是本機檔，不會把路徑當成連結，也不補假字幕。",
+                "missing": "這次還沒有對到這一版檔案的 Drive 預覽。不顯示假連結，也不補假字幕。下一份帶版本的預覽 JSON 可以補上。",
             },
             "local_identities": [{
                 "label": rel,
@@ -849,19 +894,41 @@ def invariants(model: dict) -> list[str]:
         problems.append("C1 range")
     if not c4 or not c4["range"].startswith("2402.958") or "2464.230" not in c4["range"]:
         problems.append("C4 range")
-    if any(it["flags"]["publish_approved"] or it["flags"]["cut_authorized"] or it["flags"]["script_approved"] for it in items):
-        problems.append("a baseline flag was approved")
+    if any(it["flags"]["publish_approved"] or it["flags"]["cut_authorized"] for it in items):
+        problems.append("publish or cut was authorized")
+    if any(it["flags"]["script_approved"] and it.get("section") != "approved" for it in items):
+        problems.append("script approved outside 已審核")
     new_ids = {it["id"] for it in items if it["section"] == "new"}
     if set(PICK_IDS) & new_ids:
         problems.append("selected proposal still in new")
     script_ids = {it["id"] for it in items if it["section"] == "script"}
     if not set(PICK_IDS) <= script_ids:
         problems.append("pick ids missing from script review")
-    if any(it["section"] == "approved" for it in items):
-        problems.append("approved not empty")
+    approved = [it for it in items if it["section"] == "approved"]
+    if len(approved) not in (0, 16):
+        problems.append(f"approved count {len(approved)}")
+    for it in approved:
+        if not it["flags"]["script_approved"] or it["flags"]["cut_authorized"] or it["flags"]["publish_approved"]:
+            problems.append(it["id"] + " approved flags")
+        if it.get("id") == "script:C":
+            problems.append("conditional C was approved")
+    previews = [it for it in items if (it.get("preview") or {}).get("access") == "private_owner_sign_in"]
+    if len(previews) not in (0, 14):
+        problems.append(f"private previews {len(previews)}")
+    for it in previews:
+        if it["flags"]["publish_approved"] or it.get("qc", {}).get("ready"):
+            problems.append(it["id"] + " preview implied release")
+        if "4年升Meta主管" in json.dumps(it, ensure_ascii=False):
+            problems.append("withheld title leaked")
     oct29 = [it for it in items if it["id"].startswith("cut:") and it["platforms"]["fb"]["published"] and it["platforms"]["ig"]["published"]]
-    if len(oct29) != 3 or any(it["platforms"]["yt"]["published"] for it in oct29):
+    if len(oct29) != 3 or any(it["platforms"]["yt"]["published"] or it["platforms"]["yt"].get("verification") != "unverified" for it in oct29):
         problems.append("oct29 platforms")
+    yt_bad = [
+        it["id"] for it in items
+        if it.get("platforms") and not it["platforms"]["yt"]["published"] and it["platforms"]["yt"].get("verification") == "not_published"
+    ]
+    if yt_bad:
+        problems.append("youtube marked unpublished without a positive absence")
     full = [it for it in items if it["section"] == "published"]
     if len(full) != 3:
         problems.append("full published count")
@@ -929,17 +996,45 @@ def apply_mutation(model: dict, event: dict) -> dict:
             return {"effect": "rejected", "reason": "missing item"}
         if payload.get("artifact_id") and payload.get("artifact_id") != item.get("artifact", {}).get("id"):
             return {"effect": "rejected", "reason": "artifact mismatch"}
-        if not item.get("script_complete") or not item.get("sentences"):
-            return {"effect": "rejected", "reason": "no full script"}
         if payload.get("confirm") is not True:
             return {"effect": "rejected", "reason": "confirm required"}
-        item["flags"]["script_approved"] = True
-        item["flags"]["cut_authorized"] = False
-        item["flags"]["publish_approved"] = False
-        item["script_review_status"] = "approved"
-        item["script_final"] = True
-        item["section"] = "approved"
-        return {"effect": "script_approved", "id": item["id"]}
+        if payload.get("sentences"):
+            sentences = [sanitize_sentence(s) for s in payload["sentences"]]
+        elif item.get("sentences"):
+            sentences = item.get("sentences") or []
+        else:
+            return {"effect": "rejected", "reason": "no full script"}
+        sha = script_text_sha(sentences)
+        if payload.get("text_sha256") and payload["text_sha256"] != sha:
+            return {"effect": "rejected", "reason": "text hash mismatch"}
+        current = script_text_sha(item.get("sentences") or [])
+        item["current_text_sha"] = current
+        version = {
+            "version_id": payload.get("version_id") or sha[:16],
+            "text_sha256": sha,
+            "sentences": sentences,
+            "script_approved": True,
+            "source": payload.get("source"),
+            "approved_at": payload.get("approved_at"),
+            "event_id": event.get("event_id"),
+        }
+        item["approved_versions"] = [v for v in item.get("approved_versions") or [] if v.get("text_sha256") != sha]
+        item["approved_versions"].append(version)
+        # QC identity is unrelated. A later mtime mismatch must not delete this version.
+        if item.get("sentences") and sha == current:
+            item["flags"]["script_approved"] = True
+            item["flags"]["cut_authorized"] = False
+            item["flags"]["publish_approved"] = False
+            item["script_review_status"] = "approved"
+            item["script_final"] = True
+            item["section"] = "approved"
+            return {"effect": "script_approved_current", "id": item["id"], "text_sha256": sha}
+        item["flags"]["script_approved"] = False
+        item["script_final"] = False
+        item["script_review_status"] = "pending"
+        if item.get("section") == "approved":
+            item["section"] = "script"
+        return {"effect": "script_approved_historical_only", "id": item["id"], "text_sha256": sha}
     if et == "email_parsed":
         kind = payload.get("kind")
         if kind == "selection":
@@ -1013,7 +1108,8 @@ def apply_mutation(model: dict, event: dict) -> dict:
         )
         item["qc"] = gate
         item["flags"]["publish_approved"] = False
-        return {"effect": "qc_updated", "id": item["id"], "ready": gate["ready"]}
+        # Stale bytes/mtime invalidate QC only. Historical script approvals stay.
+        return {"effect": "qc_updated", "id": item["id"], "ready": gate["ready"], "script_versions": len(item.get("approved_versions") or [])}
     if et == "publication_verified":
         item = model["items"].get(payload.get("item_id"))
         if not item:
@@ -1023,15 +1119,257 @@ def apply_mutation(model: dict, event: dict) -> dict:
             raise ValueError("bad platform")
         before = {k: dict(v) for k, v in item.get("platforms", empty_platforms()).items()}
         item.setdefault("platforms", empty_platforms())
-        item["platforms"][platform]["published"] = bool(payload.get("published"))
-        item["platforms"][platform]["date"] = payload.get("date")
-        item["platforms"][platform]["source"] = payload.get("evidence")
-        item["platforms"][platform]["url"] = https_url(payload.get("url"))
+        item["platforms"][platform] = platform_slot(
+            item["platforms"][platform].get("label") or platform,
+            published=bool(payload.get("published")),
+            date=payload.get("date"),
+            source=payload.get("evidence"),
+            url=payload.get("url"),
+            confirmed_absent=bool(payload.get("confirmed_absent")) and not payload.get("published"),
+        )
         published_n = sum(1 for p in item["platforms"].values() if p["published"])
         if item.get("kind") == "cut" or item.get("section") in ("cut", "published"):
             item["section"] = "published" if published_n == 3 else "cut"
         return {"effect": "platform_only", "id": item["id"], "platform": platform, "unchanged": [k for k in before if k != platform and before[k] == item["platforms"][k]]}
+    if et == "preview_attached":
+        item = model["items"].get(payload.get("item_id"))
+        if not item:
+            return {"effect": "rejected", "reason": "missing item"}
+        if payload.get("artifact_id") != item.get("artifact", {}).get("id"):
+            return {"effect": "rejected", "reason": "artifact mismatch"}
+        url = https_url(payload.get("video_url"))
+        if not url:
+            return {"effect": "rejected", "reason": "preview url not allowed"}
+        art = item.get("artifact") or {}
+        if payload.get("bytes") is not None and art.get("bytes") is not None and int(payload["bytes"]) != int(art["bytes"]):
+            return {"effect": "rejected", "reason": "bytes mismatch"}
+        item.setdefault("media", {})
+        item["media"]["video"] = url
+        item["media"]["video_label"] = payload.get("label") or "對到這一版的預覽"
+        item["media"]["missing"] = None
+        item["preview"] = {"url": url, "artifact_id": art.get("id"), "event_id": event.get("event_id")}
+        return {"effect": "preview_attached", "id": item["id"]}
     raise ValueError("unsupported event " + et)
+
+
+def _public_text(value: str) -> str | None:
+    if not value or not isinstance(value, str):
+        return None
+    if any(x in value for x in ("/workspace/", "local://", "@", "4年升Meta主管")):
+        return None
+    return value
+
+
+def _lines_from_bilingual(rows: list) -> list[dict]:
+    out = []
+    for raw in rows or []:
+        text = _public_text(str(raw).strip())
+        if not text:
+            continue
+        body = re.sub(r"^-+\s*", "", text)
+        body = re.sub(r"^S\d+-\d+\s+", "", body)
+        if "／" in body:
+            zh, en = body.split("／", 1)
+        else:
+            zh, en = body, ""
+        zh, en = zh.strip(), en.strip()
+        if not zh:
+            continue
+        out.append({
+            "start": None,
+            "end": None,
+            "zh": zh,
+            "lines": [zh],
+            "en_display": en,
+            "en_status": "translation" if en else "blank_pending",
+            "note": "",
+            "timing_provisional": False,
+            "spoken_includes_note": False,
+        })
+    return out
+
+
+def _withheld_label(counts: dict | None) -> str | None:
+    if not counts:
+        return None
+    parts = []
+    names = {
+        "script_lines": "腳本句",
+        "title": "標題",
+        "subtitle_cues": "字幕",
+        "caption_lines": "文案",
+    }
+    for key, label in names.items():
+        n = int(counts.get(key) or 0)
+        if n:
+            parts.append(f"{label} {n}")
+    if not parts:
+        return None
+    return "需私下審核：" + "、".join(parts) + "。未放上公開頁，也不從缺漏還原。"
+
+
+def import_safe_site(model: dict, doc: dict) -> dict:
+    """Apply the public-safe import. Does not copy raw evidence, paths, or emails."""
+    if doc.get("scope") != "public_site_safe_review_import":
+        raise ValueError("not the safe import")
+    items = model["items"]
+    by_identity = {}
+    for it in items.values():
+        art = it.get("artifact") or {}
+        if art.get("bytes") and art.get("id"):
+            by_identity[(art.get("bytes"), it.get("artifact", {}).get("mtime_taipei"))] = it
+        for ident in it.get("local_identities") or []:
+            by_identity[(ident.get("bytes"), ident.get("mtime"))] = it
+    linked = []
+    for art in doc.get("artifacts") or []:
+        ver = art.get("artifact_version") or {}
+        target = by_identity.get((ver.get("size"), ver.get("mtime")))
+        if not target or target.get("kind") != "cut":
+            raise ValueError("artifact not matched " + art.get("id", ""))
+        url = https_url(art.get("preview_url"))
+        if not url or "drive.google.com" not in url:
+            raise ValueError("preview url rejected")
+        if art.get("publish_approval"):
+            raise ValueError("import tried to authorize publication")
+        # Withheld titles stay withheld. B is the file whose public name is 成片 B.
+        public_title = art.get("title") or target.get("title")
+        if int((art.get("withheld_counts") or {}).get("title") or 0):
+            public_title = "成片 B" if art.get("id") == "B" else public_title
+        sensitive = "4年升Meta主管"
+        if art.get("id") == "B":
+            old_id = target["id"]
+            new_id = "cut:EP220/成片B"
+            if old_id != new_id and old_id in items:
+                items.pop(old_id)
+            target["id"] = new_id
+            target["title"] = "成片 B"
+            target["artifact"] = {
+                "id": f"成片B|{ver.get('size')}|{ver.get('mtime')}",
+                "label": "成片 B",
+                "bytes": ver.get("size"),
+                "mtime_taipei": fmt_epoch(ver.get("mtime")),
+            }
+            target["local_identities"] = [{
+                "label": "成片 B",
+                "bytes": ver.get("size"),
+                "mtime": ver.get("mtime"),
+                "mtime_taipei": fmt_epoch(ver.get("mtime")),
+                "qc": target.get("qc"),
+            }]
+            items[new_id] = target
+            public_title = "成片 B"
+        target["title"] = public_title
+        subs = []
+        for cue in art.get("subtitles") or []:
+            zh = _public_text(cue.get("zh") or "")
+            if zh:
+                subs.append(zh)
+        captions = []
+        for key in ("fb", "ig"):
+            text = _public_text((art.get("captions") or {}).get(key) or "")
+            if text and text.strip():
+                captions.append(text.strip())
+        withheld = _withheld_label(art.get("withheld_counts"))
+        target["flags"]["publish_approved"] = False
+        target["flags"]["script_approved"] = False
+        target["flags"]["cut_authorized"] = False
+        target.setdefault("media", {})
+        target["media"].update({
+            "video": url,
+            "video_label": "開啟Drive審片",
+            "doc": None,
+            "subs": subs,
+            "copy": "\n\n".join(captions) if captions else None,
+            "missing": None,
+            "playback_note": "私人 Drive 連結，需登入後開啟。權限沒有改。檔案類型是 application/mp4。串流播放與轉碼都沒有驗證；若頁面不能播，請下載後審片。",
+        })
+        target["preview"] = {
+            "access": "private_owner_sign_in",
+            "mime": "application/mp4",
+            "streaming_playback_verified": False,
+            "artifact_id": target["artifact"]["id"],
+        }
+        target["qc"] = not_run_qc("現檔身份未通過 qc_short，qc_extra 也沒有台帳")
+        target["qc"]["short"]["state"] = "stale"
+        target["qc"]["extra"]["state"] = "absent"
+        target["withheld_label"] = withheld
+        target["subtitle_note"] = "燒錄進影片的字幕是否就是這份文字，尚未核對。"
+        target["script_note"] = "現檔沒有繼承先前那一版腳本核准，QC 仍是失效。"
+        if sensitive in json.dumps(target, ensure_ascii=False):
+            raise ValueError("withheld title reached a public card")
+        linked.append(target["id"])
+    approved_ids = []
+    for src in doc.get("approved_scripts") or []:
+        if not src.get("original_script_approved") or src.get("current_script_approval_inherited"):
+            raise ValueError("script import tried to inherit approval")
+        if src.get("publish_approval"):
+            raise ValueError("script import tried to publish")
+        sentences = _lines_from_bilingual(src.get("display_script_bilingual_lines") or [])
+        if not sentences:
+            raise ValueError("approved script has no public lines " + src.get("id", ""))
+        sha = src.get("version_sha256")
+        iid = "approved-script:" + src["id"]
+        title = src.get("title") or src["id"]
+        if int((src.get("withheld_counts") or {}).get("title") or 0):
+            title = "成片 B" if src["id"] == "B" else title
+        item = {
+            "id": iid,
+            "kind": "script",
+            "section": "approved",
+            "ep": src.get("episode"),
+            "title": title,
+            "flags": flags(selected=True, script=True),
+            "script_review_status": "approved",
+            "script_complete": True,
+            "script_final": True,
+            "approval_scope": "這一版腳本文字，供開剪使用",
+            "approved_at": src.get("approved_at"),
+            "version_label": _public_text(src.get("version_label") or "") or "",
+            "sentences": sentences,
+            "current_text_sha": sha,
+            "approved_versions": [{
+                "version_id": src["id"],
+                "text_sha256": sha,
+                "sentences": sentences,
+                "script_approved": True,
+                "source": "先前審核的那一版文字",
+                "approved_at": src.get("approved_at"),
+            }],
+            "platforms": empty_platforms(),
+            "qc": not_run_qc("這是腳本核准，不是成片 QC"),
+            "artifact": {"id": f"script:{src['id']}|{sha}", "label": title},
+            "media": {"video": None, "subs": [], "copy": None, "missing": "這張是已核准腳本，不是現檔預覽。"},
+            "withheld_label": _withheld_label(src.get("withheld_counts")),
+            "selection_note": "核准只涵蓋這一版文字，用來開剪。現檔若文字或檔案時間不同，沒有繼承這份核准，也不能發佈。",
+            "related_notes": [],
+        }
+        items[iid] = item
+        approved_ids.append(iid)
+    cond = doc.get("conditional_revisions") or []
+    if len(cond) != 1 or cond[0].get("id") != "C" or cond[0].get("original_script_approved"):
+        raise ValueError("conditional revision C missing or marked approved")
+    items["script:C"] = {
+        "id": "script:C",
+        "kind": "script",
+        "section": "script",
+        "ep": "修訂",
+        "title": "條件式修訂",
+        "flags": flags(),
+        "script_review_status": "pending",
+        "script_complete": False,
+        "script_final": False,
+        "sentences": [],
+        "platforms": empty_platforms(),
+        "qc": not_run_qc("條件式修訂不是核准"),
+        "artifact": {"id": "script:C|conditional", "label": "條件式修訂"},
+        "draft_banner": "這是條件式修訂，不是無條件核准，也不是發佈核准。",
+        "withheld_label": "需私下審核。未放上公開頁，也不從缺漏還原。",
+        "media": {"video": None, "subs": [], "copy": None, "missing": None},
+    }
+    problems = invariants(model)
+    if problems:
+        raise ValueError("after safe import: " + "; ".join(problems))
+    return {"artifacts": linked, "approved_scripts": approved_ids, "conditional": "script:C"}
 
 
 def merge_baseline(model: dict, incoming: dict) -> dict:

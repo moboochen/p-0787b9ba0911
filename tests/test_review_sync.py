@@ -18,7 +18,7 @@ HTML = (ROOT / "Cdj1cq3x3gEFyC5WbNqRdjoU/index.html").read_text(encoding="utf-8"
 def test_committed_model_invariants():
     assert rv.invariants(MODEL) == []
     assert rv.revision_of(MODEL) in HTML
-    for banned in ("/workspace/", "local://", "C1_money.mp3", "aren't needed", "x-access-token", "high-school ones"):
+    for banned in ("/workspace/", "local://", "C1_money.mp3", ".mp3", "aren't needed", "x-access-token", "high-school ones"):
         assert banned not in HTML
         assert banned not in json.dumps(MODEL, ensure_ascii=False)
 
@@ -64,7 +64,15 @@ def test_views_and_platforms():
     script = {it["id"] for it in items if it["section"] == "script"}
     assert len(new) == 48 and not (set(rv.PICK_IDS) & new)
     assert set(rv.PICK_IDS) <= script
-    assert not any(it["section"] == "approved" for it in items)
+    approved = [it for it in items if it["section"] == "approved"]
+    assert len(approved) == 16
+    assert all(it["flags"]["script_approved"] and not it["flags"]["publish_approved"] and not it["flags"]["cut_authorized"] for it in approved)
+    assert MODEL["items"]["script:C"]["flags"]["script_approved"] is False
+    previews = [it for it in items if (it.get("preview") or {}).get("access") == "private_owner_sign_in"]
+    assert len(previews) == 14
+    assert all(it["media"]["video_label"] == "開啟Drive審片" and it["media"]["video"].startswith("https://drive.google.com/") for it in previews)
+    assert all(not it["flags"]["publish_approved"] and not it["qc"]["ready"] for it in previews)
+    assert "4年升Meta主管" not in json.dumps(MODEL, ensure_ascii=False)
     oct29 = [it for it in items if it["id"].startswith("cut:") and it["platforms"]["fb"]["published"]]
     assert len(oct29) == 3
     assert all(it["platforms"]["ig"]["published"] and not it["platforms"]["yt"]["published"] for it in oct29)
@@ -253,6 +261,158 @@ def test_failed_verify_keeps_outbox(tmp_path: Path, monkeypatch):
     assert got["last_successful_sync"] is None
     assert got["outbox"][0]["event_ids"] == ["e1"]
     assert got["error"]["message"].startswith("verify fetch failed")
+
+
+def test_youtube_without_absence_is_unverified():
+    slot = rv.platform_slot("YouTube", published=False, source="sheet 沒勾")
+    assert slot["verification"] == "unverified"
+    assert slot["published"] is False
+    absent = rv.platform_slot("YouTube", published=False, confirmed_absent=True, source="人工確認未上傳")
+    assert absent["verification"] == "not_published"
+    posted = rv.platform_slot("YouTube", published=True, url="https://www.youtube.com/shorts/abc", date="2026-09-30", source="detected")
+    assert posted["verification"] == "published"
+    for it in MODEL["items"].values():
+        yt = (it.get("platforms") or {}).get("yt")
+        if not yt or yt["published"]:
+            continue
+        assert yt["verification"] == "unverified"
+
+
+def test_script_approval_is_version_scoped_and_survives_qc_mismatch(tmp_path: Path):
+    root = tmp_path
+    sync.dumpj(sync.paths(root)["model"], rv.empty_model())
+    sync.dumpj(sync.paths(root)["stills"], {})
+    for name in ("applied", "inbox", "results"):
+        sync.write_jsonl(sync.paths(root)[name], [])
+    html = tmp_path / "index.html"
+    created = {
+        "event_id": "script-v",
+        "type": "script_created",
+        "occurred_at": "2026-11-09T12:00:00+08:00",
+        "payload": {"item": {
+            "id": "EP-S",
+            "title": "版本",
+            "ep": "EP1",
+            "artifact": {"id": "art-s", "label": "EP-S", "bytes": 10},
+            "sentences": [{"start": 1, "end": 2, "zh": "舊稿", "en": "old", "lines": ["舊稿"]}],
+        }},
+    }
+    sync.apply_bundle(root, {"bundle_version": 1, "events": [created]}, html)
+    item = json.loads(sync.paths(root)["model"].read_text())["items"]["EP-S"]
+    old_sha = rv.script_text_sha(item["sentences"])
+    approved = {
+        "event_id": "approve-old",
+        "type": "script_approved",
+        "occurred_at": "2026-11-09T12:10:00+08:00",
+        "payload": {"item_id": "EP-S", "confirm": True, "text_sha256": old_sha, "source": "review_20261026.md", "version_id": "v-old"},
+    }
+    sync.apply_bundle(root, {"bundle_version": 1, "events": [approved]}, html)
+    changed = {
+        "event_id": "script-new-text",
+        "type": "script_created",
+        "occurred_at": "2026-11-09T12:20:00+08:00",
+        "payload": {"item": {
+            "id": "EP-S",
+            "title": "版本",
+            "ep": "EP1",
+            "artifact": {"id": "art-s", "label": "EP-S", "bytes": 10},
+            "sentences": [{"start": 1, "end": 2, "zh": "新稿", "en": "new", "lines": ["新稿"]}],
+            "approved_versions": json.loads(sync.paths(root)["model"].read_text())["items"]["EP-S"]["approved_versions"],
+        }},
+    }
+    sync.apply_bundle(root, {"bundle_version": 1, "events": [changed]}, html)
+    item = json.loads(sync.paths(root)["model"].read_text())["items"]["EP-S"]
+    assert item["flags"]["script_approved"] is False
+    assert item["section"] == "script"
+    assert item["approved_versions"][0]["script_approved"] is True
+    assert item["approved_versions"][0]["text_sha256"] == old_sha
+    assert rv.script_text_sha(item["sentences"]) != old_sha
+    qc = {
+        "event_id": "qc-stale",
+        "type": "QC_completed",
+        "occurred_at": "2026-11-09T12:30:00+08:00",
+        "payload": {
+            "item_id": "EP-S",
+            "artifact_id": "art-s",
+            "file_mtime": 5,
+            "file_size": 10,
+            "qc_short": {"result": "PASS", "mtime": 1, "size": 10, "fails": [], "warns": []},
+            "qc_extra": {"result": "PASS", "mtime": 1, "size": 10, "fails": [], "warns": []},
+        },
+    }
+    sync.apply_bundle(root, {"bundle_version": 1, "events": [qc]}, html)
+    item = json.loads(sync.paths(root)["model"].read_text())["items"]["EP-S"]
+    assert item["qc"]["ready"] is False
+    assert item["approved_versions"][0]["script_approved"] is True
+    assert item["flags"]["script_approved"] is False
+
+
+def test_preview_requires_matching_artifact_and_https(tmp_path: Path):
+    root = tmp_path
+    model = rv.empty_model()
+    item = _base_item()
+    item["media"] = {"video": None, "missing": "none"}
+    model["items"]["X1"] = item
+    sync.dumpj(sync.paths(root)["model"], model)
+    sync.dumpj(sync.paths(root)["stills"], {})
+    for name in ("applied", "inbox", "results"):
+        sync.write_jsonl(sync.paths(root)[name], [])
+    html = tmp_path / "index.html"
+    bad = {
+        "event_id": "prev-bad",
+        "type": "preview_attached",
+        "occurred_at": "2026-11-09T12:00:00+08:00",
+        "payload": {"item_id": "X1", "artifact_id": "art-1", "video_url": "file:///tmp/a.mp4"},
+    }
+    sync.apply_bundle(root, {"bundle_version": 1, "events": [bad]}, html)
+    item = json.loads(sync.paths(root)["model"].read_text())["items"]["X1"]
+    assert not item["media"].get("video")
+    mismatch = dict(bad)
+    mismatch["event_id"] = "prev-mismatch"
+    mismatch["payload"] = {"item_id": "X1", "artifact_id": "other", "video_url": "https://drive.google.com/file/d/abc/view"}
+    sync.apply_bundle(root, {"bundle_version": 1, "events": [mismatch]}, html)
+    item = json.loads(sync.paths(root)["model"].read_text())["items"]["X1"]
+    assert not item["media"].get("video")
+    ok = dict(bad)
+    ok["event_id"] = "prev-ok"
+    ok["payload"] = {"item_id": "X1", "artifact_id": "art-1", "video_url": "https://drive.google.com/file/d/abc/view"}
+    sync.apply_bundle(root, {"bundle_version": 1, "events": [ok]}, html)
+    item = json.loads(sync.paths(root)["model"].read_text())["items"]["X1"]
+    assert item["media"]["video"].startswith("https://drive.google.com/")
+    assert item["qc"]["ready"] is False
+    assert item["flags"]["publish_approved"] is False
+
+
+def test_build_does_not_mark_deployed(tmp_path: Path):
+    root = tmp_path
+    model = rv.empty_model()
+    model["items"]["X1"] = _base_item()
+    sync.dumpj(sync.paths(root)["model"], model)
+    sync.dumpj(sync.paths(root)["stills"], {})
+    status = sync.build_only(root, tmp_path / "index.html")
+    assert status["stages"]["built"]["revision"]
+    assert status["stages"]["pushed_branch"] is None
+    assert status["stages"]["merged"] is None
+    assert status["stages"]["deployed"] is None
+    assert status["stages"]["verified"] is None
+    assert status["last_successful_sync"] is None
+
+
+def test_box_plan_does_not_publish_or_merge(tmp_path: Path):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("sync_box", ROOT / "box" / "review-sync" / "sync_box.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    bundle = tmp_path / "bundle.json"
+    bundle.write_text("{}", encoding="utf-8")
+    plan = mod.github_commit_plan("moboochen/p-0787b9ba0911", "cursor/shorts-review-sync-f53b", bundle)
+    assert plan["publishes_pages"] is False and plan["merges"] is False and plan["force"] is False
+    try:
+        mod.github_commit_plan("moboochen/p-0787b9ba0911", "main", bundle)
+    except RuntimeError as exc:
+        assert "refuse" in str(exc)
+    else:
+        raise AssertionError("main was allowed")
 
 
 def test_deploy_refuses_force_and_main():

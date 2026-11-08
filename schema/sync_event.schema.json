@@ -16,7 +16,8 @@
         "script_approved",
         "artifact_created",
         "QC_completed",
-        "publication_verified"
+        "publication_verified",
+        "preview_attached"
       ]
     },
     "occurred_at": {"type": "string", "description": "ISO-8601 with Asia/Taipei offset"},

@@ -25,6 +25,7 @@ main{padding:10px;max-width:1100px;margin:0 auto}
 .chip{border-radius:999px;padding:3px 8px;font-size:12px;background:#243556}
 .chip.on{background:#1b4d2e;color:#d9ffe4}
 .chip.off{background:#3a2a2a;color:#ffd0d0}
+.chip.wait{background:#3a3418;color:#ffe7a3}
 .qc{background:#2a2030;border:1px solid #6a3a3a;border-radius:8px;padding:6px 8px;font-size:13px;margin:6px 0}
 .qc.ready{background:#173324;border-color:var(--grn)}
 .banner{background:#3a2e12;border:1px solid var(--org);border-radius:8px;padding:8px;margin:6px 0;color:#ffe7b3}
