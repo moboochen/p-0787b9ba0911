@@ -1,0 +1,49 @@
+{
+  "canonical_revision": "5d2f030295f84c732e0abaf8a4e1b0e9a8169eddbc6d3ddb7afd0ae5b00a814d",
+  "built_revision": "5d2f030295f84c732e0abaf8a4e1b0e9a8169eddbc6d3ddb7afd0ae5b00a814d",
+  "last_successful_sync": null,
+  "pending": {
+    "revision": "5d2f030295f84c732e0abaf8a4e1b0e9a8169eddbc6d3ddb7afd0ae5b00a814d",
+    "reason": "安全匯入已寫入並建頁，公開網址尚未驗證"
+  },
+  "error": null,
+  "outbox": [
+    {
+      "revision": "ddbccd4bdc313adcc155b007af07c1c787c2190467a0192532e5548e7ca4d8b6",
+      "event_ids": [
+        "baseline-ddbccd4bdc313adc"
+      ],
+      "verified": false
+    },
+    {
+      "revision": "4c024c3ef6d8ce180401f1c08355daf25be1334a0f6ba027bdb4a38291eee52b",
+      "event_ids": [
+        "baseline-4c024c3ef6d8ce18"
+      ],
+      "verified": false
+    },
+    {
+      "revision": "5d2f030295f84c732e0abaf8a4e1b0e9a8169eddbc6d3ddb7afd0ae5b00a814d",
+      "event_ids": [
+        "safe-import"
+      ],
+      "verified": false
+    }
+  ],
+  "stages": {
+    "persisted": {
+      "at": "2026-11-09T03:07:10+08:00",
+      "revision": "5d2f030295f84c732e0abaf8a4e1b0e9a8169eddbc6d3ddb7afd0ae5b00a814d",
+      "event": "safe-import"
+    },
+    "built": {
+      "at": "2026-11-09T03:07:11+08:00",
+      "revision": "5d2f030295f84c732e0abaf8a4e1b0e9a8169eddbc6d3ddb7afd0ae5b00a814d"
+    },
+    "pushed_branch": null,
+    "pull_request": null,
+    "merged": null,
+    "deployed": null,
+    "verified": null
+  }
+}
