@@ -347,6 +347,71 @@ def script_text_sha(sentences) -> str:
     return sha256_text(dumps(rows))
 
 
+def any_platform_published(item: dict) -> bool:
+    """True when any platform has a positive publication record. TikTok counts if present."""
+    for key, plat in (item.get("platforms") or {}).items():
+        if key not in ("yt", "fb", "ig", "tt"):
+            continue
+        if plat.get("published") or plat.get("verification") == "published":
+            return True
+    return False
+
+
+def clip_key(text: str) -> str:
+    name = (text or "").split("/")[-1]
+    name = re.sub(r"\.(mp4|srt|mov)$", "", name, flags=re.I)
+    previous = None
+    while previous != name:
+        previous = name
+        name = re.sub(r"[_\-\s]*(Chaio|重剪|延長|preview|v2style|final|old)$", "", name, flags=re.I)
+    return re.sub(r"[^\w\u4e00-\u9fff]", "", name)
+
+
+def shelve_published(model: dict) -> list[dict]:
+    """Move any published video, and duplicate/older files of that video, to 已發佈.
+
+    Platform flags and approval flags are not changed. Unpublished platforms stay
+    visible on the archived card.
+    """
+    items = model.get("items") or {}
+    published_keys = set()
+    for it in items.values():
+        if not any_platform_published(it):
+            continue
+        if it.get("section") != "published":
+            it["section"] = "published"
+        for raw in [it.get("title") or ""]:
+            key = clip_key(raw)
+            if key:
+                published_keys.add((it.get("ep"), key))
+        for ident in it.get("local_identities") or []:
+            key = clip_key(ident.get("label") or "")
+            if key:
+                published_keys.add((it.get("ep"), key))
+        if str(it.get("id", "")).startswith("cut:"):
+            key = clip_key(it["id"].split(":", 1)[1])
+            if key:
+                published_keys.add((it.get("ep"), key))
+    moved = []
+    for it in items.values():
+        if any_platform_published(it) or it.get("section") == "published":
+            continue
+        if it.get("kind") not in ("cut", "recon") and it.get("section") not in ("cut", "recon"):
+            continue
+        candidates = [clip_key(it.get("title") or "")]
+        if str(it.get("id", "")).startswith(("cut:", "recon:")):
+            candidates.append(clip_key(it["id"].split(":", 1)[1]))
+        for ident in it.get("local_identities") or []:
+            candidates.append(clip_key(ident.get("label") or ""))
+        if any(c and (it.get("ep"), c) in published_keys for c in candidates):
+            origin = it.get("section")
+            it["section"] = "published"
+            it["archived_as_duplicate"] = True
+            it["archive_reason"] = "同一支已在某個平台發佈的舊版或重複檔。平台是否已發沒有改，只從主要分頁收起來。"
+            moved.append({"id": it["id"], "from": origin, "title": it.get("title")})
+    return moved
+
+
 def hms_to_seconds(text: str) -> int | None:
     if not text or not isinstance(text, str):
         return None
@@ -538,8 +603,7 @@ def build_baseline(paths: dict) -> tuple[dict, dict]:
         ident_blob = dumps([{"b": x["bytes"], "m": x["mtime"], "n": x["label"]} for x in identities])
         artifact = f"card:{sid}|email:{(st or {}).get('approval_at') or ''}|files:{sha256_text(ident_blob)[:12]}"
         plats = platforms_from_legacy(row.get("p") or {})
-        published_n = sum(1 for p in plats.values() if p["published"])
-        section = "published" if published_n == 3 else "cut"
+        section = "published" if any(p["published"] for p in plats.values()) else "cut"
         gate = not_run_qc("現檔沒有同時通過 qc_short 與 qc_extra")
         if identities:
             # Any current file still blocks unless THAT file passes both. None do today.
@@ -846,6 +910,7 @@ def build_baseline(paths: dict) -> tuple[dict, dict]:
         },
         "legacy_draft_keys_ignored": list(LEGACY_DRAFT_KEYS),
     }
+    shelve_published(model)
     problems = invariants(model)
     if problems:
         raise ValueError("baseline invariants failed: " + "; ".join(problems))
@@ -929,14 +994,22 @@ def invariants(model: dict) -> list[str]:
     ]
     if yt_bad:
         problems.append("youtube marked unpublished without a positive absence")
-    full = [it for it in items if it["section"] == "published"]
-    if len(full) != 3:
+    all_three = [
+        it for it in items
+        if all((it.get("platforms") or {}).get(k, {}).get("published") for k in ("yt", "fb", "ig"))
+    ]
+    if len(all_three) != 3:
         problems.append("full published count")
+    for it in items:
+        if any_platform_published(it) and it.get("section") != "published":
+            problems.append(it["id"] + " published but still on a main tab")
+        if it.get("section") in ("new", "script", "approved", "cut", "recon") and any_platform_published(it):
+            problems.append(it["id"] + " visible on a main tab")
     known = [it for it in items if it["id"].startswith("cut:") and not it["platforms"]["fb"]["published"]]
     if len(known) != 14:
         problems.append("known unpublished cuts")
     recon = [it for it in items if it["section"] == "recon"]
-    if len(recon) != 105:
+    if len(recon) != 94:
         problems.append(f"recon {len(recon)}")
     ready = [it for it in items if it.get("qc", {}).get("ready")]
     if ready:
@@ -1115,7 +1188,7 @@ def apply_mutation(model: dict, event: dict) -> dict:
         if not item:
             return {"effect": "rejected", "reason": "missing item"}
         platform = payload.get("platform")
-        if platform not in ("yt", "fb", "ig"):
+        if platform not in ("yt", "fb", "ig", "tt"):
             raise ValueError("bad platform")
         before = {k: dict(v) for k, v in item.get("platforms", empty_platforms()).items()}
         item.setdefault("platforms", empty_platforms())
@@ -1127,9 +1200,11 @@ def apply_mutation(model: dict, event: dict) -> dict:
             url=payload.get("url"),
             confirmed_absent=bool(payload.get("confirmed_absent")) and not payload.get("published"),
         )
-        published_n = sum(1 for p in item["platforms"].values() if p["published"])
-        if item.get("kind") == "cut" or item.get("section") in ("cut", "published"):
-            item["section"] = "published" if published_n == 3 else "cut"
+        if item.get("kind") in ("cut", "recon") or item.get("section") in ("cut", "published", "recon"):
+            if any_platform_published(item):
+                item["section"] = "published"
+            elif item.get("section") == "published" and not item.get("archived_as_duplicate"):
+                item["section"] = "cut"
         return {"effect": "platform_only", "id": item["id"], "platform": platform, "unchanged": [k for k in before if k != platform and before[k] == item["platforms"][k]]}
     if et == "preview_attached":
         item = model["items"].get(payload.get("item_id"))
