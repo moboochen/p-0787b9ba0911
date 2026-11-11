@@ -1,10 +1,10 @@
 {
-  "canonical_revision": "5d2f030295f84c732e0abaf8a4e1b0e9a8169eddbc6d3ddb7afd0ae5b00a814d",
-  "built_revision": "5d2f030295f84c732e0abaf8a4e1b0e9a8169eddbc6d3ddb7afd0ae5b00a814d",
+  "canonical_revision": "22faa3ece292e20cc0622040cc74f22e3dcc42f4525c50f1fe53223b2b831847",
+  "built_revision": "22faa3ece292e20cc0622040cc74f22e3dcc42f4525c50f1fe53223b2b831847",
   "last_successful_sync": null,
   "pending": {
-    "revision": "5d2f030295f84c732e0abaf8a4e1b0e9a8169eddbc6d3ddb7afd0ae5b00a814d",
-    "reason": "安全匯入已寫入並建頁，公開網址尚未驗證"
+    "revision": "22faa3ece292e20cc0622040cc74f22e3dcc42f4525c50f1fe53223b2b831847",
+    "reason": "頁面已重建，公開網址尚未驗證"
   },
   "error": null,
   "outbox": [
@@ -37,8 +37,8 @@
       "event": "safe-import"
     },
     "built": {
-      "at": "2026-11-09T03:07:11+08:00",
-      "revision": "5d2f030295f84c732e0abaf8a4e1b0e9a8169eddbc6d3ddb7afd0ae5b00a814d"
+      "at": "2026-11-12T01:46:56+08:00",
+      "revision": "22faa3ece292e20cc0622040cc74f22e3dcc42f4525c50f1fe53223b2b831847"
     },
     "pushed_branch": null,
     "pull_request": null,

@@ -23,10 +23,14 @@
   function taipeiDate() {
     return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Taipei", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
   }
+  function anyPublished(it) {
+    var p = it.platforms || {};
+    return ["yt", "fb", "ig", "tt"].some(function (k) {
+      return p[k] && (p[k].published || p[k].verification === "published");
+    });
+  }
   function inPublished(it) {
-    if (it.section === "published") return true;
-    if (it.section !== "cut") return false;
-    return ["yt", "fb", "ig"].some(function (k) { return it.platforms && it.platforms[k] && it.platforms[k].published; });
+    return it.section === "published" || anyPublished(it);
   }
   function hasApprovedVersion(it) {
     if (it.flags && it.flags.script_approved) return true;
@@ -35,6 +39,7 @@
   function pool(tab) {
     return DATA.items.filter(function (it) {
       if (tab === "published") return inPublished(it);
+      if (inPublished(it)) return false;
       if (tab === "approved") return hasApprovedVersion(it);
       if (tab === "cut") return it.section === "cut";
       return it.section === tab;
@@ -47,7 +52,8 @@
   }
   function platforms(it) {
     if (!it.platforms) return "";
-    return '<div class="chips">' + ["yt", "fb", "ig"].map(function (k) {
+    var keys = ["yt", "fb", "ig"].concat(it.platforms.tt ? ["tt"] : []);
+    return '<div class="chips">' + keys.map(function (k) {
       var p = it.platforms[k];
       var extra = p.source ? " " + p.source : "";
       if (p.verification === "published" || p.published) return '<span class="chip on">' + esc(p.label) + " 已發佈 " + esc(p.date || "") + esc(extra) + "</span>";
@@ -123,6 +129,7 @@
     (it.related_notes || []).forEach(function (n) { h += '<p class="note">' + esc(n) + "</p>"; });
     if (it.cut_file_note) h += '<p class="note">' + esc(it.cut_file_note) + "</p>";
     if (it.approval_scope) h += '<p class="note">核准範圍：' + esc(it.approval_scope) + (it.approved_at ? " · " + esc(it.approved_at) : "") + (it.version_label ? " · " + esc(it.version_label) : "") + "</p>";
+    if (it.archive_reason) h += '<p class="note">' + esc(it.archive_reason) + "</p>";
     if (it.script_note) h += '<p class="note">' + esc(it.script_note) + "</p>";
     if (it.subtitle_note) h += '<p class="note">' + esc(it.subtitle_note) + "</p>";
     if (it.withheld_label) h += '<p class="note">' + esc(it.withheld_label) + "</p>";
@@ -167,8 +174,8 @@
       new: "預設只看還沒選的新提案。勾選只會留在這台瀏覽器，不會變成選片核准。",
       script: "這裡是已選、但腳本還在審的項目。Cake C1–C5 是完整雙語初稿，不是已審核。",
       approved: "這裡只放某一版文字已被核准的腳本。文字若已改，舊版留在這裡，新版留在腳本待審，不會兩版都標成核准。選片和發佈「可發」不是腳本核准。",
-      cut: "已剪、還沒在所有平台發完的成片。可以預覽；QC 沒過不能放行。已發的平台照樣標出來，沒發的平台不會被藏起來。",
-      published: "已發佈平台的封存。預設不在第一個分頁。還有平台沒發的，仍留在成片待審。",
+      cut: "只留還沒有任何平台發佈紀錄的成片。只要 Facebook、Instagram、YouTube 或 TikTok 發過，整支只在已發佈。",
+      published: "任一平台已發佈的影片都收在這裡，預設不開。還沒發或未核實的平台寫在同一張卡上，不會回到主列表。",
       recon: "沒核對成獨立成片的檔案。不是可發卡片。"
     };
     var body;

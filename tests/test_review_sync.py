@@ -76,8 +76,8 @@ def test_views_and_platforms():
     oct29 = [it for it in items if it["id"].startswith("cut:") and it["platforms"]["fb"]["published"]]
     assert len(oct29) == 3
     assert all(it["platforms"]["ig"]["published"] and not it["platforms"]["yt"]["published"] for it in oct29)
-    assert all(it["section"] == "cut" for it in oct29)
-    assert sum(1 for it in items if it["section"] == "published") == 3
+    assert all(it["section"] == "published" for it in oct29)
+    assert sum(1 for it in items if all((it.get("platforms") or {}).get(k, {}).get("published") for k in ("yt", "fb", "ig"))) == 3
     assert all(not it["qc"]["ready"] for it in items)
     assert all(not it["flags"]["publish_approved"] for it in items)
 
@@ -413,6 +413,49 @@ def test_box_plan_does_not_publish_or_merge(tmp_path: Path):
         assert "refuse" in str(exc)
     else:
         raise AssertionError("main was allowed")
+
+
+def test_any_platform_published_is_only_in_archive():
+    main_tabs = {"new", "script", "approved", "cut", "recon"}
+    for it in MODEL["items"].values():
+        published = rv.any_platform_published(it)
+        if published or it.get("archived_as_duplicate"):
+            assert it["section"] == "published", it["id"]
+            assert it["section"] not in main_tabs or it["section"] == "published"
+        if published:
+            assert not it["flags"]["publish_approved"]
+    # A partial FB/IG post must not remain in the cut queue.
+    chaio = MODEL["items"]["cut:EP183/伊隆的偏執狂_Chaio.mp4"]
+    assert chaio["platforms"]["fb"]["published"] and chaio["platforms"]["ig"]["published"]
+    assert chaio["platforms"]["yt"]["verification"] == "unverified"
+    assert chaio["section"] == "published"
+    # Older file of that clip is archived without inventing a publication.
+    older = MODEL["items"]["recon:EP183/伊隆的偏執狂.mp4"]
+    assert older["section"] == "published"
+    assert older.get("archived_as_duplicate") is True
+    assert not rv.any_platform_published(older)
+
+
+def test_shelve_does_not_touch_flags_or_unrelated_files():
+    model = {"items": {
+        "vid": {"id": "vid", "kind": "cut", "section": "cut", "ep": "EP1", "title": "已發的片子",
+                "flags": rv.flags(), "platforms": {"fb": rv.platform_slot("Facebook", published=True, date="2026-10-29", source="對話")}},
+        "old": {"id": "recon:EP1/已發的片子.mp4", "kind": "recon", "section": "recon", "ep": "EP1", "title": "已發的片子.mp4",
+                "flags": rv.flags(script=True), "platforms": rv.empty_platforms()},
+        "other": {"id": "recon:EP1/另一支.mp4", "kind": "recon", "section": "recon", "ep": "EP1", "title": "另一支.mp4",
+                  "flags": rv.flags(), "platforms": rv.empty_platforms()},
+        "script": {"id": "EP1-Q1", "kind": "proposal", "section": "script", "ep": "EP1", "title": "已發的片子腳本",
+                   "flags": rv.flags(selected=True), "platforms": rv.empty_platforms()},
+    }}
+    before = {i: dict(it["flags"]) for i, it in model["items"].items()}
+    rv.shelve_published(model)
+    assert model["items"]["vid"]["section"] == "published"
+    assert model["items"]["old"]["section"] == "published"
+    assert model["items"]["old"]["archived_as_duplicate"] is True
+    assert model["items"]["other"]["section"] == "recon"
+    assert model["items"]["script"]["section"] == "script"
+    for i, flags in before.items():
+        assert model["items"][i]["flags"] == flags
 
 
 def test_deploy_refuses_force_and_main():
