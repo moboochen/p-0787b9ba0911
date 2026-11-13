@@ -6786,36 +6786,72 @@
       },
       "qc": {
         "short": {
-          "state": "stale",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "PASS",
+          "fails": [],
+          "warns": [],
+          "spec": "STRICT v2 2026-10-18",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794594514,
+          "file_mtime": 1794594514,
+          "state": "pass",
+          "pass": true,
+          "detail": "qc 通過且身份一致"
         },
         "extra": {
-          "state": "absent",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "WARN",
+          "fails": [],
+          "warns": [
+            "1.39 「2022、2018 年的時候，蠻多家都負的」: 14 chars>12 (font shrinks)",
+            "6.42 「我記得那時候有一些公司，像 Meta」: 14 chars>12 (font shrinks)",
+            "29.06 「你會發現那段時間很多人在網路上問」: 16 chars>12 (font shrinks)",
+            "44.89 「我們講到怎麼樣的心態可以抱很長久」: 16 chars>12 (font shrinks)",
+            "59.00 「這個其實那幾家我就不特別講了」: 14 chars>12 (font shrinks)",
+            "66.12 「有一些啊，有一些，二十年來從一而終」: 15 chars>12 (font shrinks)",
+            "70.56 「對對對，可是不代表它公司沒有價值」: 15 chars>12 (font shrinks)",
+            "ig_reels: 16 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "yt_shorts: 15 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+            "tiktok: 16 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+            "video bitrate 0.79 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+          ],
+          "spec": "qc_extra v1 2026-10-30",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794594514,
+          "file_mtime": 1794594514,
+          "state": "warn_accepted",
+          "pass": true,
+          "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "不能放行：現檔身份未通過 qc_short，qc_extra 也沒有台帳",
-        "accepted_warns": []
+        "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+        "accepted_warns": [
+          "1.39 「2022、2018 年的時候，蠻多家都負的」: 14 chars>12 (font shrinks)",
+          "6.42 「我記得那時候有一些公司，像 Meta」: 14 chars>12 (font shrinks)",
+          "29.06 「你會發現那段時間很多人在網路上問」: 16 chars>12 (font shrinks)",
+          "44.89 「我們講到怎麼樣的心態可以抱很長久」: 16 chars>12 (font shrinks)",
+          "59.00 「這個其實那幾家我就不特別講了」: 14 chars>12 (font shrinks)",
+          "66.12 「有一些啊，有一些，二十年來從一而終」: 15 chars>12 (font shrinks)",
+          "70.56 「對對對，可是不代表它公司沒有價值」: 15 chars>12 (font shrinks)",
+          "ig_reels: 16 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "yt_shorts: 15 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+          "tiktok: 16 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+          "video bitrate 0.79 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+        ]
       },
       "artifact": {
-        "id": "EP198/員工配股拿到就賣.mp4|9240873|1794161803",
-        "label": "EP198/員工配股拿到就賣.mp4",
-        "bytes": 9240873,
-        "mtime_taipei": "2026-11-09 02:16"
+        "id": "員工配股拿到就賣_locked.mp4|9263666|1794594514",
+        "label": "員工配股拿到就賣_locked.mp4",
+        "bytes": 9263666,
+        "mtime_taipei": "2026-11-14 02:28"
       },
       "historical": null,
       "hold": null,
       "schedule_label": "",
       "schedule_readonly": true,
       "media": {
-        "video": "https://drive.google.com/file/d/1XrXTn94ZV7WP-gF1yZGsg0qwshinWwup/view?usp=drivesdk",
-        "video_label": "開啟Drive審片",
+        "video": "https://drive.google.com/file/d/1U8OoMprUE0qQTV04zAG6DUihyEsOMEOu/view?usp=drivesdk",
+        "video_label": "開啟Drive審片（本輪現檔）",
         "doc": null,
         "subs": [
           "那我這邊看了一下",
@@ -6852,49 +6888,79 @@
       },
       "local_identities": [
         {
-          "label": "EP198/員工配股拿到就賣.mp4",
-          "bytes": 9240873,
-          "mtime": 1794161803,
-          "mtime_taipei": "2026-11-09 02:16",
+          "label": "員工配股拿到就賣_locked.mp4",
+          "bytes": 9263666,
+          "mtime": 1794594514,
+          "mtime_taipei": "2026-11-14 02:28",
           "qc": {
             "short": {
-              "identity_match": false,
+              "identity_match": true,
               "result_raw": "PASS",
               "fails": [],
               "warns": [],
               "spec": "STRICT v2 2026-10-18",
-              "at": "2026-10-29T23:45:10+08:00",
-              "record_mtime": 1793288402,
-              "file_mtime": 1794161803,
-              "state": "stale",
-              "pass": false,
-              "detail": "舊紀錄與現檔的 mtime 或大小不一致，不能當成通過"
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794594514,
+              "file_mtime": 1794594514,
+              "state": "pass",
+              "pass": true,
+              "detail": "qc 通過且身份一致"
             },
             "extra": {
-              "state": "absent",
-              "pass": false,
-              "identity_match": false,
-              "result_raw": null,
-              "detail": "沒有 qc_extra 台帳"
+              "identity_match": true,
+              "result_raw": "WARN",
+              "fails": [],
+              "warns": [
+                "1.39 「2022、2018 年的時候，蠻多家都負的」: 14 chars>12 (font shrinks)",
+                "6.42 「我記得那時候有一些公司，像 Meta」: 14 chars>12 (font shrinks)",
+                "29.06 「你會發現那段時間很多人在網路上問」: 16 chars>12 (font shrinks)",
+                "44.89 「我們講到怎麼樣的心態可以抱很長久」: 16 chars>12 (font shrinks)",
+                "59.00 「這個其實那幾家我就不特別講了」: 14 chars>12 (font shrinks)",
+                "66.12 「有一些啊，有一些，二十年來從一而終」: 15 chars>12 (font shrinks)",
+                "70.56 「對對對，可是不代表它公司沒有價值」: 15 chars>12 (font shrinks)",
+                "ig_reels: 16 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "yt_shorts: 15 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+                "tiktok: 16 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+                "video bitrate 0.79 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+              ],
+              "spec": "qc_extra v1 2026-10-30",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794594514,
+              "file_mtime": 1794594514,
+              "state": "warn_accepted",
+              "pass": true,
+              "detail": "警告已在這次事件裡明示接受"
             },
             "ready": false,
-            "block_reason": "不能放行：qc_short=stale；qc_extra=absent",
-            "accepted_warns": []
+            "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+            "accepted_warns": [
+              "1.39 「2022、2018 年的時候，蠻多家都負的」: 14 chars>12 (font shrinks)",
+              "6.42 「我記得那時候有一些公司，像 Meta」: 14 chars>12 (font shrinks)",
+              "29.06 「你會發現那段時間很多人在網路上問」: 16 chars>12 (font shrinks)",
+              "44.89 「我們講到怎麼樣的心態可以抱很長久」: 16 chars>12 (font shrinks)",
+              "59.00 「這個其實那幾家我就不特別講了」: 14 chars>12 (font shrinks)",
+              "66.12 「有一些啊，有一些，二十年來從一而終」: 15 chars>12 (font shrinks)",
+              "70.56 「對對對，可是不代表它公司沒有價值」: 15 chars>12 (font shrinks)",
+              "ig_reels: 16 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "yt_shorts: 15 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+              "tiktok: 16 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+              "video bitrate 0.79 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+            ]
           }
         }
       ],
       "still_id": null,
       "related_notes": [],
-      "cut_file_note": "檔案存在只供審片。沒有開剪授權紀錄，也不等於可以發佈。",
+      "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
         "access": "private_owner_sign_in",
         "mime": "application/mp4",
         "streaming_playback_verified": false,
-        "artifact_id": "EP198/員工配股拿到就賣.mp4|9240873|1794161803"
+        "artifact_id": "員工配股拿到就賣_locked.mp4|9263666|1794594514"
       },
       "withheld_label": null,
-      "subtitle_note": "燒錄進影片的字幕是否就是這份文字，尚未核對。",
-      "script_note": "現檔沒有繼承先前那一版腳本核准，QC 仍是失效。"
+      "subtitle_note": "字幕依本輪現檔（近逐字跟語音）。與核准稿用詞差異已另外紀錄，未默改。",
+      "script_note": "現檔沒有繼承發佈核准。腳本核准只涵蓋先前那一版文字。"
     },
     "cut:EP198/投資沒有致勝公式.mp4": {
       "id": "cut:EP198/投資沒有致勝公式.mp4",
@@ -6939,36 +7005,86 @@
       },
       "qc": {
         "short": {
-          "state": "stale",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "PASS",
+          "fails": [],
+          "warns": [],
+          "spec": "STRICT v2 2026-10-18",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794610158,
+          "file_mtime": 1794610158,
+          "state": "pass",
+          "pass": true,
+          "detail": "qc 通過且身份一致"
         },
         "extra": {
-          "state": "absent",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "WARN",
+          "fails": [],
+          "warns": [
+            "0.07 「股市其實說老實話，有一些股票」: 13 chars>12 (font shrinks)",
+            "2.97 「2000 年到 2016 年都沒有漲回來」: 13 chars>12 (font shrinks)",
+            "13.88 「不要去找那種不能適用的時代」: 13 chars>12 (font shrinks)",
+            "24.97 「可以證明投資什麼時候都可以用的」: 15 chars>12 (font shrinks)",
+            "30.57 「投資沒有 holy grail（聖杯），要不然……」: 13.5 chars>12 (font shrinks)",
+            "41.95 「所以投資沒有真正的一個規律」: 13 chars>12 (font shrinks)",
+            "48.97 「所以如果你現在要把我的這一段東西」: 16 chars>12 (font shrinks)",
+            "59.69 「歷史上任何一個時間點都還可以賺錢」: 16 chars>12 (font shrinks)",
+            "66.14 「我現在講的這東西不是什麼定律」: 14 chars>12 (font shrinks)",
+            "79.10 「我今天講的投資東西全部是錯的」: 14 chars>12 (font shrinks)",
+            "81.93 「你也可以找到任何一個投資方法」: 14 chars>12 (font shrinks)",
+            "88.34 「但是你不要去做這個事情，為什麼？」: 14 chars>12 (font shrinks)",
+            "93.84 「我 follow 做，我複製，我賺錢成功」: 13 chars>12 (font shrinks)",
+            "98.46 「好，我希望大家不要去做這個事情」: 14 chars>12 (font shrinks)",
+            "ig_reels: 29 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "yt_shorts: 29 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+            "tiktok: 32 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+            "video bitrate 0.80 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+          ],
+          "spec": "qc_extra v1 2026-10-30",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794610158,
+          "file_mtime": 1794610158,
+          "state": "warn_accepted",
+          "pass": true,
+          "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "不能放行：現檔身份未通過 qc_short，qc_extra 也沒有台帳",
-        "accepted_warns": []
+        "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+        "accepted_warns": [
+          "0.07 「股市其實說老實話，有一些股票」: 13 chars>12 (font shrinks)",
+          "2.97 「2000 年到 2016 年都沒有漲回來」: 13 chars>12 (font shrinks)",
+          "13.88 「不要去找那種不能適用的時代」: 13 chars>12 (font shrinks)",
+          "24.97 「可以證明投資什麼時候都可以用的」: 15 chars>12 (font shrinks)",
+          "30.57 「投資沒有 holy grail（聖杯），要不然……」: 13.5 chars>12 (font shrinks)",
+          "41.95 「所以投資沒有真正的一個規律」: 13 chars>12 (font shrinks)",
+          "48.97 「所以如果你現在要把我的這一段東西」: 16 chars>12 (font shrinks)",
+          "59.69 「歷史上任何一個時間點都還可以賺錢」: 16 chars>12 (font shrinks)",
+          "66.14 「我現在講的這東西不是什麼定律」: 14 chars>12 (font shrinks)",
+          "79.10 「我今天講的投資東西全部是錯的」: 14 chars>12 (font shrinks)",
+          "81.93 「你也可以找到任何一個投資方法」: 14 chars>12 (font shrinks)",
+          "88.34 「但是你不要去做這個事情，為什麼？」: 14 chars>12 (font shrinks)",
+          "93.84 「我 follow 做，我複製，我賺錢成功」: 13 chars>12 (font shrinks)",
+          "98.46 「好，我希望大家不要去做這個事情」: 14 chars>12 (font shrinks)",
+          "ig_reels: 29 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "yt_shorts: 29 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+          "tiktok: 32 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+          "video bitrate 0.80 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+        ]
       },
       "artifact": {
-        "id": "EP198/投資沒有致勝公式.mp4|12653455|1794161804",
-        "label": "EP198/投資沒有致勝公式.mp4",
-        "bytes": 12653455,
-        "mtime_taipei": "2026-11-09 02:16"
+        "id": "投資沒有致勝公式_fix3.mp4|12696442|1794610158",
+        "label": "投資沒有致勝公式_fix3.mp4",
+        "bytes": 12696442,
+        "mtime_taipei": "2026-11-14 06:49"
       },
       "historical": null,
       "hold": null,
       "schedule_label": "",
       "schedule_readonly": true,
       "media": {
-        "video": "https://drive.google.com/file/d/1jPqUxSVocXR6Evc4m46eYiz9FI2xfoKJ/view?usp=drivesdk",
-        "video_label": "開啟Drive審片",
+        "video": "https://drive.google.com/file/d/1QxgKyWiKgj0uBlRztMWsSd0hDHtyxLBb/view?usp=drivesdk",
+        "video_label": "開啟Drive審片（本輪現檔）",
         "doc": null,
         "subs": [
           "股市其實說老實話，有一些股票",
@@ -6980,7 +7096,8 @@
           "不要去找那種不能適用的時代",
           "因為對你一點意義都沒有",
           "因為你在找什麼？",
-          "投資有沒有一個規律、有沒有一個 formula",
+          "投資有沒有一個規律",
+          "有沒有一個 formula",
           "可以證明投資什麼時候都可以用的",
           "你自己其實內心知道",
           "投資沒有 holy grail（聖杯），要不然……",
@@ -6992,7 +7109,8 @@
           "所以投資沒有真正的一個規律",
           "說今天跟你講一個定律",
           "你套了這個公式你就可以贏",
-          "所以如果你現在要把我的這一段東西，今天這一節內容",
+          "所以如果你現在要把我的這一段東西",
+          "今天這一節內容",
           "套在某個時間，證明我是錯的",
           "那你是對的",
           "因為我這一段不可能套在",
@@ -7002,7 +7120,8 @@
           "到底可不可以複製",
           "要跟大家講，不可以複製",
           "絕對是不能複製的",
-          "所以你一定可以找到歷史上有一個時間點",
+          "所以你一定可以找到",
+          "歷史上有一個時間點",
           "我今天講的投資東西全部是錯的",
           "你也可以找到任何一個投資方法",
           "再套在某個時間點，它是錯的",
@@ -7019,49 +7138,93 @@
       },
       "local_identities": [
         {
-          "label": "EP198/投資沒有致勝公式.mp4",
-          "bytes": 12653455,
-          "mtime": 1794161804,
-          "mtime_taipei": "2026-11-09 02:16",
+          "label": "投資沒有致勝公式_fix3.mp4",
+          "bytes": 12696442,
+          "mtime": 1794610158,
+          "mtime_taipei": "2026-11-14 06:49",
           "qc": {
             "short": {
-              "identity_match": false,
+              "identity_match": true,
               "result_raw": "PASS",
               "fails": [],
               "warns": [],
               "spec": "STRICT v2 2026-10-18",
-              "at": "2026-10-30T00:00:17+08:00",
-              "record_mtime": 1793289532,
-              "file_mtime": 1794161804,
-              "state": "stale",
-              "pass": false,
-              "detail": "舊紀錄與現檔的 mtime 或大小不一致，不能當成通過"
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794610158,
+              "file_mtime": 1794610158,
+              "state": "pass",
+              "pass": true,
+              "detail": "qc 通過且身份一致"
             },
             "extra": {
-              "state": "absent",
-              "pass": false,
-              "identity_match": false,
-              "result_raw": null,
-              "detail": "沒有 qc_extra 台帳"
+              "identity_match": true,
+              "result_raw": "WARN",
+              "fails": [],
+              "warns": [
+                "0.07 「股市其實說老實話，有一些股票」: 13 chars>12 (font shrinks)",
+                "2.97 「2000 年到 2016 年都沒有漲回來」: 13 chars>12 (font shrinks)",
+                "13.88 「不要去找那種不能適用的時代」: 13 chars>12 (font shrinks)",
+                "24.97 「可以證明投資什麼時候都可以用的」: 15 chars>12 (font shrinks)",
+                "30.57 「投資沒有 holy grail（聖杯），要不然……」: 13.5 chars>12 (font shrinks)",
+                "41.95 「所以投資沒有真正的一個規律」: 13 chars>12 (font shrinks)",
+                "48.97 「所以如果你現在要把我的這一段東西」: 16 chars>12 (font shrinks)",
+                "59.69 「歷史上任何一個時間點都還可以賺錢」: 16 chars>12 (font shrinks)",
+                "66.14 「我現在講的這東西不是什麼定律」: 14 chars>12 (font shrinks)",
+                "79.10 「我今天講的投資東西全部是錯的」: 14 chars>12 (font shrinks)",
+                "81.93 「你也可以找到任何一個投資方法」: 14 chars>12 (font shrinks)",
+                "88.34 「但是你不要去做這個事情，為什麼？」: 14 chars>12 (font shrinks)",
+                "93.84 「我 follow 做，我複製，我賺錢成功」: 13 chars>12 (font shrinks)",
+                "98.46 「好，我希望大家不要去做這個事情」: 14 chars>12 (font shrinks)",
+                "ig_reels: 29 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "yt_shorts: 29 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+                "tiktok: 32 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+                "video bitrate 0.80 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+              ],
+              "spec": "qc_extra v1 2026-10-30",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794610158,
+              "file_mtime": 1794610158,
+              "state": "warn_accepted",
+              "pass": true,
+              "detail": "警告已在這次事件裡明示接受"
             },
             "ready": false,
-            "block_reason": "不能放行：qc_short=stale；qc_extra=absent",
-            "accepted_warns": []
+            "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+            "accepted_warns": [
+              "0.07 「股市其實說老實話，有一些股票」: 13 chars>12 (font shrinks)",
+              "2.97 「2000 年到 2016 年都沒有漲回來」: 13 chars>12 (font shrinks)",
+              "13.88 「不要去找那種不能適用的時代」: 13 chars>12 (font shrinks)",
+              "24.97 「可以證明投資什麼時候都可以用的」: 15 chars>12 (font shrinks)",
+              "30.57 「投資沒有 holy grail（聖杯），要不然……」: 13.5 chars>12 (font shrinks)",
+              "41.95 「所以投資沒有真正的一個規律」: 13 chars>12 (font shrinks)",
+              "48.97 「所以如果你現在要把我的這一段東西」: 16 chars>12 (font shrinks)",
+              "59.69 「歷史上任何一個時間點都還可以賺錢」: 16 chars>12 (font shrinks)",
+              "66.14 「我現在講的這東西不是什麼定律」: 14 chars>12 (font shrinks)",
+              "79.10 「我今天講的投資東西全部是錯的」: 14 chars>12 (font shrinks)",
+              "81.93 「你也可以找到任何一個投資方法」: 14 chars>12 (font shrinks)",
+              "88.34 「但是你不要去做這個事情，為什麼？」: 14 chars>12 (font shrinks)",
+              "93.84 「我 follow 做，我複製，我賺錢成功」: 13 chars>12 (font shrinks)",
+              "98.46 「好，我希望大家不要去做這個事情」: 14 chars>12 (font shrinks)",
+              "ig_reels: 29 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "yt_shorts: 29 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+              "tiktok: 32 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+              "video bitrate 0.80 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+            ]
           }
         }
       ],
       "still_id": null,
       "related_notes": [],
-      "cut_file_note": "檔案存在只供審片。沒有開剪授權紀錄，也不等於可以發佈。",
+      "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
         "access": "private_owner_sign_in",
         "mime": "application/mp4",
         "streaming_playback_verified": false,
-        "artifact_id": "EP198/投資沒有致勝公式.mp4|12653455|1794161804"
+        "artifact_id": "投資沒有致勝公式_fix3.mp4|12696442|1794610158"
       },
       "withheld_label": null,
-      "subtitle_note": "燒錄進影片的字幕是否就是這份文字，尚未核對。",
-      "script_note": "現檔沒有繼承先前那一版腳本核准，QC 仍是失效。"
+      "subtitle_note": "字幕依本輪現檔（近逐字跟語音）。與核准稿用詞差異已另外紀錄，未默改。",
+      "script_note": "現檔沒有繼承發佈核准。腳本核准只涵蓋先前那一版文字。"
     },
     "cut:EP198/抱十年就會發.mp4": {
       "id": "cut:EP198/抱十年就會發.mp4",
@@ -7106,46 +7269,90 @@
       },
       "qc": {
         "short": {
-          "state": "stale",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "PASS",
+          "fails": [],
+          "warns": [],
+          "spec": "STRICT v2 2026-10-18",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794605290,
+          "file_mtime": 1794605290,
+          "state": "pass",
+          "pass": true,
+          "detail": "qc 通過且身份一致"
         },
         "extra": {
-          "state": "absent",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "WARN",
+          "fails": [],
+          "warns": [
+            "0.00 「那我有一個問題蠻好奇想問你」: 13 chars>12 (font shrinks)",
+            "16.49 「很多人會覺得說，啊，就美……美股抱十……」: 14 chars>12 (font shrinks)",
+            "25.17 「尤其美股投資經驗，就是這幾年」: 13 chars>12 (font shrinks)",
+            "30.08 「就會知道你就是這幾年才加入的」: 14 chars>12 (font shrinks)",
+            "32.44 「那像我們這種抱很久的人就知道」: 14 chars>12 (font shrinks)",
+            "34.39 「它有一些年份是沒有漲的，整年沒漲」: 15 chars>12 (font shrinks)",
+            "43.13 「我有特別回去再查一下七巨頭」: 13 chars>12 (font shrinks)",
+            "48.35 「我記得那年好像 Meta 也是蠻慘的」: 14 chars>12 (font shrinks)",
+            "66.56 「對，就是兩年，兩個年次都下降的」: 13 chars>12 (font shrinks)",
+            "75.65 「基本上七巨頭全部都跌得蠻慘的」: 14 chars>12 (font shrinks)",
+            "ig_reels: 27 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "yt_shorts: 27 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "tiktok: 28 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+            "video bitrate 0.86 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+          ],
+          "spec": "qc_extra v1 2026-10-30",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794605290,
+          "file_mtime": 1794605290,
+          "state": "warn_accepted",
+          "pass": true,
+          "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "不能放行：現檔身份未通過 qc_short，qc_extra 也沒有台帳",
-        "accepted_warns": []
+        "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+        "accepted_warns": [
+          "0.00 「那我有一個問題蠻好奇想問你」: 13 chars>12 (font shrinks)",
+          "16.49 「很多人會覺得說，啊，就美……美股抱十……」: 14 chars>12 (font shrinks)",
+          "25.17 「尤其美股投資經驗，就是這幾年」: 13 chars>12 (font shrinks)",
+          "30.08 「就會知道你就是這幾年才加入的」: 14 chars>12 (font shrinks)",
+          "32.44 「那像我們這種抱很久的人就知道」: 14 chars>12 (font shrinks)",
+          "34.39 「它有一些年份是沒有漲的，整年沒漲」: 15 chars>12 (font shrinks)",
+          "43.13 「我有特別回去再查一下七巨頭」: 13 chars>12 (font shrinks)",
+          "48.35 「我記得那年好像 Meta 也是蠻慘的」: 14 chars>12 (font shrinks)",
+          "66.56 「對，就是兩年，兩個年次都下降的」: 13 chars>12 (font shrinks)",
+          "75.65 「基本上七巨頭全部都跌得蠻慘的」: 14 chars>12 (font shrinks)",
+          "ig_reels: 27 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "yt_shorts: 27 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "tiktok: 28 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+          "video bitrate 0.86 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+        ]
       },
       "artifact": {
-        "id": "EP198/抱十年就會發.mp4|11376889|1794161803",
-        "label": "EP198/抱十年就會發.mp4",
-        "bytes": 11376889,
-        "mtime_taipei": "2026-11-09 02:16"
+        "id": "抱十年就會發_fix4.mp4|11444954|1794605290",
+        "label": "抱十年就會發_fix4.mp4",
+        "bytes": 11444954,
+        "mtime_taipei": "2026-11-14 05:28"
       },
       "historical": null,
       "hold": null,
       "schedule_label": "",
       "schedule_readonly": true,
       "media": {
-        "video": "https://drive.google.com/file/d/12R4sBDYvDJiWw-0bgRRDjvqGR43EU_fo/view?usp=drivesdk",
-        "video_label": "開啟Drive審片",
+        "video": "https://drive.google.com/file/d/1FwzMi6oAlNS5ozsZaVRRkC6qffBTymyo/view?usp=drivesdk",
+        "video_label": "開啟Drive審片（本輪現檔）",
         "doc": null,
         "subs": [
           "那我有一個問題蠻好奇想問你",
           "因為你說你自己是那個大概",
           "金融海嘯那一陣子畢業的嘛",
           "不行啊，就已經賠了，就是賠了",
-          "賠到還沒回到之前的水位、已經賠很久了",
+          "賠到還沒回到之前的水位",
+          "我已經賠很久了",
           "你不會想要把它賣掉嗎？",
           "對，這個就要跟大家講",
-          "很多人會覺得說，啊，就美……美股抱十……美股抱十年就會發",
+          "很多人會覺得說，啊，就美……美股抱十……",
+          "美股抱十年就會發",
           "這有什麼難的",
           "這要跟大家講",
           "這是很多人的投資經驗",
@@ -7180,49 +7387,85 @@
       },
       "local_identities": [
         {
-          "label": "EP198/抱十年就會發.mp4",
-          "bytes": 11376889,
-          "mtime": 1794161803,
-          "mtime_taipei": "2026-11-09 02:16",
+          "label": "抱十年就會發_fix4.mp4",
+          "bytes": 11444954,
+          "mtime": 1794605290,
+          "mtime_taipei": "2026-11-14 05:28",
           "qc": {
             "short": {
-              "identity_match": false,
+              "identity_match": true,
               "result_raw": "PASS",
               "fails": [],
               "warns": [],
               "spec": "STRICT v2 2026-10-18",
-              "at": "2026-10-29T23:49:36+08:00",
-              "record_mtime": 1793288891,
-              "file_mtime": 1794161803,
-              "state": "stale",
-              "pass": false,
-              "detail": "舊紀錄與現檔的 mtime 或大小不一致，不能當成通過"
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794605290,
+              "file_mtime": 1794605290,
+              "state": "pass",
+              "pass": true,
+              "detail": "qc 通過且身份一致"
             },
             "extra": {
-              "state": "absent",
-              "pass": false,
-              "identity_match": false,
-              "result_raw": null,
-              "detail": "沒有 qc_extra 台帳"
+              "identity_match": true,
+              "result_raw": "WARN",
+              "fails": [],
+              "warns": [
+                "0.00 「那我有一個問題蠻好奇想問你」: 13 chars>12 (font shrinks)",
+                "16.49 「很多人會覺得說，啊，就美……美股抱十……」: 14 chars>12 (font shrinks)",
+                "25.17 「尤其美股投資經驗，就是這幾年」: 13 chars>12 (font shrinks)",
+                "30.08 「就會知道你就是這幾年才加入的」: 14 chars>12 (font shrinks)",
+                "32.44 「那像我們這種抱很久的人就知道」: 14 chars>12 (font shrinks)",
+                "34.39 「它有一些年份是沒有漲的，整年沒漲」: 15 chars>12 (font shrinks)",
+                "43.13 「我有特別回去再查一下七巨頭」: 13 chars>12 (font shrinks)",
+                "48.35 「我記得那年好像 Meta 也是蠻慘的」: 14 chars>12 (font shrinks)",
+                "66.56 「對，就是兩年，兩個年次都下降的」: 13 chars>12 (font shrinks)",
+                "75.65 「基本上七巨頭全部都跌得蠻慘的」: 14 chars>12 (font shrinks)",
+                "ig_reels: 27 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "yt_shorts: 27 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "tiktok: 28 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+                "video bitrate 0.86 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+              ],
+              "spec": "qc_extra v1 2026-10-30",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794605290,
+              "file_mtime": 1794605290,
+              "state": "warn_accepted",
+              "pass": true,
+              "detail": "警告已在這次事件裡明示接受"
             },
             "ready": false,
-            "block_reason": "不能放行：qc_short=stale；qc_extra=absent",
-            "accepted_warns": []
+            "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+            "accepted_warns": [
+              "0.00 「那我有一個問題蠻好奇想問你」: 13 chars>12 (font shrinks)",
+              "16.49 「很多人會覺得說，啊，就美……美股抱十……」: 14 chars>12 (font shrinks)",
+              "25.17 「尤其美股投資經驗，就是這幾年」: 13 chars>12 (font shrinks)",
+              "30.08 「就會知道你就是這幾年才加入的」: 14 chars>12 (font shrinks)",
+              "32.44 「那像我們這種抱很久的人就知道」: 14 chars>12 (font shrinks)",
+              "34.39 「它有一些年份是沒有漲的，整年沒漲」: 15 chars>12 (font shrinks)",
+              "43.13 「我有特別回去再查一下七巨頭」: 13 chars>12 (font shrinks)",
+              "48.35 「我記得那年好像 Meta 也是蠻慘的」: 14 chars>12 (font shrinks)",
+              "66.56 「對，就是兩年，兩個年次都下降的」: 13 chars>12 (font shrinks)",
+              "75.65 「基本上七巨頭全部都跌得蠻慘的」: 14 chars>12 (font shrinks)",
+              "ig_reels: 27 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "yt_shorts: 27 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "tiktok: 28 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+              "video bitrate 0.86 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+            ]
           }
         }
       ],
       "still_id": null,
       "related_notes": [],
-      "cut_file_note": "檔案存在只供審片。沒有開剪授權紀錄，也不等於可以發佈。",
+      "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
         "access": "private_owner_sign_in",
         "mime": "application/mp4",
         "streaming_playback_verified": false,
-        "artifact_id": "EP198/抱十年就會發.mp4|11376889|1794161803"
+        "artifact_id": "抱十年就會發_fix4.mp4|11444954|1794605290"
       },
       "withheld_label": null,
-      "subtitle_note": "燒錄進影片的字幕是否就是這份文字，尚未核對。",
-      "script_note": "現檔沒有繼承先前那一版腳本核准，QC 仍是失效。"
+      "subtitle_note": "字幕依本輪現檔（近逐字跟語音）。與核准稿用詞差異已另外紀錄，未默改。",
+      "script_note": "現檔沒有繼承發佈核准。腳本核准只涵蓋先前那一版文字。"
     },
     "cut:EP198/有F-U_money也沒走.mp4": {
       "id": "cut:EP198/有F-U_money也沒走.mp4",
@@ -7267,42 +7510,78 @@
       },
       "qc": {
         "short": {
-          "state": "stale",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "PASS",
+          "fails": [],
+          "warns": [],
+          "spec": "STRICT v2 2026-10-18",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794601570,
+          "file_mtime": 1794601570,
+          "state": "pass",
+          "pass": true,
+          "detail": "qc 通過且身份一致"
         },
         "extra": {
-          "state": "absent",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "WARN",
+          "fails": [],
+          "warns": [
+            "1.17 「那當然，覺得達到資產那個是就是目標」: 16 chars>12 (font shrinks)",
+            "7.25 「會覺得說，哎呀我隨時都可以，對吧，」: 14 chars>12 (font shrinks)",
+            "11.64 「對不對，就是隨不隨時我都拍桌，」: 13 chars>12 (font shrinks)",
+            "19.53 「對不對，因為當你有選擇的時候」: 13 chars>12 (font shrinks)",
+            "35.89 「會擔心說資產會不會還繼續成長」: 14 chars>12 (font shrinks)",
+            "40.22 「我現在是處於一個最平衡的狀態」: 14 chars>12 (font shrinks)",
+            "ig_reels: 14 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "yt_shorts: 14 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+            "tiktok: 14 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07",
+            "video bitrate 0.80 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+          ],
+          "spec": "qc_extra v1 2026-10-30",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794601570,
+          "file_mtime": 1794601570,
+          "state": "warn_accepted",
+          "pass": true,
+          "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "不能放行：現檔身份未通過 qc_short，qc_extra 也沒有台帳",
-        "accepted_warns": []
+        "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+        "accepted_warns": [
+          "1.17 「那當然，覺得達到資產那個是就是目標」: 16 chars>12 (font shrinks)",
+          "7.25 「會覺得說，哎呀我隨時都可以，對吧，」: 14 chars>12 (font shrinks)",
+          "11.64 「對不對，就是隨不隨時我都拍桌，」: 13 chars>12 (font shrinks)",
+          "19.53 「對不對，因為當你有選擇的時候」: 13 chars>12 (font shrinks)",
+          "35.89 「會擔心說資產會不會還繼續成長」: 14 chars>12 (font shrinks)",
+          "40.22 「我現在是處於一個最平衡的狀態」: 14 chars>12 (font shrinks)",
+          "ig_reels: 14 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "yt_shorts: 14 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+          "tiktok: 14 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07",
+          "video bitrate 0.80 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+        ]
       },
       "artifact": {
-        "id": "EP198/有F-U_money也沒走.mp4|6495791|1794161803",
-        "label": "EP198/有F-U_money也沒走.mp4",
-        "bytes": 6495791,
-        "mtime_taipei": "2026-11-09 02:16"
+        "id": "有F-U_money也沒走_fix4.mp4|6544613|1794601570",
+        "label": "有F-U_money也沒走_fix4.mp4",
+        "bytes": 6544613,
+        "mtime_taipei": "2026-11-14 04:26"
       },
       "historical": null,
       "hold": null,
       "schedule_label": "",
       "schedule_readonly": true,
       "media": {
-        "video": "https://drive.google.com/file/d/1dzBhVnC0SBRHw1FE01Pk0x9D0SORSCCG/view?usp=drivesdk",
-        "video_label": "開啟Drive審片",
+        "video": "https://drive.google.com/file/d/11BJ3OaK008fbymZ6m4fzA8KtDetAOPJB/view?usp=drivesdk",
+        "video_label": "開啟Drive審片（本輪現檔）",
         "doc": null,
         "subs": [
           "那當然，覺得達到資產那個是就是目標",
           "那個時候心態會比較輕鬆",
-          "會覺得說，哎呀我隨時都可以，對吧，F-U money",
-          "對不對，就是隨不隨時我都拍桌，拍桌閃人，對",
+          "會覺得說，哎呀我隨時都可以，對吧，",
+          "F-U money",
+          "對不對，就是隨不隨時我都拍桌，",
+          "拍桌閃人，對",
           "但是就像我講的",
           "你買到自由的那一刻",
           "你可能還不會馬上想要走",
@@ -7311,7 +7590,8 @@
           "很爽你知道嗎",
           "有選擇的感覺就很爽了",
           "不需要真的選擇下去",
-          "你選擇下去可能會有一些內心的壓力嘛",
+          "你選擇下去可能會有一些",
+          "內心的壓力嘛",
           "離職就會有內心壓力",
           "去做自己想做的事情",
           "會擔心說資產會不會還繼續成長",
@@ -7328,49 +7608,77 @@
       },
       "local_identities": [
         {
-          "label": "EP198/有F-U_money也沒走.mp4",
-          "bytes": 6495791,
-          "mtime": 1794161803,
-          "mtime_taipei": "2026-11-09 02:16",
+          "label": "有F-U_money也沒走_fix4.mp4",
+          "bytes": 6544613,
+          "mtime": 1794601570,
+          "mtime_taipei": "2026-11-14 04:26",
           "qc": {
             "short": {
-              "identity_match": false,
+              "identity_match": true,
               "result_raw": "PASS",
               "fails": [],
               "warns": [],
               "spec": "STRICT v2 2026-10-18",
-              "at": "2026-10-30T00:59:29+08:00",
-              "record_mtime": 1793293118,
-              "file_mtime": 1794161803,
-              "state": "stale",
-              "pass": false,
-              "detail": "舊紀錄與現檔的 mtime 或大小不一致，不能當成通過"
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794601570,
+              "file_mtime": 1794601570,
+              "state": "pass",
+              "pass": true,
+              "detail": "qc 通過且身份一致"
             },
             "extra": {
-              "state": "absent",
-              "pass": false,
-              "identity_match": false,
-              "result_raw": null,
-              "detail": "沒有 qc_extra 台帳"
+              "identity_match": true,
+              "result_raw": "WARN",
+              "fails": [],
+              "warns": [
+                "1.17 「那當然，覺得達到資產那個是就是目標」: 16 chars>12 (font shrinks)",
+                "7.25 「會覺得說，哎呀我隨時都可以，對吧，」: 14 chars>12 (font shrinks)",
+                "11.64 「對不對，就是隨不隨時我都拍桌，」: 13 chars>12 (font shrinks)",
+                "19.53 「對不對，因為當你有選擇的時候」: 13 chars>12 (font shrinks)",
+                "35.89 「會擔心說資產會不會還繼續成長」: 14 chars>12 (font shrinks)",
+                "40.22 「我現在是處於一個最平衡的狀態」: 14 chars>12 (font shrinks)",
+                "ig_reels: 14 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "yt_shorts: 14 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+                "tiktok: 14 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07",
+                "video bitrate 0.80 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+              ],
+              "spec": "qc_extra v1 2026-10-30",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794601570,
+              "file_mtime": 1794601570,
+              "state": "warn_accepted",
+              "pass": true,
+              "detail": "警告已在這次事件裡明示接受"
             },
             "ready": false,
-            "block_reason": "不能放行：qc_short=stale；qc_extra=absent",
-            "accepted_warns": []
+            "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+            "accepted_warns": [
+              "1.17 「那當然，覺得達到資產那個是就是目標」: 16 chars>12 (font shrinks)",
+              "7.25 「會覺得說，哎呀我隨時都可以，對吧，」: 14 chars>12 (font shrinks)",
+              "11.64 「對不對，就是隨不隨時我都拍桌，」: 13 chars>12 (font shrinks)",
+              "19.53 「對不對，因為當你有選擇的時候」: 13 chars>12 (font shrinks)",
+              "35.89 「會擔心說資產會不會還繼續成長」: 14 chars>12 (font shrinks)",
+              "40.22 「我現在是處於一個最平衡的狀態」: 14 chars>12 (font shrinks)",
+              "ig_reels: 14 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "yt_shorts: 14 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+              "tiktok: 14 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07",
+              "video bitrate 0.80 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+            ]
           }
         }
       ],
       "still_id": null,
       "related_notes": [],
-      "cut_file_note": "檔案存在只供審片。沒有開剪授權紀錄，也不等於可以發佈。",
+      "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
         "access": "private_owner_sign_in",
         "mime": "application/mp4",
         "streaming_playback_verified": false,
-        "artifact_id": "EP198/有F-U_money也沒走.mp4|6495791|1794161803"
+        "artifact_id": "有F-U_money也沒走_fix4.mp4|6544613|1794601570"
       },
       "withheld_label": null,
-      "subtitle_note": "燒錄進影片的字幕是否就是這份文字，尚未核對。",
-      "script_note": "現檔沒有繼承先前那一版腳本核准，QC 仍是失效。"
+      "subtitle_note": "字幕依本輪現檔（近逐字跟語音）。與核准稿用詞差異已另外紀錄，未默改。",
+      "script_note": "現檔沒有繼承發佈核准。腳本核准只涵蓋先前那一版文字。"
     },
     "cut:EP198/每個時代都有一代拳王.mp4": {
       "id": "cut:EP198/每個時代都有一代拳王.mp4",
@@ -7415,36 +7723,76 @@
       },
       "qc": {
         "short": {
-          "state": "stale",
+          "identity_match": true,
+          "result_raw": "FAIL",
+          "fails": [
+            "T1 字幕不同步/不逐字 1/39 句：#25 字幕文字對不到語音（<50% 字對上）"
+          ],
+          "warns": [],
+          "spec": "STRICT v2 2026-10-18",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794606326,
+          "file_mtime": 1794606326,
+          "state": "fail",
           "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "detail": "紀錄是失敗"
         },
         "extra": {
-          "state": "absent",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "WARN",
+          "fails": [],
+          "warns": [
+            "7.60 「其實你就是還是專注你的工作」: 13 chars>12 (font shrinks)",
+            "14.92 「除非你看它會讓你賺得比較多」: 13 chars>12 (font shrinks)",
+            "19.86 「可是如果你怎麼弄一弄，覺得瞎忙」: 14 chars>12 (font shrinks)",
+            "25.89 「或者投資一些比較大型的公司」: 13 chars>12 (font shrinks)",
+            "31.47 「但我先講，不是七巨頭都漲了很多」: 14 chars>12 (font shrinks)",
+            "49.37 「後來又竟然還聽到什麼什麼十兄弟」: 15 chars>12 (font shrinks)",
+            "71.57 「所以每個時代有它的一代拳王」: 13 chars>12 (font shrinks)",
+            "83.42 「你就要知道，投資時間要拉夠長」: 13 chars>12 (font shrinks)",
+            "ig_reels: 25 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "yt_shorts: 25 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "tiktok: 25 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+            "video bitrate 0.82 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+          ],
+          "spec": "qc_extra v1 2026-10-30",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794606326,
+          "file_mtime": 1794606326,
+          "state": "warn_accepted",
+          "pass": true,
+          "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "不能放行：現檔身份未通過 qc_short，qc_extra 也沒有台帳",
-        "accepted_warns": []
+        "block_reason": "不能放行：qc_short=fail；qc_extra=warn_accepted。未過字幕：#25「你不是 MANGO 嗎？MANGO 啦」：字幕文字對不到語音（<50% 字對上）（窗內「就是这是明狗啦」；whisper「你不是mango嗎」）",
+        "accepted_warns": [
+          "7.60 「其實你就是還是專注你的工作」: 13 chars>12 (font shrinks)",
+          "14.92 「除非你看它會讓你賺得比較多」: 13 chars>12 (font shrinks)",
+          "19.86 「可是如果你怎麼弄一弄，覺得瞎忙」: 14 chars>12 (font shrinks)",
+          "25.89 「或者投資一些比較大型的公司」: 13 chars>12 (font shrinks)",
+          "31.47 「但我先講，不是七巨頭都漲了很多」: 14 chars>12 (font shrinks)",
+          "49.37 「後來又竟然還聽到什麼什麼十兄弟」: 15 chars>12 (font shrinks)",
+          "71.57 「所以每個時代有它的一代拳王」: 13 chars>12 (font shrinks)",
+          "83.42 「你就要知道，投資時間要拉夠長」: 13 chars>12 (font shrinks)",
+          "ig_reels: 25 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "yt_shorts: 25 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "tiktok: 25 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+          "video bitrate 0.82 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+        ]
       },
       "artifact": {
-        "id": "EP198/每個時代都有一代拳王.mp4|11274298|1794161803",
-        "label": "EP198/每個時代都有一代拳王.mp4",
-        "bytes": 11274298,
-        "mtime_taipei": "2026-11-09 02:16"
+        "id": "每個時代都有一代拳王_fix4.mp4|11327530|1794606326",
+        "label": "每個時代都有一代拳王_fix4.mp4",
+        "bytes": 11327530,
+        "mtime_taipei": "2026-11-14 05:45"
       },
       "historical": null,
       "hold": null,
       "schedule_label": "",
       "schedule_readonly": true,
       "media": {
-        "video": "https://drive.google.com/file/d/1YpWPNfxg9MQXD2d3_oHoVHcQRGPc--0o/view?usp=drivesdk",
-        "video_label": "開啟Drive審片",
+        "video": "https://drive.google.com/file/d/1JA8vRYJ8bxIlfamfa59occ9xAejGA1C0/view?usp=drivesdk",
+        "video_label": "開啟Drive審片（本輪現檔）",
         "doc": null,
         "subs": [
           "好，就像很多人講的",
@@ -7457,7 +7805,7 @@
           "除非你看它會讓你賺得比較多",
           "那當然可以花時間下去看",
           "可是如果你怎麼弄一弄，覺得瞎忙",
-          "那真的建議大家走指數",
+          "真的建議大家走這個指數",
           "或者投資一些比較大型的公司",
           "基本上比較能夠反映預期",
           "但我先講，不是七巨頭都漲了很多",
@@ -7469,14 +7817,17 @@
           "對不對？",
           "現在 Netflix 股價也是很高",
           "然後人家叫七巨頭啊、AI 時代",
-          "後來又竟然還聽到什麼什麼十兄弟、什麼各種鬼的",
-          "你不是 MANGO 嗎？MANGO 啦，我會說還要再加一些 AI 股啊",
+          "後來又竟然還聽到什麼什麼十兄弟",
+          "什麼各種鬼的",
+          "你不是 MANGO 嗎？MANGO 啦",
+          "我會說還要再加一些 AI 股啊",
           "每個年代都有它的",
           "我那個，我記得 2020、2021",
           "還有什麼 SMART，小型股",
           "SMART 都創新高",
           "然後現在 SMART 那五家",
-          "大家可以去查，那五家的股價都跌得很慘啊",
+          "大家可以去查",
+          "那五家的股價都跌得很慘啊",
           "所以每個時代有它的一代拳王",
           "所以大家在選個股",
           "你不瞭解，不要真的長期投資",
@@ -7490,49 +7841,86 @@
       },
       "local_identities": [
         {
-          "label": "EP198/每個時代都有一代拳王.mp4",
-          "bytes": 11274298,
-          "mtime": 1794161803,
-          "mtime_taipei": "2026-11-09 02:16",
+          "label": "每個時代都有一代拳王_fix4.mp4",
+          "bytes": 11327530,
+          "mtime": 1794606326,
+          "mtime_taipei": "2026-11-14 05:45",
           "qc": {
             "short": {
-              "identity_match": false,
-              "result_raw": "PASS",
-              "fails": [],
+              "identity_match": true,
+              "result_raw": "FAIL",
+              "fails": [
+                "T1 字幕不同步/不逐字 1/39 句：#25 字幕文字對不到語音（<50% 字對上）"
+              ],
               "warns": [],
               "spec": "STRICT v2 2026-10-18",
-              "at": "2026-11-01T19:32:49+08:00",
-              "record_mtime": 1793532686,
-              "file_mtime": 1794161803,
-              "state": "stale",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794606326,
+              "file_mtime": 1794606326,
+              "state": "fail",
               "pass": false,
-              "detail": "舊紀錄與現檔的 mtime 或大小不一致，不能當成通過"
+              "detail": "紀錄是失敗"
             },
             "extra": {
-              "state": "absent",
-              "pass": false,
-              "identity_match": false,
-              "result_raw": null,
-              "detail": "沒有 qc_extra 台帳"
+              "identity_match": true,
+              "result_raw": "WARN",
+              "fails": [],
+              "warns": [
+                "7.60 「其實你就是還是專注你的工作」: 13 chars>12 (font shrinks)",
+                "14.92 「除非你看它會讓你賺得比較多」: 13 chars>12 (font shrinks)",
+                "19.86 「可是如果你怎麼弄一弄，覺得瞎忙」: 14 chars>12 (font shrinks)",
+                "25.89 「或者投資一些比較大型的公司」: 13 chars>12 (font shrinks)",
+                "31.47 「但我先講，不是七巨頭都漲了很多」: 14 chars>12 (font shrinks)",
+                "49.37 「後來又竟然還聽到什麼什麼十兄弟」: 15 chars>12 (font shrinks)",
+                "71.57 「所以每個時代有它的一代拳王」: 13 chars>12 (font shrinks)",
+                "83.42 「你就要知道，投資時間要拉夠長」: 13 chars>12 (font shrinks)",
+                "ig_reels: 25 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "yt_shorts: 25 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "tiktok: 25 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+                "video bitrate 0.82 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+              ],
+              "spec": "qc_extra v1 2026-10-30",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794606326,
+              "file_mtime": 1794606326,
+              "state": "warn_accepted",
+              "pass": true,
+              "detail": "警告已在這次事件裡明示接受"
             },
             "ready": false,
-            "block_reason": "不能放行：qc_short=stale；qc_extra=absent",
-            "accepted_warns": []
+            "block_reason": "不能放行：qc_short=fail；qc_extra=warn_accepted。未過字幕：#25「你不是 MANGO 嗎？MANGO 啦」：字幕文字對不到語音（<50% 字對上）（窗內「就是这是明狗啦」；whisper「你不是mango嗎」）",
+            "accepted_warns": [
+              "7.60 「其實你就是還是專注你的工作」: 13 chars>12 (font shrinks)",
+              "14.92 「除非你看它會讓你賺得比較多」: 13 chars>12 (font shrinks)",
+              "19.86 「可是如果你怎麼弄一弄，覺得瞎忙」: 14 chars>12 (font shrinks)",
+              "25.89 「或者投資一些比較大型的公司」: 13 chars>12 (font shrinks)",
+              "31.47 「但我先講，不是七巨頭都漲了很多」: 14 chars>12 (font shrinks)",
+              "49.37 「後來又竟然還聽到什麼什麼十兄弟」: 15 chars>12 (font shrinks)",
+              "71.57 「所以每個時代有它的一代拳王」: 13 chars>12 (font shrinks)",
+              "83.42 「你就要知道，投資時間要拉夠長」: 13 chars>12 (font shrinks)",
+              "ig_reels: 25 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "yt_shorts: 25 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "tiktok: 25 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+              "video bitrate 0.82 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+            ]
           }
         }
       ],
       "still_id": null,
-      "related_notes": [],
-      "cut_file_note": "檔案存在只供審片。沒有開剪授權紀錄，也不等於可以發佈。",
+      "related_notes": [
+        "未過字幕：#25「你不是 MANGO 嗎？MANGO 啦」：字幕文字對不到語音（<50% 字對上）（窗內「就是这是明狗啦」；whisper「你不是mango嗎」）",
+        "這是目前最佳未過檔，不是可發定稿。舊官方成片未被覆蓋。"
+      ],
+      "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
         "access": "private_owner_sign_in",
         "mime": "application/mp4",
         "streaming_playback_verified": false,
-        "artifact_id": "EP198/每個時代都有一代拳王.mp4|11274298|1794161803"
+        "artifact_id": "每個時代都有一代拳王_fix4.mp4|11327530|1794606326"
       },
       "withheld_label": null,
-      "subtitle_note": "燒錄進影片的字幕是否就是這份文字，尚未核對。",
-      "script_note": "現檔沒有繼承先前那一版腳本核准，QC 仍是失效。"
+      "subtitle_note": "字幕依本輪現檔（近逐字跟語音）。與核准稿用詞差異已另外紀錄，未默改。",
+      "script_note": "現檔沒有繼承發佈核准。腳本核准只涵蓋先前那一版文字。"
     },
     "cut:EP198/第一份薪水4萬5.mp4": {
       "id": "cut:EP198/第一份薪水4萬5.mp4",
@@ -7577,44 +7965,74 @@
       },
       "qc": {
         "short": {
-          "state": "stale",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "PASS",
+          "fails": [],
+          "warns": [],
+          "spec": "STRICT v2 2026-10-18",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794600766,
+          "file_mtime": 1794600766,
+          "state": "pass",
+          "pass": true,
+          "detail": "qc 通過且身份一致"
         },
         "extra": {
-          "state": "absent",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "WARN",
+          "fails": [],
+          "warns": [
+            "0.19 「不過其實前幾年都是很辛苦的啦」: 14 chars>12 (font shrinks)",
+            "18.65 「其實你算一算，你說一百萬三年多」: 14 chars>12 (font shrinks)",
+            "22.17 「我記得我大概大概三年半的時候」: 14 chars>12 (font shrinks)",
+            "45.14 「所以每年還要還一點那個車貸」: 13 chars>12 (font shrinks)",
+            "ig_reels: 17 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "yt_shorts: 17 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+            "tiktok: 18 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07",
+            "video bitrate 0.84 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+          ],
+          "spec": "qc_extra v1 2026-10-30",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794600766,
+          "file_mtime": 1794600766,
+          "state": "warn_accepted",
+          "pass": true,
+          "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "不能放行：現檔身份未通過 qc_short，qc_extra 也沒有台帳",
-        "accepted_warns": []
+        "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+        "accepted_warns": [
+          "0.19 「不過其實前幾年都是很辛苦的啦」: 14 chars>12 (font shrinks)",
+          "18.65 「其實你算一算，你說一百萬三年多」: 14 chars>12 (font shrinks)",
+          "22.17 「我記得我大概大概三年半的時候」: 14 chars>12 (font shrinks)",
+          "45.14 「所以每年還要還一點那個車貸」: 13 chars>12 (font shrinks)",
+          "ig_reels: 17 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "yt_shorts: 17 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+          "tiktok: 18 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07",
+          "video bitrate 0.84 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+        ]
       },
       "artifact": {
-        "id": "EP198/第一份薪水4萬5.mp4|7489772|1794161803",
-        "label": "EP198/第一份薪水4萬5.mp4",
-        "bytes": 7489772,
-        "mtime_taipei": "2026-11-09 02:16"
+        "id": "第一份薪水4萬5_fix3.mp4|7501740|1794600766",
+        "label": "第一份薪水4萬5_fix3.mp4",
+        "bytes": 7501740,
+        "mtime_taipei": "2026-11-14 04:12"
       },
       "historical": null,
       "hold": null,
       "schedule_label": "",
       "schedule_readonly": true,
       "media": {
-        "video": "https://drive.google.com/file/d/1Wxes2V8qDJbTTgGJ8-5fTl1qqmflNqoO/view?usp=drivesdk",
-        "video_label": "開啟Drive審片",
+        "video": "https://drive.google.com/file/d/1Gt75GWVyOPGxGSig54vwe2_gaLwO3ofE/view?usp=drivesdk",
+        "video_label": "開啟Drive審片（本輪現檔）",
         "doc": null,
         "subs": [
           "不過其實前幾年都是很辛苦的啦",
           "我第一份工作也是薪水",
           "也就是四萬五啊，十五年前嘛",
           "嗯嗯，對，是二零一一年",
-          "那你這樣子",
-          "什麼時候才存到你的一千萬了？",
+          "這樣子，什麼時候",
+          "才存到你的一千萬了？",
           "我存到一百萬哦，大概三年多",
           "一百萬三年多，那一千萬呢？",
           "其實你算一算，你說一百萬三年多",
@@ -7643,49 +8061,73 @@
       },
       "local_identities": [
         {
-          "label": "EP198/第一份薪水4萬5.mp4",
-          "bytes": 7489772,
-          "mtime": 1794161803,
-          "mtime_taipei": "2026-11-09 02:16",
+          "label": "第一份薪水4萬5_fix3.mp4",
+          "bytes": 7501740,
+          "mtime": 1794600766,
+          "mtime_taipei": "2026-11-14 04:12",
           "qc": {
             "short": {
-              "identity_match": false,
+              "identity_match": true,
               "result_raw": "PASS",
               "fails": [],
               "warns": [],
               "spec": "STRICT v2 2026-10-18",
-              "at": "2026-10-27T23:22:24+08:00",
-              "record_mtime": 1793114466,
-              "file_mtime": 1794161803,
-              "state": "stale",
-              "pass": false,
-              "detail": "舊紀錄與現檔的 mtime 或大小不一致，不能當成通過"
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794600766,
+              "file_mtime": 1794600766,
+              "state": "pass",
+              "pass": true,
+              "detail": "qc 通過且身份一致"
             },
             "extra": {
-              "state": "absent",
-              "pass": false,
-              "identity_match": false,
-              "result_raw": null,
-              "detail": "沒有 qc_extra 台帳"
+              "identity_match": true,
+              "result_raw": "WARN",
+              "fails": [],
+              "warns": [
+                "0.19 「不過其實前幾年都是很辛苦的啦」: 14 chars>12 (font shrinks)",
+                "18.65 「其實你算一算，你說一百萬三年多」: 14 chars>12 (font shrinks)",
+                "22.17 「我記得我大概大概三年半的時候」: 14 chars>12 (font shrinks)",
+                "45.14 「所以每年還要還一點那個車貸」: 13 chars>12 (font shrinks)",
+                "ig_reels: 17 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "yt_shorts: 17 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+                "tiktok: 18 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07",
+                "video bitrate 0.84 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+              ],
+              "spec": "qc_extra v1 2026-10-30",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794600766,
+              "file_mtime": 1794600766,
+              "state": "warn_accepted",
+              "pass": true,
+              "detail": "警告已在這次事件裡明示接受"
             },
             "ready": false,
-            "block_reason": "不能放行：qc_short=stale；qc_extra=absent",
-            "accepted_warns": []
+            "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+            "accepted_warns": [
+              "0.19 「不過其實前幾年都是很辛苦的啦」: 14 chars>12 (font shrinks)",
+              "18.65 「其實你算一算，你說一百萬三年多」: 14 chars>12 (font shrinks)",
+              "22.17 「我記得我大概大概三年半的時候」: 14 chars>12 (font shrinks)",
+              "45.14 「所以每年還要還一點那個車貸」: 13 chars>12 (font shrinks)",
+              "ig_reels: 17 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "yt_shorts: 17 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+              "tiktok: 18 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07",
+              "video bitrate 0.84 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+            ]
           }
         }
       ],
       "still_id": null,
       "related_notes": [],
-      "cut_file_note": "檔案存在只供審片。沒有開剪授權紀錄，也不等於可以發佈。",
+      "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
         "access": "private_owner_sign_in",
         "mime": "application/mp4",
         "streaming_playback_verified": false,
-        "artifact_id": "EP198/第一份薪水4萬5.mp4|7489772|1794161803"
+        "artifact_id": "第一份薪水4萬5_fix3.mp4|7501740|1794600766"
       },
       "withheld_label": null,
-      "subtitle_note": "燒錄進影片的字幕是否就是這份文字，尚未核對。",
-      "script_note": "現檔沒有繼承先前那一版腳本核准，QC 仍是失效。"
+      "subtitle_note": "字幕依本輪現檔（近逐字跟語音）。與核准稿用詞差異已另外紀錄，未默改。",
+      "script_note": "現檔沒有繼承發佈核准。腳本核准只涵蓋先前那一版文字。"
     },
     "cut:EP198/要買就買客戶.mp4": {
       "id": "cut:EP198/要買就買客戶.mp4",
@@ -7730,48 +8172,95 @@
       },
       "qc": {
         "short": {
-          "state": "stale",
+          "identity_match": true,
+          "result_raw": "FAIL",
+          "fails": [
+            "T1 字幕不同步/不逐字 1/42 句：#39 非逐字／字幕時段內聽不到這句（全段 0.78、窗內重聽 0.67）"
+          ],
+          "warns": [],
+          "spec": "STRICT v2 2026-10-18",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794607942,
+          "file_mtime": 1794607942,
+          "state": "fail",
           "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "detail": "紀錄是失敗"
         },
         "extra": {
-          "state": "absent",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "WARN",
+          "fails": [],
+          "warns": [
+            "2.06 「那些蘋概股，為什麼後來那些蘋果」: 14 chars>12 (font shrinks)",
+            "5.50 「不太喜歡做蘋果的單？太難拿了」: 13 chars>12 (font shrinks)",
+            "8.67 「你什麼時候有單、什麼時候沒單，不知道」: 16 chars>12 (font shrinks)",
+            "22.03 「它可能就這個產品做不好，就沒拿到單」: 16 chars>12 (font shrinks)",
+            "26.14 「然後投資人就股票就跌這樣子」: 13 chars>12 (font shrinks)",
+            "39.31 「你可以看得到今年要賣幾台、要賣幾支」: 16 chars>12 (font shrinks)",
+            "48.97 「蘋概股跟蘋果，你買蘋果啊，對不對？」: 14 chars>12 (font shrinks)",
+            "55.48 「做蘋果供應商，錢最後都是蘋果賺去」: 15 chars>12 (font shrinks)",
+            "76.89 「可能都會有很多中國或各國的供應商」: 16 chars>12 (font shrinks)",
+            "87.83 「好，就是說你為什麼投資大型的科技股？」: 16 chars>12 (font shrinks)",
+            "ig_reels: 28 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "yt_shorts: 28 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "tiktok: 31 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+            "video bitrate 0.84 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+          ],
+          "spec": "qc_extra v1 2026-10-30",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794607942,
+          "file_mtime": 1794607942,
+          "state": "warn_accepted",
+          "pass": true,
+          "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "不能放行：現檔身份未通過 qc_short，qc_extra 也沒有台帳",
-        "accepted_warns": []
+        "block_reason": "不能放行：qc_short=fail；qc_extra=warn_accepted。未過字幕：#39「做蘋概股才可以賺錢」：非逐字／字幕時段內聽不到這句（全段 0.78、窗內重聽 0.67）（全段ASR「做瓶盖股才可以赚钱」；窗內「作品盖股才可以赚钱」；whisper「只做平概股才可以賺錢」）",
+        "accepted_warns": [
+          "2.06 「那些蘋概股，為什麼後來那些蘋果」: 14 chars>12 (font shrinks)",
+          "5.50 「不太喜歡做蘋果的單？太難拿了」: 13 chars>12 (font shrinks)",
+          "8.67 「你什麼時候有單、什麼時候沒單，不知道」: 16 chars>12 (font shrinks)",
+          "22.03 「它可能就這個產品做不好，就沒拿到單」: 16 chars>12 (font shrinks)",
+          "26.14 「然後投資人就股票就跌這樣子」: 13 chars>12 (font shrinks)",
+          "39.31 「你可以看得到今年要賣幾台、要賣幾支」: 16 chars>12 (font shrinks)",
+          "48.97 「蘋概股跟蘋果，你買蘋果啊，對不對？」: 14 chars>12 (font shrinks)",
+          "55.48 「做蘋果供應商，錢最後都是蘋果賺去」: 15 chars>12 (font shrinks)",
+          "76.89 「可能都會有很多中國或各國的供應商」: 16 chars>12 (font shrinks)",
+          "87.83 「好，就是說你為什麼投資大型的科技股？」: 16 chars>12 (font shrinks)",
+          "ig_reels: 28 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "yt_shorts: 28 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "tiktok: 31 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+          "video bitrate 0.84 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+        ]
       },
       "artifact": {
-        "id": "EP198/要買就買客戶.mp4|12017724|1794161804",
-        "label": "EP198/要買就買客戶.mp4",
-        "bytes": 12017724,
-        "mtime_taipei": "2026-11-09 02:16"
+        "id": "要買就買客戶_fix4.mp4|12098740|1794607942",
+        "label": "要買就買客戶_fix4.mp4",
+        "bytes": 12098740,
+        "mtime_taipei": "2026-11-14 06:12"
       },
       "historical": null,
       "hold": null,
       "schedule_label": "",
       "schedule_readonly": true,
       "media": {
-        "video": "https://drive.google.com/file/d/1NjvkqEt4ZGjbXjhMGK7UCHkPX8BkeR-N/view?usp=drivesdk",
-        "video_label": "開啟Drive審片",
+        "video": "https://drive.google.com/file/d/1GGexo64uRkdL5-BxLRohXuktj9izut4c/view?usp=drivesdk",
+        "video_label": "開啟Drive審片（本輪現檔）",
         "doc": null,
         "subs": [
           "不過基本上，哦",
-          "那些蘋概股，為什麼後來那些蘋果的供應商",
+          "那些蘋概股，為什麼後來那些蘋果",
+          "的供應商",
           "不太喜歡做蘋果的單？太難拿了",
           "太競爭了",
           "你什麼時候有單、什麼時候沒單，不知道",
           "那我就想到說",
           "說這些人，這些人的公司，對",
-          "拿到單的時候，拿到大單的時候，股價會噴",
+          "拿到單的時候",
+          "拿到大單的時候，股價會噴",
           "沒錯，可是它沒拿到單",
-          "有時候理由可能比你想像中要簡單很多",
+          "有時候理由可能",
+          "比你想像中要簡單很多",
           "它可能就這個產品做不好，就沒拿到單",
           "然後投資人就股票就跌這樣子",
           "然後投資人就不知道為什麼",
@@ -7782,11 +8271,13 @@
           "你可以看得到今年要賣幾台、要賣幾支",
           "你可以看到產線多少",
           "你可以決定單要給誰",
-          "所以如果要買客戶，蘋概股跟蘋果，你買蘋果啊，對不對？",
+          "所以如果要買客戶",
+          "蘋概股跟蘋果，你買蘋果啊，對不對？",
           "因為最後錢都給蘋果賺去",
           "你不是聽過一句話嗎？",
           "做蘋果供應商，錢最後都是蘋果賺去",
-          "所以就奠定我對於這種大型科技股的觀念",
+          "所以就奠定我就是可能對於",
+          "這種大型科技股的觀念",
           "就是你看到它怎麼在運作的",
           "你會發現說",
           "台灣真蠻可憐的，做供應商",
@@ -7794,7 +8285,8 @@
           "對，那，但現在台灣",
           "可能都會有很多中國或各國的供應商",
           "加入競爭，就更難做了",
-          "所以當然不一定要真的做蘋概股才可以賺錢",
+          "所以但不一定要真的",
+          "做蘋概股才可以賺錢",
           "但那時候就影響我蠻大的",
           "好，就是說你為什麼投資大型的科技股？",
           "因為他們有錢、有訂單"
@@ -7805,49 +8297,90 @@
       },
       "local_identities": [
         {
-          "label": "EP198/要買就買客戶.mp4",
-          "bytes": 12017724,
-          "mtime": 1794161804,
-          "mtime_taipei": "2026-11-09 02:16",
+          "label": "要買就買客戶_fix4.mp4",
+          "bytes": 12098740,
+          "mtime": 1794607942,
+          "mtime_taipei": "2026-11-14 06:12",
           "qc": {
             "short": {
-              "identity_match": false,
-              "result_raw": "PASS",
-              "fails": [],
+              "identity_match": true,
+              "result_raw": "FAIL",
+              "fails": [
+                "T1 字幕不同步/不逐字 1/42 句：#39 非逐字／字幕時段內聽不到這句（全段 0.78、窗內重聽 0.67）"
+              ],
               "warns": [],
               "spec": "STRICT v2 2026-10-18",
-              "at": "2026-11-01T19:28:35+08:00",
-              "record_mtime": 1793532433,
-              "file_mtime": 1794161804,
-              "state": "stale",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794607942,
+              "file_mtime": 1794607942,
+              "state": "fail",
               "pass": false,
-              "detail": "舊紀錄與現檔的 mtime 或大小不一致，不能當成通過"
+              "detail": "紀錄是失敗"
             },
             "extra": {
-              "state": "absent",
-              "pass": false,
-              "identity_match": false,
-              "result_raw": null,
-              "detail": "沒有 qc_extra 台帳"
+              "identity_match": true,
+              "result_raw": "WARN",
+              "fails": [],
+              "warns": [
+                "2.06 「那些蘋概股，為什麼後來那些蘋果」: 14 chars>12 (font shrinks)",
+                "5.50 「不太喜歡做蘋果的單？太難拿了」: 13 chars>12 (font shrinks)",
+                "8.67 「你什麼時候有單、什麼時候沒單，不知道」: 16 chars>12 (font shrinks)",
+                "22.03 「它可能就這個產品做不好，就沒拿到單」: 16 chars>12 (font shrinks)",
+                "26.14 「然後投資人就股票就跌這樣子」: 13 chars>12 (font shrinks)",
+                "39.31 「你可以看得到今年要賣幾台、要賣幾支」: 16 chars>12 (font shrinks)",
+                "48.97 「蘋概股跟蘋果，你買蘋果啊，對不對？」: 14 chars>12 (font shrinks)",
+                "55.48 「做蘋果供應商，錢最後都是蘋果賺去」: 15 chars>12 (font shrinks)",
+                "76.89 「可能都會有很多中國或各國的供應商」: 16 chars>12 (font shrinks)",
+                "87.83 「好，就是說你為什麼投資大型的科技股？」: 16 chars>12 (font shrinks)",
+                "ig_reels: 28 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "yt_shorts: 28 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "tiktok: 31 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+                "video bitrate 0.84 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+              ],
+              "spec": "qc_extra v1 2026-10-30",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794607942,
+              "file_mtime": 1794607942,
+              "state": "warn_accepted",
+              "pass": true,
+              "detail": "警告已在這次事件裡明示接受"
             },
             "ready": false,
-            "block_reason": "不能放行：qc_short=stale；qc_extra=absent",
-            "accepted_warns": []
+            "block_reason": "不能放行：qc_short=fail；qc_extra=warn_accepted。未過字幕：#39「做蘋概股才可以賺錢」：非逐字／字幕時段內聽不到這句（全段 0.78、窗內重聽 0.67）（全段ASR「做瓶盖股才可以赚钱」；窗內「作品盖股才可以赚钱」；whisper「只做平概股才可以賺錢」）",
+            "accepted_warns": [
+              "2.06 「那些蘋概股，為什麼後來那些蘋果」: 14 chars>12 (font shrinks)",
+              "5.50 「不太喜歡做蘋果的單？太難拿了」: 13 chars>12 (font shrinks)",
+              "8.67 「你什麼時候有單、什麼時候沒單，不知道」: 16 chars>12 (font shrinks)",
+              "22.03 「它可能就這個產品做不好，就沒拿到單」: 16 chars>12 (font shrinks)",
+              "26.14 「然後投資人就股票就跌這樣子」: 13 chars>12 (font shrinks)",
+              "39.31 「你可以看得到今年要賣幾台、要賣幾支」: 16 chars>12 (font shrinks)",
+              "48.97 「蘋概股跟蘋果，你買蘋果啊，對不對？」: 14 chars>12 (font shrinks)",
+              "55.48 「做蘋果供應商，錢最後都是蘋果賺去」: 15 chars>12 (font shrinks)",
+              "76.89 「可能都會有很多中國或各國的供應商」: 16 chars>12 (font shrinks)",
+              "87.83 「好，就是說你為什麼投資大型的科技股？」: 16 chars>12 (font shrinks)",
+              "ig_reels: 28 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "yt_shorts: 28 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "tiktok: 31 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+              "video bitrate 0.84 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+            ]
           }
         }
       ],
       "still_id": null,
-      "related_notes": [],
-      "cut_file_note": "檔案存在只供審片。沒有開剪授權紀錄，也不等於可以發佈。",
+      "related_notes": [
+        "未過字幕：#39「做蘋概股才可以賺錢」：非逐字／字幕時段內聽不到這句（全段 0.78、窗內重聽 0.67）（全段ASR「做瓶盖股才可以赚钱」；窗內「作品盖股才可以赚钱」；whisper「只做平概股才可以賺錢」）",
+        "這是目前最佳未過檔，不是可發定稿。舊官方成片未被覆蓋。"
+      ],
+      "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
         "access": "private_owner_sign_in",
         "mime": "application/mp4",
         "streaming_playback_verified": false,
-        "artifact_id": "EP198/要買就買客戶.mp4|12017724|1794161804"
+        "artifact_id": "要買就買客戶_fix4.mp4|12098740|1794607942"
       },
       "withheld_label": null,
-      "subtitle_note": "燒錄進影片的字幕是否就是這份文字，尚未核對。",
-      "script_note": "現檔沒有繼承先前那一版腳本核准，QC 仍是失效。"
+      "subtitle_note": "字幕依本輪現檔（近逐字跟語音）。與核准稿用詞差異已另外紀錄，未默改。",
+      "script_note": "現檔沒有繼承發佈核准。腳本核准只涵蓋先前那一版文字。"
     },
     "cut:EP198/資產五千萬錢自己滾_延長.mp4": {
       "id": "cut:EP198/資產五千萬錢自己滾_延長.mp4",
@@ -7892,36 +8425,74 @@
       },
       "qc": {
         "short": {
-          "state": "stale",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "PASS",
+          "fails": [],
+          "warns": [],
+          "spec": "STRICT v2 2026-10-18",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794602171,
+          "file_mtime": 1794602171,
+          "state": "pass",
+          "pass": true,
+          "detail": "qc 通過且身份一致"
         },
         "extra": {
-          "state": "absent",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "WARN",
+          "fails": [],
+          "warns": [
+            "0.25 「有個網友，他看到我們的文章之後」: 14 chars>12 (font shrinks)",
+            "28.03 「破三千萬、四千萬、五千萬的時候」: 13 chars>12 (font shrinks)",
+            "36.67 「你知道嗎，它就是開大資金之後」: 13 chars>12 (font shrinks)",
+            "38.65 「你就不用去擔心每天賺十萬二十萬」: 15 chars>12 (font shrinks)",
+            "42.80 「它就是會慢慢滾嘛，你就不用擔心」: 14 chars>12 (font shrinks)",
+            "51.69 「像我從蘋果離開的時候回台北」: 13 chars>12 (font shrinks)",
+            "61.10 「那時候開始做科技工作講之前」: 13 chars>12 (font shrinks)",
+            "71.49 「對，那個時候也就是二零二一、二二嘛」: 15 chars>12 (font shrinks)",
+            "ig_reels: 24 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "yt_shorts: 24 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "tiktok: 26 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+            "video bitrate 0.82 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+          ],
+          "spec": "qc_extra v1 2026-10-30",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794602171,
+          "file_mtime": 1794602171,
+          "state": "warn_accepted",
+          "pass": true,
+          "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "不能放行：現檔身份未通過 qc_short，qc_extra 也沒有台帳",
-        "accepted_warns": []
+        "block_reason": "短片通過／加驗警告已接受。QC 已過，但 qc_short 的「科技工作講」ASR alias 變更待使用者決定，不能標成可發。",
+        "accepted_warns": [
+          "0.25 「有個網友，他看到我們的文章之後」: 14 chars>12 (font shrinks)",
+          "28.03 「破三千萬、四千萬、五千萬的時候」: 13 chars>12 (font shrinks)",
+          "36.67 「你知道嗎，它就是開大資金之後」: 13 chars>12 (font shrinks)",
+          "38.65 「你就不用去擔心每天賺十萬二十萬」: 15 chars>12 (font shrinks)",
+          "42.80 「它就是會慢慢滾嘛，你就不用擔心」: 14 chars>12 (font shrinks)",
+          "51.69 「像我從蘋果離開的時候回台北」: 13 chars>12 (font shrinks)",
+          "61.10 「那時候開始做科技工作講之前」: 13 chars>12 (font shrinks)",
+          "71.49 「對，那個時候也就是二零二一、二二嘛」: 15 chars>12 (font shrinks)",
+          "ig_reels: 24 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "yt_shorts: 24 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "tiktok: 26 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+          "video bitrate 0.82 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+        ]
       },
       "artifact": {
-        "id": "EP198/資產五千萬錢自己滾_延長.mp4|10157646|1794161803",
-        "label": "EP198/資產五千萬錢自己滾_延長.mp4",
-        "bytes": 10157646,
-        "mtime_taipei": "2026-11-09 02:16"
+        "id": "資產五千萬錢自己滾_延長_fix3.mp4|10219485|1794602171",
+        "label": "資產五千萬錢自己滾_延長_fix3.mp4",
+        "bytes": 10219485,
+        "mtime_taipei": "2026-11-14 04:36"
       },
       "historical": null,
       "hold": null,
       "schedule_label": "",
       "schedule_readonly": true,
       "media": {
-        "video": "https://drive.google.com/file/d/1ijG7-POifTmcZyQ8MlBpJj648xAZqR-L/view?usp=drivesdk",
-        "video_label": "開啟Drive審片",
+        "video": "https://drive.google.com/file/d/1--GejbYjtJCxEoJ0VkslCcq5pQHUVeSs/view?usp=drivesdk",
+        "video_label": "開啟Drive審片（本輪現檔）",
         "doc": null,
         "subs": [
           "有個網友，他看到我們的文章之後",
@@ -7950,16 +8521,18 @@
           "就 sooner or later 的問題",
           "所以他不需要去想這些問題",
           "好，就跟大家講，就是你要累積",
+          "像我從蘋果離開的時候回台北",
           "那時候就想說要買房子",
           "那時候我記得我大概",
           "就資產大概就兩千多而已",
           "那時候開始做科技工作講之前",
-          "前一年，對啊，對啊",
+          "前一年，對啊",
+          "科技工作講前一年",
           "資產就兩千萬左右而已",
           "跟一般人就差不多吧",
           "對，那個時候也就是二零二一、二二嘛",
           "所以就是也就這幾年嘛",
-          "基本上你累積夠了",
+          "基本上你的積累夠了",
           "它就會上去了"
         ],
         "copy": "資產五千萬之後，錢會自己滾\n\n抹布：有網友看了我們的文章，長期投資、好好工作把薪水拉高，資產五千多萬了。資產破三千、四千、五千萬之後，你會發現它成長很快，就會慢慢滾，不用每天擔心賺十萬二十萬。\n\n↓\n\n▶ 完整集數：https://youtu.be/qAskdXS2IXc\n★ 加入免費科技職場LINE群：https://linktr.ee/Techjobntalk\n\n2026 科技工作講年末聚會晚宴\n12/05（六）1600 - 2100\n10/12週一晚間9:00開始這邊報名 https://link.oen.tw/9YjWgr\n每年座位都非常有限，請記得要準時報名~\n早鳥票有優惠，數量是限量\n含場地，紀念品，講座，晚餐，酒水\n\n#科技工作講 #TechJobNTalk #抹布 #財富自由 #長期投資 #理財 #shorts\n\n資產五千萬之後，錢會自己滾\n\n抹布：有網友看了我們的文章，長期投資、好好工作把薪水拉高，資產五千多萬了。資產破三千、四千、五千萬之後，你會發現它成長很快，就會慢慢滾，不用每天擔心賺十萬二十萬。\n\n▶ 完整集數請看 YouTube「科技工作講」EP198\n★ 免費科技職場LINE群：👉個人檔案連結\n\n2026 科技工作講年末聚會晚宴\n12/05（六）1600 - 2100\n10/12週一晚間9:00開始這邊報名 👉個人檔案連結\n每年座位都非常有限，請記得要準時報名~\n早鳥票有優惠，數量是限量\n含場地，紀念品，講座，晚餐，酒水\n\n#科技工作講 #TechJobNTalk #抹布 #財富自由 #長期投資 #理財 #shorts",
@@ -7968,49 +8541,83 @@
       },
       "local_identities": [
         {
-          "label": "EP198/資產五千萬錢自己滾_延長.mp4",
-          "bytes": 10157646,
-          "mtime": 1794161803,
-          "mtime_taipei": "2026-11-09 02:16",
+          "label": "資產五千萬錢自己滾_延長_fix3.mp4",
+          "bytes": 10219485,
+          "mtime": 1794602171,
+          "mtime_taipei": "2026-11-14 04:36",
           "qc": {
             "short": {
-              "identity_match": false,
+              "identity_match": true,
               "result_raw": "PASS",
               "fails": [],
               "warns": [],
               "spec": "STRICT v2 2026-10-18",
-              "at": "2026-11-01T19:43:32+08:00",
-              "record_mtime": 1793533328,
-              "file_mtime": 1794161803,
-              "state": "stale",
-              "pass": false,
-              "detail": "舊紀錄與現檔的 mtime 或大小不一致，不能當成通過"
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794602171,
+              "file_mtime": 1794602171,
+              "state": "pass",
+              "pass": true,
+              "detail": "qc 通過且身份一致"
             },
             "extra": {
-              "state": "absent",
-              "pass": false,
-              "identity_match": false,
-              "result_raw": null,
-              "detail": "沒有 qc_extra 台帳"
+              "identity_match": true,
+              "result_raw": "WARN",
+              "fails": [],
+              "warns": [
+                "0.25 「有個網友，他看到我們的文章之後」: 14 chars>12 (font shrinks)",
+                "28.03 「破三千萬、四千萬、五千萬的時候」: 13 chars>12 (font shrinks)",
+                "36.67 「你知道嗎，它就是開大資金之後」: 13 chars>12 (font shrinks)",
+                "38.65 「你就不用去擔心每天賺十萬二十萬」: 15 chars>12 (font shrinks)",
+                "42.80 「它就是會慢慢滾嘛，你就不用擔心」: 14 chars>12 (font shrinks)",
+                "51.69 「像我從蘋果離開的時候回台北」: 13 chars>12 (font shrinks)",
+                "61.10 「那時候開始做科技工作講之前」: 13 chars>12 (font shrinks)",
+                "71.49 「對，那個時候也就是二零二一、二二嘛」: 15 chars>12 (font shrinks)",
+                "ig_reels: 24 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "yt_shorts: 24 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "tiktok: 26 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+                "video bitrate 0.82 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+              ],
+              "spec": "qc_extra v1 2026-10-30",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794602171,
+              "file_mtime": 1794602171,
+              "state": "warn_accepted",
+              "pass": true,
+              "detail": "警告已在這次事件裡明示接受"
             },
             "ready": false,
-            "block_reason": "不能放行：qc_short=stale；qc_extra=absent",
-            "accepted_warns": []
+            "block_reason": "短片通過／加驗警告已接受。QC 已過，但 qc_short 的「科技工作講」ASR alias 變更待使用者決定，不能標成可發。",
+            "accepted_warns": [
+              "0.25 「有個網友，他看到我們的文章之後」: 14 chars>12 (font shrinks)",
+              "28.03 「破三千萬、四千萬、五千萬的時候」: 13 chars>12 (font shrinks)",
+              "36.67 「你知道嗎，它就是開大資金之後」: 13 chars>12 (font shrinks)",
+              "38.65 「你就不用去擔心每天賺十萬二十萬」: 15 chars>12 (font shrinks)",
+              "42.80 「它就是會慢慢滾嘛，你就不用擔心」: 14 chars>12 (font shrinks)",
+              "51.69 「像我從蘋果離開的時候回台北」: 13 chars>12 (font shrinks)",
+              "61.10 「那時候開始做科技工作講之前」: 13 chars>12 (font shrinks)",
+              "71.49 「對，那個時候也就是二零二一、二二嘛」: 15 chars>12 (font shrinks)",
+              "ig_reels: 24 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "yt_shorts: 24 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "tiktok: 26 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+              "video bitrate 0.82 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+            ]
           }
         }
       ],
       "still_id": null,
-      "related_notes": [],
-      "cut_file_note": "檔案存在只供審片。沒有開剪授權紀錄，也不等於可以發佈。",
+      "related_notes": [
+        "QC passed with alias change pending user decision：qc_short 的「科技工作講」ASR alias 變更待使用者決定。"
+      ],
+      "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
         "access": "private_owner_sign_in",
         "mime": "application/mp4",
         "streaming_playback_verified": false,
-        "artifact_id": "EP198/資產五千萬錢自己滾_延長.mp4|10157646|1794161803"
+        "artifact_id": "資產五千萬錢自己滾_延長_fix3.mp4|10219485|1794602171"
       },
       "withheld_label": "需私下審核：字幕 1。未放上公開頁，也不從缺漏還原。",
-      "subtitle_note": "燒錄進影片的字幕是否就是這份文字，尚未核對。",
-      "script_note": "現檔沒有繼承先前那一版腳本核准，QC 仍是失效。"
+      "subtitle_note": "字幕依本輪現檔（近逐字跟語音）。與核准稿用詞差異已另外紀錄，未默改。",
+      "script_note": "現檔沒有繼承發佈核准。腳本核准只涵蓋先前那一版文字。"
     },
     "cut:EP198/錯過大漲明年就不投資嗎.mp4": {
       "id": "cut:EP198/錯過大漲明年就不投資嗎.mp4",
@@ -8055,36 +8662,74 @@
       },
       "qc": {
         "short": {
-          "state": "stale",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "PASS",
+          "fails": [],
+          "warns": [],
+          "spec": "STRICT v2 2026-10-18",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794604341,
+          "file_mtime": 1794604341,
+          "state": "pass",
+          "pass": true,
+          "detail": "qc 通過且身份一致"
         },
         "extra": {
-          "state": "absent",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "WARN",
+          "fails": [],
+          "warns": [
+            "12.57 「然後去找一個時空證明它是錯的」: 14 chars>12 (font shrinks)",
+            "19.32 「比我早五年的學長可不可以退休」: 14 chars>12 (font shrinks)",
+            "25.79 「今年賺很多，你今年沒有賺到錢」: 13 chars>12 (font shrinks)",
+            "54.32 「你只要有好的現金流，持續有在賺錢」: 15 chars>12 (font shrinks)",
+            "58.82 「大家好好找到一個高薪的工作」: 13 chars>12 (font shrinks)",
+            "61.59 「你不要靠著高薪工作累積高資產」: 14 chars>12 (font shrinks)",
+            "73.29 「那你就可以撐到投資開花結果的時候」: 16 chars>12 (font shrinks)",
+            "76.39 「只是這個時間點長短，沒有人說得準」: 15 chars>12 (font shrinks)",
+            "ig_reels: 21 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "yt_shorts: 21 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "tiktok: 23 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+            "video bitrate 0.79 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+          ],
+          "spec": "qc_extra v1 2026-10-30",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794604341,
+          "file_mtime": 1794604341,
+          "state": "warn_accepted",
+          "pass": true,
+          "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "不能放行：現檔身份未通過 qc_short，qc_extra 也沒有台帳",
-        "accepted_warns": []
+        "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+        "accepted_warns": [
+          "12.57 「然後去找一個時空證明它是錯的」: 14 chars>12 (font shrinks)",
+          "19.32 「比我早五年的學長可不可以退休」: 14 chars>12 (font shrinks)",
+          "25.79 「今年賺很多，你今年沒有賺到錢」: 13 chars>12 (font shrinks)",
+          "54.32 「你只要有好的現金流，持續有在賺錢」: 15 chars>12 (font shrinks)",
+          "58.82 「大家好好找到一個高薪的工作」: 13 chars>12 (font shrinks)",
+          "61.59 「你不要靠著高薪工作累積高資產」: 14 chars>12 (font shrinks)",
+          "73.29 「那你就可以撐到投資開花結果的時候」: 16 chars>12 (font shrinks)",
+          "76.39 「只是這個時間點長短，沒有人說得準」: 15 chars>12 (font shrinks)",
+          "ig_reels: 21 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "yt_shorts: 21 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "tiktok: 23 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+          "video bitrate 0.79 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+        ]
       },
       "artifact": {
-        "id": "EP198/錯過大漲明年就不投資嗎.mp4|10141973|1794161803",
-        "label": "EP198/錯過大漲明年就不投資嗎.mp4",
-        "bytes": 10141973,
-        "mtime_taipei": "2026-11-09 02:16"
+        "id": "錯過大漲明年就不投資嗎_fix4.mp4|10181238|1794604341",
+        "label": "錯過大漲明年就不投資嗎_fix4.mp4",
+        "bytes": 10181238,
+        "mtime_taipei": "2026-11-14 05:12"
       },
       "historical": null,
       "hold": null,
       "schedule_label": "",
       "schedule_readonly": true,
       "media": {
-        "video": "https://drive.google.com/file/d/1DQBuCg2y0MGLiIUjPiPO7BonxsJe4nfz/view?usp=drivesdk",
-        "video_label": "開啟Drive審片",
+        "video": "https://drive.google.com/file/d/1DJfmeMQwAk7jbtq-94P83Sx3gWQVu1dw/view?usp=drivesdk",
+        "video_label": "開啟Drive審片（本輪現檔）",
         "doc": null,
         "subs": [
           "你今天聽到的東西",
@@ -8125,7 +8770,8 @@
           "就適量的投資",
           "那你就可以撐到投資開花結果的時候",
           "只是這個時間點長短，沒有人說得準",
-          "沒有說什麼投資兩年內一定可以回報的"
+          "沒有說什麼投資兩年內",
+          "可以回報的"
         ],
         "copy": "今年錯過大漲，明年就不投資了嗎？\n\n抹布：明年跌，後年可能就漲回來。只要有好的現金流、持續有在賺錢，高薪工作讓你在市場活得夠久，撐到投資開花結果。\n\n↓\n\n▶ 完整集數：https://youtu.be/qAskdXS2IXc\n★ 加入免費科技職場LINE群：https://linktr.ee/Techjobntalk\n\n2026 科技工作講年末聚會晚宴\n12/05（六）1600 - 2100\n10/12週一晚間9:00開始這邊報名 https://link.oen.tw/9YjWgr\n每年座位都非常有限，請記得要準時報名~\n早鳥票有優惠，數量是限量\n含場地，紀念品，講座，晚餐，酒水\n\n#科技工作講 #TechJobNTalk #抹布 #理財 #投資 #財富自由 #長期投資 #shorts\n\n今年錯過大漲，明年就不投資了嗎？\n\n抹布：明年跌，後年可能就漲回來。只要有好的現金流、持續有在賺錢，高薪工作讓你在市場活得夠久，撐到投資開花結果。\n\n▶ 完整集數請看 YouTube「科技工作講」EP198\n★ 免費科技職場LINE群：👉個人檔案連結\n\n2026 科技工作講年末聚會晚宴\n12/05（六）1600 - 2100\n10/12週一晚間9:00開始這邊報名 👉個人檔案連結\n每年座位都非常有限，請記得要準時報名~\n早鳥票有優惠，數量是限量\n含場地，紀念品，講座，晚餐，酒水\n\n#科技工作講 #TechJobNTalk #抹布 #理財 #投資 #財富自由 #長期投資 #shorts",
         "missing": null,
@@ -8133,49 +8779,81 @@
       },
       "local_identities": [
         {
-          "label": "EP198/錯過大漲明年就不投資嗎.mp4",
-          "bytes": 10141973,
-          "mtime": 1794161803,
-          "mtime_taipei": "2026-11-09 02:16",
+          "label": "錯過大漲明年就不投資嗎_fix4.mp4",
+          "bytes": 10181238,
+          "mtime": 1794604341,
+          "mtime_taipei": "2026-11-14 05:12",
           "qc": {
             "short": {
-              "identity_match": false,
+              "identity_match": true,
               "result_raw": "PASS",
               "fails": [],
               "warns": [],
               "spec": "STRICT v2 2026-10-18",
-              "at": "2026-10-30T19:30:31+08:00",
-              "record_mtime": 1793288169,
-              "file_mtime": 1794161803,
-              "state": "stale",
-              "pass": false,
-              "detail": "舊紀錄與現檔的 mtime 或大小不一致，不能當成通過"
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794604341,
+              "file_mtime": 1794604341,
+              "state": "pass",
+              "pass": true,
+              "detail": "qc 通過且身份一致"
             },
             "extra": {
-              "state": "absent",
-              "pass": false,
-              "identity_match": false,
-              "result_raw": null,
-              "detail": "沒有 qc_extra 台帳"
+              "identity_match": true,
+              "result_raw": "WARN",
+              "fails": [],
+              "warns": [
+                "12.57 「然後去找一個時空證明它是錯的」: 14 chars>12 (font shrinks)",
+                "19.32 「比我早五年的學長可不可以退休」: 14 chars>12 (font shrinks)",
+                "25.79 「今年賺很多，你今年沒有賺到錢」: 13 chars>12 (font shrinks)",
+                "54.32 「你只要有好的現金流，持續有在賺錢」: 15 chars>12 (font shrinks)",
+                "58.82 「大家好好找到一個高薪的工作」: 13 chars>12 (font shrinks)",
+                "61.59 「你不要靠著高薪工作累積高資產」: 14 chars>12 (font shrinks)",
+                "73.29 「那你就可以撐到投資開花結果的時候」: 16 chars>12 (font shrinks)",
+                "76.39 「只是這個時間點長短，沒有人說得準」: 15 chars>12 (font shrinks)",
+                "ig_reels: 21 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "yt_shorts: 21 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "tiktok: 23 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+                "video bitrate 0.79 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+              ],
+              "spec": "qc_extra v1 2026-10-30",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794604341,
+              "file_mtime": 1794604341,
+              "state": "warn_accepted",
+              "pass": true,
+              "detail": "警告已在這次事件裡明示接受"
             },
             "ready": false,
-            "block_reason": "不能放行：qc_short=stale；qc_extra=absent",
-            "accepted_warns": []
+            "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+            "accepted_warns": [
+              "12.57 「然後去找一個時空證明它是錯的」: 14 chars>12 (font shrinks)",
+              "19.32 「比我早五年的學長可不可以退休」: 14 chars>12 (font shrinks)",
+              "25.79 「今年賺很多，你今年沒有賺到錢」: 13 chars>12 (font shrinks)",
+              "54.32 「你只要有好的現金流，持續有在賺錢」: 15 chars>12 (font shrinks)",
+              "58.82 「大家好好找到一個高薪的工作」: 13 chars>12 (font shrinks)",
+              "61.59 「你不要靠著高薪工作累積高資產」: 14 chars>12 (font shrinks)",
+              "73.29 「那你就可以撐到投資開花結果的時候」: 16 chars>12 (font shrinks)",
+              "76.39 「只是這個時間點長短，沒有人說得準」: 15 chars>12 (font shrinks)",
+              "ig_reels: 21 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "yt_shorts: 21 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "tiktok: 23 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+              "video bitrate 0.79 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+            ]
           }
         }
       ],
       "still_id": null,
       "related_notes": [],
-      "cut_file_note": "檔案存在只供審片。沒有開剪授權紀錄，也不等於可以發佈。",
+      "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
         "access": "private_owner_sign_in",
         "mime": "application/mp4",
         "streaming_playback_verified": false,
-        "artifact_id": "EP198/錯過大漲明年就不投資嗎.mp4|10141973|1794161803"
+        "artifact_id": "錯過大漲明年就不投資嗎_fix4.mp4|10181238|1794604341"
       },
       "withheld_label": null,
-      "subtitle_note": "燒錄進影片的字幕是否就是這份文字，尚未核對。",
-      "script_note": "現檔沒有繼承先前那一版腳本核准，QC 仍是失效。"
+      "subtitle_note": "字幕依本輪現檔（近逐字跟語音）。與核准稿用詞差異已另外紀錄，未默改。",
+      "script_note": "現檔沒有繼承發佈核准。腳本核准只涵蓋先前那一版文字。"
     },
     "cut:EP198/長期投資靠穩定收入.mp4": {
       "id": "cut:EP198/長期投資靠穩定收入.mp4",
@@ -8220,41 +8898,80 @@
       },
       "qc": {
         "short": {
-          "state": "stale",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "PASS",
+          "fails": [],
+          "warns": [],
+          "spec": "STRICT v2 2026-10-18",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794608934,
+          "file_mtime": 1794608934,
+          "state": "pass",
+          "pass": true,
+          "detail": "qc 通過且身份一致"
         },
         "extra": {
-          "state": "absent",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "WARN",
+          "fails": [],
+          "warns": [
+            "0.09 「對，可是萬一你拉長到五年才有賺」: 14 chars>12 (font shrinks)",
+            "3.98 「那你會在前面賠錢就砍掉了啊，對不對？」: 16 chars>12 (font shrinks)",
+            "29.27 「當然你要看全市場是不是也在下跌」: 15 chars>12 (font shrinks)",
+            "33.23 「基本上全市場會跟著大型的公司走嘛」: 16 chars>12 (font shrinks)",
+            "39.33 「它今年特別衰，特別中了一些東西」: 14 chars>12 (font shrinks)",
+            "51.11 「全世界沒有人在挖礦了，它就很慘嘛」: 15 chars>12 (font shrinks)",
+            "60.10 「那時候知道 AI 會需要這麼多的投資呢？」: 16 chars>12 (font shrinks)",
+            "81.18 「所以長期投資我覺得最大關鍵」: 13 chars>12 (font shrinks)",
+            "97.22 「你的股票就抱十年，就這麼簡單」: 13 chars>12 (font shrinks)",
+            "ig_reels: 25 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "yt_shorts: 25 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "tiktok: 30 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+            "video bitrate 0.83 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+          ],
+          "spec": "qc_extra v1 2026-10-30",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794608934,
+          "file_mtime": 1794608934,
+          "state": "warn_accepted",
+          "pass": true,
+          "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "不能放行：現檔身份未通過 qc_short，qc_extra 也沒有台帳",
-        "accepted_warns": []
+        "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+        "accepted_warns": [
+          "0.09 「對，可是萬一你拉長到五年才有賺」: 14 chars>12 (font shrinks)",
+          "3.98 「那你會在前面賠錢就砍掉了啊，對不對？」: 16 chars>12 (font shrinks)",
+          "29.27 「當然你要看全市場是不是也在下跌」: 15 chars>12 (font shrinks)",
+          "33.23 「基本上全市場會跟著大型的公司走嘛」: 16 chars>12 (font shrinks)",
+          "39.33 「它今年特別衰，特別中了一些東西」: 14 chars>12 (font shrinks)",
+          "51.11 「全世界沒有人在挖礦了，它就很慘嘛」: 15 chars>12 (font shrinks)",
+          "60.10 「那時候知道 AI 會需要這麼多的投資呢？」: 16 chars>12 (font shrinks)",
+          "81.18 「所以長期投資我覺得最大關鍵」: 13 chars>12 (font shrinks)",
+          "97.22 「你的股票就抱十年，就這麼簡單」: 13 chars>12 (font shrinks)",
+          "ig_reels: 25 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "yt_shorts: 25 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "tiktok: 30 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+          "video bitrate 0.83 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+        ]
       },
       "artifact": {
-        "id": "EP198/長期投資靠穩定收入.mp4|12958068|1794161804",
-        "label": "EP198/長期投資靠穩定收入.mp4",
-        "bytes": 12958068,
-        "mtime_taipei": "2026-11-09 02:16"
+        "id": "長期投資靠穩定收入_fix3.mp4|13021262|1794608934",
+        "label": "長期投資靠穩定收入_fix3.mp4",
+        "bytes": 13021262,
+        "mtime_taipei": "2026-11-14 06:28"
       },
       "historical": null,
       "hold": null,
       "schedule_label": "",
       "schedule_readonly": true,
       "media": {
-        "video": "https://drive.google.com/file/d/1iZ2iqPRYw7r-DBk_QCsOqQK2dOlDjCy4/view?usp=drivesdk",
-        "video_label": "開啟Drive審片",
+        "video": "https://drive.google.com/file/d/1N3QgGhbjv_bVhwJovoQ_xLxq2trnWXxR/view?usp=drivesdk",
+        "video_label": "開啟Drive審片（本輪現檔）",
         "doc": null,
         "subs": [
           "對，可是萬一你拉長到五年才有賺",
-          "那你會在前面賠錢就砍掉了啊",
-          "對不對？",
+          "那你會在前面賠錢就砍掉了啊，對不對？",
           "哦，我懂你",
           "對，因為你就覺得",
           "我是不是做錯了",
@@ -8269,6 +8986,7 @@
           "當然你要看全市場是不是也在下跌",
           "那大型的公司",
           "基本上全市場會跟著大型的公司走嘛",
+          "這就是全指股的概念嘛",
           "當然會有一些公司",
           "它今年特別衰，特別中了一些東西",
           "比如說 Meta 中了什麼劍橋案",
@@ -8280,8 +8998,8 @@
           "沒有人要買它的東西",
           "股價跌到谷底",
           "如果沒有 AI，它不會回來",
-          "那時候知道",
-          "AI 會需要這麼多的投資呢？不知道",
+          "那時候知道 AI 會需要這麼多的投資呢？",
+          "不知道",
           "所以個股都是高風險的",
           "除非你在這個產業",
           "你如果在這個產業",
@@ -8299,7 +9017,8 @@
           "你就可以放很久",
           "就像台積電，你收入很高",
           "台積電股票都不要賣",
-          "你做台積電做十年，你的股票就抱十年，就這麼簡單",
+          "你做台積電做十年",
+          "你的股票就抱十年，就這麼簡單",
           "大部分其實是這樣子而已"
         ],
         "copy": "長期投資靠的不是眼光，是穩定的收入\n\n抹布：大部分人長期投資，不是因為眼光看得到十年後，而是收入夠穩定、本業一直成長，平常不用動那筆資產，自然就能抱很久。\n\n↓\n\n▶ 完整集數：https://youtu.be/qAskdXS2IXc\n★ 加入免費科技職場LINE群：https://linktr.ee/Techjobntalk\n\n2026 科技工作講年末聚會晚宴\n12/05（六）1600 - 2100\n10/12週一晚間9:00開始這邊報名 https://link.oen.tw/9YjWgr\n每年座位都非常有限，請記得要準時報名~\n早鳥票有優惠，數量是限量\n含場地，紀念品，講座，晚餐，酒水\n\n#科技工作講 #TechJobNTalk #抹布 #理財 #投資 #理財觀念 #財富自由 #shorts\n\n長期投資靠的不是眼光，是穩定的收入\n\n抹布：大部分人長期投資，不是因為眼光看得到十年後，而是收入夠穩定、本業一直成長，平常不用動那筆資產，自然就能抱很久。\n\n▶ 完整集數請看 YouTube「科技工作講」EP198\n★ 免費科技職場LINE群：👉個人檔案連結\n\n2026 科技工作講年末聚會晚宴\n12/05（六）1600 - 2100\n10/12週一晚間9:00開始這邊報名 👉個人檔案連結\n每年座位都非常有限，請記得要準時報名~\n早鳥票有優惠，數量是限量\n含場地，紀念品，講座，晚餐，酒水\n\n#科技工作講 #TechJobNTalk #抹布 #理財 #投資 #理財觀念 #財富自由 #shorts",
@@ -8308,49 +9027,83 @@
       },
       "local_identities": [
         {
-          "label": "EP198/長期投資靠穩定收入.mp4",
-          "bytes": 12958068,
-          "mtime": 1794161804,
-          "mtime_taipei": "2026-11-09 02:16",
+          "label": "長期投資靠穩定收入_fix3.mp4",
+          "bytes": 13021262,
+          "mtime": 1794608934,
+          "mtime_taipei": "2026-11-14 06:28",
           "qc": {
             "short": {
-              "identity_match": false,
+              "identity_match": true,
               "result_raw": "PASS",
               "fails": [],
               "warns": [],
               "spec": "STRICT v2 2026-10-18",
-              "at": "2026-11-01T19:47:50+08:00",
-              "record_mtime": 1793533592,
-              "file_mtime": 1794161804,
-              "state": "stale",
-              "pass": false,
-              "detail": "舊紀錄與現檔的 mtime 或大小不一致，不能當成通過"
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794608934,
+              "file_mtime": 1794608934,
+              "state": "pass",
+              "pass": true,
+              "detail": "qc 通過且身份一致"
             },
             "extra": {
-              "state": "absent",
-              "pass": false,
-              "identity_match": false,
-              "result_raw": null,
-              "detail": "沒有 qc_extra 台帳"
+              "identity_match": true,
+              "result_raw": "WARN",
+              "fails": [],
+              "warns": [
+                "0.09 「對，可是萬一你拉長到五年才有賺」: 14 chars>12 (font shrinks)",
+                "3.98 「那你會在前面賠錢就砍掉了啊，對不對？」: 16 chars>12 (font shrinks)",
+                "29.27 「當然你要看全市場是不是也在下跌」: 15 chars>12 (font shrinks)",
+                "33.23 「基本上全市場會跟著大型的公司走嘛」: 16 chars>12 (font shrinks)",
+                "39.33 「它今年特別衰，特別中了一些東西」: 14 chars>12 (font shrinks)",
+                "51.11 「全世界沒有人在挖礦了，它就很慘嘛」: 15 chars>12 (font shrinks)",
+                "60.10 「那時候知道 AI 會需要這麼多的投資呢？」: 16 chars>12 (font shrinks)",
+                "81.18 「所以長期投資我覺得最大關鍵」: 13 chars>12 (font shrinks)",
+                "97.22 「你的股票就抱十年，就這麼簡單」: 13 chars>12 (font shrinks)",
+                "ig_reels: 25 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "yt_shorts: 25 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "tiktok: 30 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+                "video bitrate 0.83 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+              ],
+              "spec": "qc_extra v1 2026-10-30",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794608934,
+              "file_mtime": 1794608934,
+              "state": "warn_accepted",
+              "pass": true,
+              "detail": "警告已在這次事件裡明示接受"
             },
             "ready": false,
-            "block_reason": "不能放行：qc_short=stale；qc_extra=absent",
-            "accepted_warns": []
+            "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+            "accepted_warns": [
+              "0.09 「對，可是萬一你拉長到五年才有賺」: 14 chars>12 (font shrinks)",
+              "3.98 「那你會在前面賠錢就砍掉了啊，對不對？」: 16 chars>12 (font shrinks)",
+              "29.27 「當然你要看全市場是不是也在下跌」: 15 chars>12 (font shrinks)",
+              "33.23 「基本上全市場會跟著大型的公司走嘛」: 16 chars>12 (font shrinks)",
+              "39.33 「它今年特別衰，特別中了一些東西」: 14 chars>12 (font shrinks)",
+              "51.11 「全世界沒有人在挖礦了，它就很慘嘛」: 15 chars>12 (font shrinks)",
+              "60.10 「那時候知道 AI 會需要這麼多的投資呢？」: 16 chars>12 (font shrinks)",
+              "81.18 「所以長期投資我覺得最大關鍵」: 13 chars>12 (font shrinks)",
+              "97.22 「你的股票就抱十年，就這麼簡單」: 13 chars>12 (font shrinks)",
+              "ig_reels: 25 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "yt_shorts: 25 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "tiktok: 30 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07",
+              "video bitrate 0.83 Mb/s outside 1.0–16 (fine for static CRF content; check visually)"
+            ]
           }
         }
       ],
       "still_id": null,
       "related_notes": [],
-      "cut_file_note": "檔案存在只供審片。沒有開剪授權紀錄，也不等於可以發佈。",
+      "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
         "access": "private_owner_sign_in",
         "mime": "application/mp4",
         "streaming_playback_verified": false,
-        "artifact_id": "EP198/長期投資靠穩定收入.mp4|12958068|1794161804"
+        "artifact_id": "長期投資靠穩定收入_fix3.mp4|13021262|1794608934"
       },
       "withheld_label": null,
-      "subtitle_note": "燒錄進影片的字幕是否就是這份文字，尚未核對。",
-      "script_note": "現檔沒有繼承先前那一版腳本核准，QC 仍是失效。"
+      "subtitle_note": "字幕依本輪現檔（近逐字跟語音）。與核准稿用詞差異已另外紀錄，未默改。",
+      "script_note": "現檔沒有繼承發佈核准。腳本核准只涵蓋先前那一版文字。"
     },
     "cut:EP220/不升我就走.mp4": {
       "id": "cut:EP220/不升我就走.mp4",
@@ -8395,36 +9148,88 @@
       },
       "qc": {
         "short": {
-          "state": "stale",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "PASS",
+          "fails": [],
+          "warns": [],
+          "spec": "STRICT v2 2026-10-18",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794599122,
+          "file_mtime": 1794599122,
+          "state": "pass",
+          "pass": true,
+          "detail": "qc 通過且身份一致"
         },
         "extra": {
-          "state": "absent",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "WARN",
+          "fails": [],
+          "warns": [
+            "0.05 「其實我們就會看說，從後面回來看」: 14 chars>12 (font shrinks)",
+            "2.07 「就看出他這個能力會有一些落差」: 14 chars>12 (font shrinks)",
+            "7.53 「那個人我就儘量給他大一點的空間」: 15 chars>12 (font shrinks)",
+            "16.71 「你可能年輕的時候看到這種評論」: 14 chars>12 (font shrinks)",
+            "20.37 「可是你如果知道這個邏輯之後」: 13 chars>12 (font shrinks)",
+            "26.67 「你這樣就很像是你去外面找一份工作」: 16 chars>12 (font shrinks)",
+            "33.17 「因為這樣的人，你可能之後會想走」: 14 chars>12 (font shrinks)",
+            "35.98 「我就我就跟你分手，對，情侶，就是情侶」: 15 chars>12 (font shrinks)",
+            "38.69 「就反過來情侶這樣，你就覺得這個」: 14 chars>12 (font shrinks)",
+            "40.63 「你就知道他的機率不是那麼高」: 13 chars>12 (font shrinks)",
+            "42.31 「因為為什麼？因為除非你已經是公認」: 15 chars>12 (font shrinks)",
+            "45.84 「對，公認，你的能力都已經到下一級了」: 15 chars>12 (font shrinks)",
+            "49.78 「每次可能其他的主管都覺得你很好」: 15 chars>12 (font shrinks)",
+            "52.71 「然後你這樣子去跟他爭，大概有機會」: 15 chars>12 (font shrinks)",
+            "55.58 「對不對，因為他都沒有跟你爭，他可能」: 15 chars>12 (font shrinks)",
+            "69.32 「所以就就沒有那麼，就沒那麼必要」: 14 chars>12 (font shrinks)",
+            "ig_reels: 29 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "yt_shorts: 29 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "tiktok: 29 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07"
+          ],
+          "spec": "qc_extra v1 2026-10-30",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794599122,
+          "file_mtime": 1794599122,
+          "state": "warn_accepted",
+          "pass": true,
+          "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "不能放行：現檔身份未通過 qc_short，qc_extra 也沒有台帳",
-        "accepted_warns": []
+        "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+        "accepted_warns": [
+          "0.05 「其實我們就會看說，從後面回來看」: 14 chars>12 (font shrinks)",
+          "2.07 「就看出他這個能力會有一些落差」: 14 chars>12 (font shrinks)",
+          "7.53 「那個人我就儘量給他大一點的空間」: 15 chars>12 (font shrinks)",
+          "16.71 「你可能年輕的時候看到這種評論」: 14 chars>12 (font shrinks)",
+          "20.37 「可是你如果知道這個邏輯之後」: 13 chars>12 (font shrinks)",
+          "26.67 「你這樣就很像是你去外面找一份工作」: 16 chars>12 (font shrinks)",
+          "33.17 「因為這樣的人，你可能之後會想走」: 14 chars>12 (font shrinks)",
+          "35.98 「我就我就跟你分手，對，情侶，就是情侶」: 15 chars>12 (font shrinks)",
+          "38.69 「就反過來情侶這樣，你就覺得這個」: 14 chars>12 (font shrinks)",
+          "40.63 「你就知道他的機率不是那麼高」: 13 chars>12 (font shrinks)",
+          "42.31 「因為為什麼？因為除非你已經是公認」: 15 chars>12 (font shrinks)",
+          "45.84 「對，公認，你的能力都已經到下一級了」: 15 chars>12 (font shrinks)",
+          "49.78 「每次可能其他的主管都覺得你很好」: 15 chars>12 (font shrinks)",
+          "52.71 「然後你這樣子去跟他爭，大概有機會」: 15 chars>12 (font shrinks)",
+          "55.58 「對不對，因為他都沒有跟你爭，他可能」: 15 chars>12 (font shrinks)",
+          "69.32 「所以就就沒有那麼，就沒那麼必要」: 14 chars>12 (font shrinks)",
+          "ig_reels: 29 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "yt_shorts: 29 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "tiktok: 29 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07"
+        ]
       },
       "artifact": {
-        "id": "EP220/不升我就走.mp4|20433037|1794161803",
-        "label": "EP220/不升我就走.mp4",
-        "bytes": 20433037,
-        "mtime_taipei": "2026-11-09 02:16"
+        "id": "不升我就走_fix7.mp4|20459648|1794599122",
+        "label": "不升我就走_fix7.mp4",
+        "bytes": 20459648,
+        "mtime_taipei": "2026-11-14 03:45"
       },
       "historical": null,
       "hold": null,
       "schedule_label": "",
       "schedule_readonly": true,
       "media": {
-        "video": "https://drive.google.com/file/d/17xcx88kDmpp8U3RdjsXCjOZJCAwu-yiB/view?usp=drivesdk",
-        "video_label": "開啟Drive審片",
+        "video": "https://drive.google.com/file/d/1PJO0JsjQchnFI8AQOIz13OfLks_P-71k/view?usp=drivesdk",
+        "video_label": "開啟Drive審片（本輪現檔）",
         "doc": null,
         "subs": [
           "其實我們就會看說，從後面回來看",
@@ -8435,8 +9240,8 @@
           "儘量給他大一點的等級",
           "好，讓他升上去",
           "我一直都沒升怎麼辦？對不對？",
-          "有人會建議說",
-          "那你就跟老闆講，你不升我就走",
+          "有人會建議說，那你就跟老闆",
+          "不升就是我就走",
           "你可能年輕的時候看到這種評論",
           "就會說，嗨，我來試試看",
           "可是你如果知道這個邏輯之後",
@@ -8445,18 +9250,19 @@
           "我們沒有辦法升你",
           "你這樣就很像是你去外面找一份工作",
           "然後薪水更高",
-          "說你不給我這個薪水我就走",
+          "你不給我這個薪水我就走",
           "反正就……哦好，那你走",
-          "因為這樣的人，你可能只有你會想走",
+          "因為這樣的人，你可能之後會想走",
           "我就我就跟你分手，對，情侶，就是情侶",
+          "就反過來情侶這樣，你就覺得這個",
           "你就知道他的機率不是那麼高",
           "因為為什麼？因為除非你已經是公認",
           "對，公認，你的能力都已經到下一級了",
           "比如大家都知道",
           "每次可能其他的主管都覺得你很好",
           "然後你這樣子去跟他爭，大概有機會",
-          "因為他都沒有跟你爭",
-          "他可能有一些其他的理由",
+          "對不對，因為他都沒有跟你爭，他可能",
+          "有一些其他的理由",
           "那大概去爭一下有機會",
           "但是如果你只是單純說",
           "你不給我升就走",
@@ -8471,49 +9277,95 @@
       },
       "local_identities": [
         {
-          "label": "EP220/不升我就走.mp4",
-          "bytes": 20433037,
-          "mtime": 1794161803,
-          "mtime_taipei": "2026-11-09 02:16",
+          "label": "不升我就走_fix7.mp4",
+          "bytes": 20459648,
+          "mtime": 1794599122,
+          "mtime_taipei": "2026-11-14 03:45",
           "qc": {
             "short": {
-              "identity_match": false,
+              "identity_match": true,
               "result_raw": "PASS",
               "fails": [],
               "warns": [],
               "spec": "STRICT v2 2026-10-18",
-              "at": "2026-10-30T19:20:48+08:00",
-              "record_mtime": 1793359157,
-              "file_mtime": 1794161803,
-              "state": "stale",
-              "pass": false,
-              "detail": "舊紀錄與現檔的 mtime 或大小不一致，不能當成通過"
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794599122,
+              "file_mtime": 1794599122,
+              "state": "pass",
+              "pass": true,
+              "detail": "qc 通過且身份一致"
             },
             "extra": {
-              "state": "absent",
-              "pass": false,
-              "identity_match": false,
-              "result_raw": null,
-              "detail": "沒有 qc_extra 台帳"
+              "identity_match": true,
+              "result_raw": "WARN",
+              "fails": [],
+              "warns": [
+                "0.05 「其實我們就會看說，從後面回來看」: 14 chars>12 (font shrinks)",
+                "2.07 「就看出他這個能力會有一些落差」: 14 chars>12 (font shrinks)",
+                "7.53 「那個人我就儘量給他大一點的空間」: 15 chars>12 (font shrinks)",
+                "16.71 「你可能年輕的時候看到這種評論」: 14 chars>12 (font shrinks)",
+                "20.37 「可是你如果知道這個邏輯之後」: 13 chars>12 (font shrinks)",
+                "26.67 「你這樣就很像是你去外面找一份工作」: 16 chars>12 (font shrinks)",
+                "33.17 「因為這樣的人，你可能之後會想走」: 14 chars>12 (font shrinks)",
+                "35.98 「我就我就跟你分手，對，情侶，就是情侶」: 15 chars>12 (font shrinks)",
+                "38.69 「就反過來情侶這樣，你就覺得這個」: 14 chars>12 (font shrinks)",
+                "40.63 「你就知道他的機率不是那麼高」: 13 chars>12 (font shrinks)",
+                "42.31 「因為為什麼？因為除非你已經是公認」: 15 chars>12 (font shrinks)",
+                "45.84 「對，公認，你的能力都已經到下一級了」: 15 chars>12 (font shrinks)",
+                "49.78 「每次可能其他的主管都覺得你很好」: 15 chars>12 (font shrinks)",
+                "52.71 「然後你這樣子去跟他爭，大概有機會」: 15 chars>12 (font shrinks)",
+                "55.58 「對不對，因為他都沒有跟你爭，他可能」: 15 chars>12 (font shrinks)",
+                "69.32 「所以就就沒有那麼，就沒那麼必要」: 14 chars>12 (font shrinks)",
+                "ig_reels: 29 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "yt_shorts: 29 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "tiktok: 29 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07"
+              ],
+              "spec": "qc_extra v1 2026-10-30",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794599122,
+              "file_mtime": 1794599122,
+              "state": "warn_accepted",
+              "pass": true,
+              "detail": "警告已在這次事件裡明示接受"
             },
             "ready": false,
-            "block_reason": "不能放行：qc_short=stale；qc_extra=absent",
-            "accepted_warns": []
+            "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+            "accepted_warns": [
+              "0.05 「其實我們就會看說，從後面回來看」: 14 chars>12 (font shrinks)",
+              "2.07 「就看出他這個能力會有一些落差」: 14 chars>12 (font shrinks)",
+              "7.53 「那個人我就儘量給他大一點的空間」: 15 chars>12 (font shrinks)",
+              "16.71 「你可能年輕的時候看到這種評論」: 14 chars>12 (font shrinks)",
+              "20.37 「可是你如果知道這個邏輯之後」: 13 chars>12 (font shrinks)",
+              "26.67 「你這樣就很像是你去外面找一份工作」: 16 chars>12 (font shrinks)",
+              "33.17 「因為這樣的人，你可能之後會想走」: 14 chars>12 (font shrinks)",
+              "35.98 「我就我就跟你分手，對，情侶，就是情侶」: 15 chars>12 (font shrinks)",
+              "38.69 「就反過來情侶這樣，你就覺得這個」: 14 chars>12 (font shrinks)",
+              "40.63 「你就知道他的機率不是那麼高」: 13 chars>12 (font shrinks)",
+              "42.31 「因為為什麼？因為除非你已經是公認」: 15 chars>12 (font shrinks)",
+              "45.84 「對，公認，你的能力都已經到下一級了」: 15 chars>12 (font shrinks)",
+              "49.78 「每次可能其他的主管都覺得你很好」: 15 chars>12 (font shrinks)",
+              "52.71 「然後你這樣子去跟他爭，大概有機會」: 15 chars>12 (font shrinks)",
+              "55.58 「對不對，因為他都沒有跟你爭，他可能」: 15 chars>12 (font shrinks)",
+              "69.32 「所以就就沒有那麼，就沒那麼必要」: 14 chars>12 (font shrinks)",
+              "ig_reels: 29 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "yt_shorts: 29 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "tiktok: 29 subtitle cues run under the right rail (max 13% of the cue box) — accepted rule 2026-10-07"
+            ]
           }
         }
       ],
       "still_id": null,
       "related_notes": [],
-      "cut_file_note": "檔案存在只供審片。沒有開剪授權紀錄，也不等於可以發佈。",
+      "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
         "access": "private_owner_sign_in",
         "mime": "application/mp4",
         "streaming_playback_verified": false,
-        "artifact_id": "EP220/不升我就走.mp4|20433037|1794161803"
+        "artifact_id": "不升我就走_fix7.mp4|20459648|1794599122"
       },
       "withheld_label": null,
-      "subtitle_note": "燒錄進影片的字幕是否就是這份文字，尚未核對。",
-      "script_note": "現檔沒有繼承先前那一版腳本核准，QC 仍是失效。"
+      "subtitle_note": "字幕依本輪現檔（近逐字跟語音）。與核准稿用詞差異已另外紀錄，未默改。",
+      "script_note": "現檔沒有繼承發佈核准。腳本核准只涵蓋先前那一版文字。"
     },
     "cut:EP220/先找正在擴張的組織.mp4": {
       "id": "cut:EP220/先找正在擴張的組織.mp4",
@@ -8558,42 +9410,87 @@
       },
       "qc": {
         "short": {
-          "state": "stale",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "PASS",
+          "fails": [],
+          "warns": [],
+          "spec": "STRICT v2 2026-10-18",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794597915,
+          "file_mtime": 1794597915,
+          "state": "pass",
+          "pass": true,
+          "detail": "qc 通過且身份一致"
         },
         "extra": {
-          "state": "absent",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "WARN",
+          "fails": [],
+          "warns": [
+            "0.07 「升遷，所以除了你剛剛把事情做好之外」: 16 chars>12 (font shrinks)",
+            "5.90 「我沒有辦法創造 business need 啊」: 14 chars>12 (font shrinks)",
+            "7.61 「那你就要創造，比如說這個業務」: 13 chars>12 (font shrinks)",
+            "10.77 「我在這個組織裡面升的機會要多快」: 15 chars>12 (font shrinks)",
+            "15.91 「那就有需求嘛，需求就要有人嘛」: 13 chars>12 (font shrinks)",
+            "18.23 「所以我那時候上 Terry 的節目就說」: 14.5 chars>12 (font shrinks)",
+            "27.30 「那如果這邊都沒有資深的人怎麼辦呢？」: 16 chars>12 (font shrinks)",
+            "30.20 「那我就想辦法一個人拉上來嘛」: 13 chars>12 (font shrinks)",
+            "34.71 「再把一個比較……其中一個比較資深的」: 15 chars>12 (font shrinks)",
+            "42.62 「因為有 business need，因為有需求」: 14 chars>12 (font shrinks)",
+            "47.50 「如果這個 team 沒有 business need」: 14 chars>12 (font shrinks)",
+            "51.59 「上面的人老屁股一大堆都沒有走」: 14 chars>12 (font shrinks)",
+            "ig_reels: 23 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "yt_shorts: 23 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+            "tiktok: 23 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07"
+          ],
+          "spec": "qc_extra v1 2026-10-30",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794597915,
+          "file_mtime": 1794597915,
+          "state": "warn_accepted",
+          "pass": true,
+          "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "不能放行：現檔身份未通過 qc_short，qc_extra 也沒有台帳",
-        "accepted_warns": []
+        "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+        "accepted_warns": [
+          "0.07 「升遷，所以除了你剛剛把事情做好之外」: 16 chars>12 (font shrinks)",
+          "5.90 「我沒有辦法創造 business need 啊」: 14 chars>12 (font shrinks)",
+          "7.61 「那你就要創造，比如說這個業務」: 13 chars>12 (font shrinks)",
+          "10.77 「我在這個組織裡面升的機會要多快」: 15 chars>12 (font shrinks)",
+          "15.91 「那就有需求嘛，需求就要有人嘛」: 13 chars>12 (font shrinks)",
+          "18.23 「所以我那時候上 Terry 的節目就說」: 14.5 chars>12 (font shrinks)",
+          "27.30 「那如果這邊都沒有資深的人怎麼辦呢？」: 16 chars>12 (font shrinks)",
+          "30.20 「那我就想辦法一個人拉上來嘛」: 13 chars>12 (font shrinks)",
+          "34.71 「再把一個比較……其中一個比較資深的」: 15 chars>12 (font shrinks)",
+          "42.62 「因為有 business need，因為有需求」: 14 chars>12 (font shrinks)",
+          "47.50 「如果這個 team 沒有 business need」: 14 chars>12 (font shrinks)",
+          "51.59 「上面的人老屁股一大堆都沒有走」: 14 chars>12 (font shrinks)",
+          "ig_reels: 23 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "yt_shorts: 23 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+          "tiktok: 23 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07"
+        ]
       },
       "artifact": {
-        "id": "EP220/先找正在擴張的組織.mp4|14066233|1794161803",
-        "label": "EP220/先找正在擴張的組織.mp4",
-        "bytes": 14066233,
-        "mtime_taipei": "2026-11-09 02:16"
+        "id": "先找正在擴張的組織_fix3.mp4|14090528|1794597915",
+        "label": "先找正在擴張的組織_fix3.mp4",
+        "bytes": 14090528,
+        "mtime_taipei": "2026-11-14 03:25"
       },
       "historical": null,
       "hold": null,
       "schedule_label": "",
       "schedule_readonly": true,
       "media": {
-        "video": "https://drive.google.com/file/d/1o8fCM__S3r3Zfr-NiVdAkIQbuvlQm02-/view?usp=drivesdk",
-        "video_label": "開啟Drive審片",
+        "video": "https://drive.google.com/file/d/1Q3OPwdwhChVf82PkQroDQX9pB6QrYDDi/view?usp=drivesdk",
+        "video_label": "開啟Drive審片（本輪現檔）",
         "doc": null,
         "subs": [
           "升遷，所以除了你剛剛把事情做好之外",
           "你要去找什麼？business need",
           "那你對於一個要升的人",
-          "我怎麼……我沒有辦法創造 business need 啊",
+          "我怎麼……",
+          "我沒有辦法創造 business need 啊",
           "那你就要創造，比如說這個業務",
           "比如說舉例來講",
           "我在這個組織裡面升的機會要多快",
@@ -8625,49 +9522,87 @@
       },
       "local_identities": [
         {
-          "label": "EP220/先找正在擴張的組織.mp4",
-          "bytes": 14066233,
-          "mtime": 1794161803,
-          "mtime_taipei": "2026-11-09 02:16",
+          "label": "先找正在擴張的組織_fix3.mp4",
+          "bytes": 14090528,
+          "mtime": 1794597915,
+          "mtime_taipei": "2026-11-14 03:25",
           "qc": {
             "short": {
-              "identity_match": false,
+              "identity_match": true,
               "result_raw": "PASS",
               "fails": [],
               "warns": [],
               "spec": "STRICT v2 2026-10-18",
-              "at": "2026-10-29T23:48:47+08:00",
-              "record_mtime": 1793288824,
-              "file_mtime": 1794161803,
-              "state": "stale",
-              "pass": false,
-              "detail": "舊紀錄與現檔的 mtime 或大小不一致，不能當成通過"
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794597915,
+              "file_mtime": 1794597915,
+              "state": "pass",
+              "pass": true,
+              "detail": "qc 通過且身份一致"
             },
             "extra": {
-              "state": "absent",
-              "pass": false,
-              "identity_match": false,
-              "result_raw": null,
-              "detail": "沒有 qc_extra 台帳"
+              "identity_match": true,
+              "result_raw": "WARN",
+              "fails": [],
+              "warns": [
+                "0.07 「升遷，所以除了你剛剛把事情做好之外」: 16 chars>12 (font shrinks)",
+                "5.90 「我沒有辦法創造 business need 啊」: 14 chars>12 (font shrinks)",
+                "7.61 「那你就要創造，比如說這個業務」: 13 chars>12 (font shrinks)",
+                "10.77 「我在這個組織裡面升的機會要多快」: 15 chars>12 (font shrinks)",
+                "15.91 「那就有需求嘛，需求就要有人嘛」: 13 chars>12 (font shrinks)",
+                "18.23 「所以我那時候上 Terry 的節目就說」: 14.5 chars>12 (font shrinks)",
+                "27.30 「那如果這邊都沒有資深的人怎麼辦呢？」: 16 chars>12 (font shrinks)",
+                "30.20 「那我就想辦法一個人拉上來嘛」: 13 chars>12 (font shrinks)",
+                "34.71 「再把一個比較……其中一個比較資深的」: 15 chars>12 (font shrinks)",
+                "42.62 「因為有 business need，因為有需求」: 14 chars>12 (font shrinks)",
+                "47.50 「如果這個 team 沒有 business need」: 14 chars>12 (font shrinks)",
+                "51.59 「上面的人老屁股一大堆都沒有走」: 14 chars>12 (font shrinks)",
+                "ig_reels: 23 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "yt_shorts: 23 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+                "tiktok: 23 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07"
+              ],
+              "spec": "qc_extra v1 2026-10-30",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794597915,
+              "file_mtime": 1794597915,
+              "state": "warn_accepted",
+              "pass": true,
+              "detail": "警告已在這次事件裡明示接受"
             },
             "ready": false,
-            "block_reason": "不能放行：qc_short=stale；qc_extra=absent",
-            "accepted_warns": []
+            "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+            "accepted_warns": [
+              "0.07 「升遷，所以除了你剛剛把事情做好之外」: 16 chars>12 (font shrinks)",
+              "5.90 「我沒有辦法創造 business need 啊」: 14 chars>12 (font shrinks)",
+              "7.61 「那你就要創造，比如說這個業務」: 13 chars>12 (font shrinks)",
+              "10.77 「我在這個組織裡面升的機會要多快」: 15 chars>12 (font shrinks)",
+              "15.91 「那就有需求嘛，需求就要有人嘛」: 13 chars>12 (font shrinks)",
+              "18.23 「所以我那時候上 Terry 的節目就說」: 14.5 chars>12 (font shrinks)",
+              "27.30 「那如果這邊都沒有資深的人怎麼辦呢？」: 16 chars>12 (font shrinks)",
+              "30.20 「那我就想辦法一個人拉上來嘛」: 13 chars>12 (font shrinks)",
+              "34.71 「再把一個比較……其中一個比較資深的」: 15 chars>12 (font shrinks)",
+              "42.62 「因為有 business need，因為有需求」: 14 chars>12 (font shrinks)",
+              "47.50 「如果這個 team 沒有 business need」: 14 chars>12 (font shrinks)",
+              "51.59 「上面的人老屁股一大堆都沒有走」: 14 chars>12 (font shrinks)",
+              "ig_reels: 23 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "yt_shorts: 23 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+              "tiktok: 23 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07"
+            ]
           }
         }
       ],
       "still_id": null,
       "related_notes": [],
-      "cut_file_note": "檔案存在只供審片。沒有開剪授權紀錄，也不等於可以發佈。",
+      "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
         "access": "private_owner_sign_in",
         "mime": "application/mp4",
         "streaming_playback_verified": false,
-        "artifact_id": "EP220/先找正在擴張的組織.mp4|14066233|1794161803"
+        "artifact_id": "先找正在擴張的組織_fix3.mp4|14090528|1794597915"
       },
       "withheld_label": null,
-      "subtitle_note": "燒錄進影片的字幕是否就是這份文字，尚未核對。",
-      "script_note": "現檔沒有繼承先前那一版腳本核准，QC 仍是失效。"
+      "subtitle_note": "字幕依本輪現檔（近逐字跟語音）。與核准稿用詞差異已另外紀錄，未默改。",
+      "script_note": "現檔沒有繼承發佈核准。腳本核准只涵蓋先前那一版文字。"
     },
     "cut:EP220/每年加薪2趴做30年.mp4": {
       "id": "cut:EP220/每年加薪2趴做30年.mp4",
@@ -8712,36 +9647,68 @@
       },
       "qc": {
         "short": {
-          "state": "stale",
+          "identity_match": true,
+          "result_raw": "FAIL",
+          "fails": [
+            "T1 字幕不同步/不逐字 2/28 句：#10 非逐字／字幕時段內聽不到這句（全段 0.63、窗內重聽 0.71） | #23 非逐字／字幕時段內聽不到這句（全段 0.75、窗內重聽 0.71）"
+          ],
+          "warns": [],
+          "spec": "STRICT v2 2026-10-18",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794600215,
+          "file_mtime": 1794600215,
+          "state": "fail",
           "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "detail": "紀錄是失敗"
         },
         "extra": {
-          "state": "absent",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "WARN",
+          "fails": [],
+          "warns": [
+            "19.88 「小明什麼每年存多少，小明會加薪啊」: 15 chars>12 (font shrinks)",
+            "32.76 「其實你會發現你每一年的加薪」: 13 chars>12 (font shrinks)",
+            "42.01 「我不加薪他也不會離職，對不對」: 13 chars>12 (font shrinks)",
+            "47.17 「就說我不加薪感覺他也不會離職」: 14 chars>12 (font shrinks)",
+            "55.62 「就是這樣，所以其實加薪就是很不一定」: 16 chars>12 (font shrinks)",
+            "ig_reels: 20 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "yt_shorts: 20 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+            "tiktok: 22 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07"
+          ],
+          "spec": "qc_extra v1 2026-10-30",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794600215,
+          "file_mtime": 1794600215,
+          "state": "warn_accepted",
+          "pass": true,
+          "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "不能放行：現檔身份未通過 qc_short，qc_extra 也沒有台帳",
-        "accepted_warns": []
+        "block_reason": "不能放行：qc_short=fail；qc_extra=warn_accepted。未過字幕：#10「他他把升就加薪當成」：非逐字／字幕時段內聽不到這句（全段 0.63、窗內重聽 0.71）（全段ASR「他他他把己这个加薪当」；窗內「他他把這加加当成」；whisper「他把加薪當成」）；#23「有些外商就會這樣」：非逐字／字幕時段內聽不到這句（全段 0.75、窗內重聽 0.71）（全段ASR「有些晚上就会这样」；窗內「呃有些晚上就会这样」；whisper「有些晚上就會這樣」）",
+        "accepted_warns": [
+          "19.88 「小明什麼每年存多少，小明會加薪啊」: 15 chars>12 (font shrinks)",
+          "32.76 「其實你會發現你每一年的加薪」: 13 chars>12 (font shrinks)",
+          "42.01 「我不加薪他也不會離職，對不對」: 13 chars>12 (font shrinks)",
+          "47.17 「就說我不加薪感覺他也不會離職」: 14 chars>12 (font shrinks)",
+          "55.62 「就是這樣，所以其實加薪就是很不一定」: 16 chars>12 (font shrinks)",
+          "ig_reels: 20 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "yt_shorts: 20 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+          "tiktok: 22 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07"
+        ]
       },
       "artifact": {
-        "id": "EP220/每年加薪2趴做30年.mp4|15405117|1794161803",
-        "label": "EP220/每年加薪2趴做30年.mp4",
-        "bytes": 15405117,
-        "mtime_taipei": "2026-11-09 02:16"
+        "id": "每年加薪2趴做30年_fix5.mp4|15410897|1794600215",
+        "label": "每年加薪2趴做30年_fix5.mp4",
+        "bytes": 15410897,
+        "mtime_taipei": "2026-11-14 04:03"
       },
       "historical": null,
       "hold": null,
       "schedule_label": "",
       "schedule_readonly": true,
       "media": {
-        "video": "https://drive.google.com/file/d/1MfRYtGeAk3v1M4SntcQQwVA1uoc8ZP8p/view?usp=drivesdk",
-        "video_label": "開啟Drive審片",
+        "video": "https://drive.google.com/file/d/1aa6jlTiSO8uVdk-Wz_y2HTAh2NNHcX6i/view?usp=drivesdk",
+        "video_label": "開啟Drive審片（本輪現檔）",
         "doc": null,
         "subs": [
           "好，比如說有的人會講說",
@@ -8753,8 +9720,8 @@
           "三十年薪水的一個情況",
           "比較不會，因為大部分可能會……",
           "好像在算複利的概念，對",
-          "但他他把升……就加薪當成一個……",
-          "我就覺得有點奇怪",
+          "他他把升就加薪當成",
+          "我就就覺得奇怪",
           "小明什麼每年存多少，小明會加薪啊",
           "每年會加薪 2%",
           "小明不一定每年會加薪",
@@ -8765,7 +9732,8 @@
           "今年公司好，所有人都加薪啊",
           "明年公司不想加",
           "現在薪水太高了，比業界高",
-          "我不加薪他也不會離職，對不對，有些外商就會這樣",
+          "我不加薪他也不會離職，對不對",
+          "有些外商就會這樣",
           "OK，今年很多就調了",
           "就說我不加薪感覺他也不會離職",
           "離職率還是一樣",
@@ -8778,49 +9746,78 @@
       },
       "local_identities": [
         {
-          "label": "EP220/每年加薪2趴做30年.mp4",
-          "bytes": 15405117,
-          "mtime": 1794161803,
-          "mtime_taipei": "2026-11-09 02:16",
+          "label": "每年加薪2趴做30年_fix5.mp4",
+          "bytes": 15410897,
+          "mtime": 1794600215,
+          "mtime_taipei": "2026-11-14 04:03",
           "qc": {
             "short": {
-              "identity_match": false,
-              "result_raw": "PASS",
-              "fails": [],
+              "identity_match": true,
+              "result_raw": "FAIL",
+              "fails": [
+                "T1 字幕不同步/不逐字 2/28 句：#10 非逐字／字幕時段內聽不到這句（全段 0.63、窗內重聽 0.71） | #23 非逐字／字幕時段內聽不到這句（全段 0.75、窗內重聽 0.71）"
+              ],
               "warns": [],
               "spec": "STRICT v2 2026-10-18",
-              "at": "2026-10-30T00:16:31+08:00",
-              "record_mtime": 1793290519,
-              "file_mtime": 1794161803,
-              "state": "stale",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794600215,
+              "file_mtime": 1794600215,
+              "state": "fail",
               "pass": false,
-              "detail": "舊紀錄與現檔的 mtime 或大小不一致，不能當成通過"
+              "detail": "紀錄是失敗"
             },
             "extra": {
-              "state": "absent",
-              "pass": false,
-              "identity_match": false,
-              "result_raw": null,
-              "detail": "沒有 qc_extra 台帳"
+              "identity_match": true,
+              "result_raw": "WARN",
+              "fails": [],
+              "warns": [
+                "19.88 「小明什麼每年存多少，小明會加薪啊」: 15 chars>12 (font shrinks)",
+                "32.76 「其實你會發現你每一年的加薪」: 13 chars>12 (font shrinks)",
+                "42.01 「我不加薪他也不會離職，對不對」: 13 chars>12 (font shrinks)",
+                "47.17 「就說我不加薪感覺他也不會離職」: 14 chars>12 (font shrinks)",
+                "55.62 「就是這樣，所以其實加薪就是很不一定」: 16 chars>12 (font shrinks)",
+                "ig_reels: 20 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "yt_shorts: 20 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+                "tiktok: 22 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07"
+              ],
+              "spec": "qc_extra v1 2026-10-30",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794600215,
+              "file_mtime": 1794600215,
+              "state": "warn_accepted",
+              "pass": true,
+              "detail": "警告已在這次事件裡明示接受"
             },
             "ready": false,
-            "block_reason": "不能放行：qc_short=stale；qc_extra=absent",
-            "accepted_warns": []
+            "block_reason": "不能放行：qc_short=fail；qc_extra=warn_accepted。未過字幕：#10「他他把升就加薪當成」：非逐字／字幕時段內聽不到這句（全段 0.63、窗內重聽 0.71）（全段ASR「他他他把己这个加薪当」；窗內「他他把這加加当成」；whisper「他把加薪當成」）；#23「有些外商就會這樣」：非逐字／字幕時段內聽不到這句（全段 0.75、窗內重聽 0.71）（全段ASR「有些晚上就会这样」；窗內「呃有些晚上就会这样」；whisper「有些晚上就會這樣」）",
+            "accepted_warns": [
+              "19.88 「小明什麼每年存多少，小明會加薪啊」: 15 chars>12 (font shrinks)",
+              "32.76 「其實你會發現你每一年的加薪」: 13 chars>12 (font shrinks)",
+              "42.01 「我不加薪他也不會離職，對不對」: 13 chars>12 (font shrinks)",
+              "47.17 「就說我不加薪感覺他也不會離職」: 14 chars>12 (font shrinks)",
+              "55.62 「就是這樣，所以其實加薪就是很不一定」: 16 chars>12 (font shrinks)",
+              "ig_reels: 20 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "yt_shorts: 20 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+              "tiktok: 22 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07"
+            ]
           }
         }
       ],
       "still_id": null,
-      "related_notes": [],
-      "cut_file_note": "檔案存在只供審片。沒有開剪授權紀錄，也不等於可以發佈。",
+      "related_notes": [
+        "未過字幕：#10「他他把升就加薪當成」：非逐字／字幕時段內聽不到這句（全段 0.63、窗內重聽 0.71）（全段ASR「他他他把己这个加薪当」；窗內「他他把這加加当成」；whisper「他把加薪當成」）；#23「有些外商就會這樣」：非逐字／字幕時段內聽不到這句（全段 0.75、窗內重聽 0.71）（全段ASR「有些晚上就会这样」；窗內「呃有些晚上就会这样」；whisper「有些晚上就會這樣」）",
+        "這是目前最佳未過檔，不是可發定稿。舊官方成片未被覆蓋。"
+      ],
+      "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
         "access": "private_owner_sign_in",
         "mime": "application/mp4",
         "streaming_playback_verified": false,
-        "artifact_id": "EP220/每年加薪2趴做30年.mp4|15405117|1794161803"
+        "artifact_id": "每年加薪2趴做30年_fix5.mp4|15410897|1794600215"
       },
       "withheld_label": null,
-      "subtitle_note": "燒錄進影片的字幕是否就是這份文字，尚未核對。",
-      "script_note": "現檔沒有繼承先前那一版腳本核准，QC 仍是失效。"
+      "subtitle_note": "字幕依本輪現檔（近逐字跟語音）。與核准稿用詞差異已另外紀錄，未默改。",
+      "script_note": "現檔沒有繼承發佈核准。腳本核准只涵蓋先前那一版文字。"
     },
     "cut:EP220/選對部門比努力重要.mp4": {
       "id": "cut:EP220/選對部門比努力重要.mp4",
@@ -24710,51 +25707,95 @@
       },
       "qc": {
         "short": {
-          "state": "stale",
+          "identity_match": true,
+          "result_raw": "FAIL",
+          "fails": [
+            "T1 字幕不同步/不逐字 1/43 句：#25 非逐字／字幕時段內聽不到這句（全段 0.67、窗內重聽 0.32）"
+          ],
+          "warns": [],
+          "spec": "STRICT v2 2026-10-18",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794603283,
+          "file_mtime": 1794603283,
+          "state": "fail",
           "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "detail": "紀錄是失敗"
         },
         "extra": {
-          "state": "absent",
-          "pass": false,
-          "identity_match": false,
-          "result_raw": null,
-          "detail": "現檔身份未通過 qc_short，qc_extra 也沒有台帳"
+          "identity_match": true,
+          "result_raw": "WARN",
+          "fails": [],
+          "warns": [
+            "3.08 「大學畢業嘛，就是也不是研究所」: 13 chars>12 (font shrinks)",
+            "9.18 「他就升到這個 M1，就是主管一級」: 13 chars>12 (font shrinks)",
+            "13.89 「engineering 六還是七（Meta 職級）」: 13.5 chars>12 (font shrinks)",
+            "20.86 「他就是每一年都跟他的主管去說」: 14 chars>12 (font shrinks)",
+            "30.77 「他是把 scope 好像開槓桿一樣」: 12.5 chars>12 (font shrinks)",
+            "34.09 「做到他做不完、吃不下來超大的案子」: 15 chars>12 (font shrinks)",
+            "36.99 「每年做，雖然每年的案子都做大」: 13 chars>12 (font shrinks)",
+            "41.30 「那當然他本身一定能力也很強」: 13 chars>12 (font shrinks)",
+            "60.07 「所以他就是一直在增加他的 scope」: 14.5 chars>12 (font shrinks)",
+            "ig_reels: 30 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+            "yt_shorts: 30 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+            "tiktok: 31 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07"
+          ],
+          "spec": "qc_extra v1 2026-10-30",
+          "at": "2026-11-14T06:58:00+08:00",
+          "record_mtime": 1794603283,
+          "file_mtime": 1794603283,
+          "state": "warn_accepted",
+          "pass": true,
+          "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "不能放行：現檔身份未通過 qc_short，qc_extra 也沒有台帳",
-        "accepted_warns": []
+        "block_reason": "不能放行：qc_short=fail；qc_extra=warn_accepted。未過字幕：#25「雖然他只是大學畢業而已」：非逐字／字幕時段內聽不到這句（全段 0.67、窗內重聽 0.32）（全段ASR「虽然他叫他去毕业而已」；窗內「赚他叫他举币而已」；whisper「雖然它叫GPB而已」）",
+        "accepted_warns": [
+          "3.08 「大學畢業嘛，就是也不是研究所」: 13 chars>12 (font shrinks)",
+          "9.18 「他就升到這個 M1，就是主管一級」: 13 chars>12 (font shrinks)",
+          "13.89 「engineering 六還是七（Meta 職級）」: 13.5 chars>12 (font shrinks)",
+          "20.86 「他就是每一年都跟他的主管去說」: 14 chars>12 (font shrinks)",
+          "30.77 「他是把 scope 好像開槓桿一樣」: 12.5 chars>12 (font shrinks)",
+          "34.09 「做到他做不完、吃不下來超大的案子」: 15 chars>12 (font shrinks)",
+          "36.99 「每年做，雖然每年的案子都做大」: 13 chars>12 (font shrinks)",
+          "41.30 「那當然他本身一定能力也很強」: 13 chars>12 (font shrinks)",
+          "60.07 「所以他就是一直在增加他的 scope」: 14.5 chars>12 (font shrinks)",
+          "ig_reels: 30 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+          "yt_shorts: 30 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+          "tiktok: 31 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07"
+        ]
       },
       "artifact": {
-        "id": "成片B|21922372|1794161803",
-        "label": "成片 B",
-        "bytes": 21922372,
-        "mtime_taipei": "2026-11-09 02:16"
+        "id": "成片B_fix3.mp4|21962592|1794603283",
+        "label": "成片B_fix3.mp4",
+        "bytes": 21962592,
+        "mtime_taipei": "2026-11-14 04:54"
       },
       "historical": null,
       "hold": null,
       "schedule_label": "",
       "schedule_readonly": true,
       "media": {
-        "video": "https://drive.google.com/file/d/1u_fkGLE-WqXMkXIbl_PsyzOvP8n5sI4U/view?usp=drivesdk",
-        "video_label": "開啟Drive審片",
+        "video": "https://drive.google.com/file/d/1Bwe8eJ6G7V9Box3LR1H_dbCn7Se40plD/view?usp=drivesdk",
+        "video_label": "開啟Drive審片（本輪現檔）",
         "doc": null,
         "subs": [
-          "那時候他是一個美國念資工系大學畢業",
-          "大學畢業嘛",
-          "就是也不是研究所，是大學畢業",
+          "那時候他是一個美國",
+          "念資工系大學畢業",
+          "大學畢業嘛，就是也不是研究所",
+          "是大學畢業",
+          "然後他進去 Meta 之後呢",
           "他四年就升主管",
           "他就升到這個 M1，就是主管一級",
           "好像差不多，就是差不多",
+          "engineering 六還是七（Meta 職級）",
           "那快，他就算非常快",
           "他好像四年就升到主管",
           "那他怎麼做呢？",
           "他就是每一年都跟他的主管去說",
           "他要做更大的 scope",
           "那當然他是軟體工程師",
-          "可能因為，可能 Meta 有更多的案子可以做",
+          "可能因為，可能 Meta",
+          "有更多的案子可以做",
           "他每年都在談他的 scope",
           "他是把 scope 好像開槓桿一樣",
           "像投資開槓桿，要做到最大",
@@ -24762,12 +25803,13 @@
           "每年做，雖然每年的案子都做大",
           "那做大就需要人",
           "那當然他本身一定能力也很強",
+          "雖然他只是大學畢業而已",
           "他能力也很強，他可以吃下來",
           "那吃下來之後呢",
           "他只要有菜鳥就塞給他",
           "去投入去幫助他做這個案子",
           "所以他每年都一直成長",
-          "所以他一直做做做做做做做",
+          "所以他一直做做做做做做",
           "後來就二線主管這樣子",
           "可能就一線二線主管",
           "他四五年就上去",
@@ -24787,49 +25829,86 @@
       },
       "local_identities": [
         {
-          "label": "成片 B",
-          "bytes": 21922372,
-          "mtime": 1794161803,
-          "mtime_taipei": "2026-11-09 02:16",
+          "label": "成片B_fix3.mp4",
+          "bytes": 21962592,
+          "mtime": 1794603283,
+          "mtime_taipei": "2026-11-14 04:54",
           "qc": {
             "short": {
-              "identity_match": false,
-              "result_raw": "PASS",
-              "fails": [],
+              "identity_match": true,
+              "result_raw": "FAIL",
+              "fails": [
+                "T1 字幕不同步/不逐字 1/43 句：#25 非逐字／字幕時段內聽不到這句（全段 0.67、窗內重聽 0.32）"
+              ],
               "warns": [],
               "spec": "STRICT v2 2026-10-18",
-              "at": "2026-10-30T00:11:57+08:00",
-              "record_mtime": 1793289880,
-              "file_mtime": 1794161803,
-              "state": "stale",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794603283,
+              "file_mtime": 1794603283,
+              "state": "fail",
               "pass": false,
-              "detail": "舊紀錄與現檔的 mtime 或大小不一致，不能當成通過"
+              "detail": "紀錄是失敗"
             },
             "extra": {
-              "state": "absent",
-              "pass": false,
-              "identity_match": false,
-              "result_raw": null,
-              "detail": "沒有 qc_extra 台帳"
+              "identity_match": true,
+              "result_raw": "WARN",
+              "fails": [],
+              "warns": [
+                "3.08 「大學畢業嘛，就是也不是研究所」: 13 chars>12 (font shrinks)",
+                "9.18 「他就升到這個 M1，就是主管一級」: 13 chars>12 (font shrinks)",
+                "13.89 「engineering 六還是七（Meta 職級）」: 13.5 chars>12 (font shrinks)",
+                "20.86 「他就是每一年都跟他的主管去說」: 14 chars>12 (font shrinks)",
+                "30.77 「他是把 scope 好像開槓桿一樣」: 12.5 chars>12 (font shrinks)",
+                "34.09 「做到他做不完、吃不下來超大的案子」: 15 chars>12 (font shrinks)",
+                "36.99 「每年做，雖然每年的案子都做大」: 13 chars>12 (font shrinks)",
+                "41.30 「那當然他本身一定能力也很強」: 13 chars>12 (font shrinks)",
+                "60.07 「所以他就是一直在增加他的 scope」: 14.5 chars>12 (font shrinks)",
+                "ig_reels: 30 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+                "yt_shorts: 30 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+                "tiktok: 31 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07"
+              ],
+              "spec": "qc_extra v1 2026-10-30",
+              "at": "2026-11-14T06:58:00+08:00",
+              "record_mtime": 1794603283,
+              "file_mtime": 1794603283,
+              "state": "warn_accepted",
+              "pass": true,
+              "detail": "警告已在這次事件裡明示接受"
             },
             "ready": false,
-            "block_reason": "不能放行：qc_short=stale；qc_extra=absent",
-            "accepted_warns": []
+            "block_reason": "不能放行：qc_short=fail；qc_extra=warn_accepted。未過字幕：#25「雖然他只是大學畢業而已」：非逐字／字幕時段內聽不到這句（全段 0.67、窗內重聽 0.32）（全段ASR「虽然他叫他去毕业而已」；窗內「赚他叫他举币而已」；whisper「雖然它叫GPB而已」）",
+            "accepted_warns": [
+              "3.08 「大學畢業嘛，就是也不是研究所」: 13 chars>12 (font shrinks)",
+              "9.18 「他就升到這個 M1，就是主管一級」: 13 chars>12 (font shrinks)",
+              "13.89 「engineering 六還是七（Meta 職級）」: 13.5 chars>12 (font shrinks)",
+              "20.86 「他就是每一年都跟他的主管去說」: 14 chars>12 (font shrinks)",
+              "30.77 「他是把 scope 好像開槓桿一樣」: 12.5 chars>12 (font shrinks)",
+              "34.09 「做到他做不完、吃不下來超大的案子」: 15 chars>12 (font shrinks)",
+              "36.99 「每年做，雖然每年的案子都做大」: 13 chars>12 (font shrinks)",
+              "41.30 「那當然他本身一定能力也很強」: 13 chars>12 (font shrinks)",
+              "60.07 「所以他就是一直在增加他的 scope」: 14.5 chars>12 (font shrinks)",
+              "ig_reels: 30 subtitle cues run under the right rail (max 11% of the cue box) — accepted rule 2026-10-07",
+              "yt_shorts: 30 subtitle cues run under the right rail (max 10% of the cue box) — accepted rule 2026-10-07",
+              "tiktok: 31 subtitle cues run under the right rail (max 12% of the cue box) — accepted rule 2026-10-07"
+            ]
           }
         }
       ],
       "still_id": null,
-      "related_notes": [],
-      "cut_file_note": "檔案存在只供審片。沒有開剪授權紀錄，也不等於可以發佈。",
+      "related_notes": [
+        "未過字幕：#25「雖然他只是大學畢業而已」：非逐字／字幕時段內聽不到這句（全段 0.67、窗內重聽 0.32）（全段ASR「虽然他叫他去毕业而已」；窗內「赚他叫他举币而已」；whisper「雖然它叫GPB而已」）",
+        "這是目前最佳未過檔，不是可發定稿。舊官方成片未被覆蓋。"
+      ],
+      "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
         "access": "private_owner_sign_in",
         "mime": "application/mp4",
         "streaming_playback_verified": false,
-        "artifact_id": "成片B|21922372|1794161803"
+        "artifact_id": "成片B_fix3.mp4|21962592|1794603283"
       },
       "withheld_label": "需私下審核：標題 1、字幕 2、文案 4。未放上公開頁，也不從缺漏還原。",
-      "subtitle_note": "燒錄進影片的字幕是否就是這份文字，尚未核對。",
-      "script_note": "現檔沒有繼承先前那一版腳本核准，QC 仍是失效。"
+      "subtitle_note": "字幕依本輪現檔（近逐字跟語音）。與核准稿用詞差異已另外紀錄，未默改。",
+      "script_note": "現檔沒有繼承發佈核准。腳本核准只涵蓋先前那一版文字。"
     },
     "approved-script:A1": {
       "id": "approved-script:A1",
