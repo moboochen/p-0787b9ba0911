@@ -4,7 +4,7 @@
   "last_successful_sync": null,
   "pending": {
     "revision": "b641e3cdd19c84aefa28c5bb2256c62b87875cf6482141dbcb6a54c7f1e83952",
-    "reason": "安全更新已寫入並建頁，公開網址尚未驗證（需合併 PR 後才會上線）"
+    "reason": "PR #3 已開，尚未合併，公開網址尚未驗證"
   },
   "error": null,
   "outbox": [
@@ -40,8 +40,17 @@
       "at": "2026-11-14T06:58:00+08:00",
       "revision": "b641e3cdd19c84aefa28c5bb2256c62b87875cf6482141dbcb6a54c7f1e83952"
     },
-    "pushed_branch": null,
-    "pull_request": null,
+    "pushed_branch": {
+      "at": "2026-11-14T06:59:18+08:00",
+      "revision": "b641e3cdd19c84aefa28c5bb2256c62b87875cf6482141dbcb6a54c7f1e83952",
+      "branch": "cursor/approved16-step2-qc-20261114"
+    },
+    "pull_request": {
+      "at": "2026-11-14T06:59:18+08:00",
+      "revision": "b641e3cdd19c84aefa28c5bb2256c62b87875cf6482141dbcb6a54c7f1e83952",
+      "url": "https://github.com/moboochen/p-0787b9ba0911/pull/3",
+      "number": 3
+    },
     "merged": null,
     "deployed": null,
     "verified": null
