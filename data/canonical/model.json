@@ -8433,9 +8433,9 @@
           "at": "2026-11-14T06:58:00+08:00",
           "record_mtime": 1794602171,
           "file_mtime": 1794602171,
-          "state": "pass",
-          "pass": true,
-          "detail": "qc 通過且身份一致"
+          "state": "not_pass",
+          "pass": false,
+          "detail": "使用者已拒絕「科技工作講」ASR alias，先前那次通過不得再當成可發依據。"
         },
         "extra": {
           "identity_match": true,
@@ -8464,7 +8464,7 @@
           "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "短片通過／加驗警告已接受。QC 已過，但 qc_short 的「科技工作講」ASR alias 變更待使用者決定，不能標成可發。",
+        "block_reason": "不可發佈：使用者已拒絕 qc_short 的「科技工作講」ASR alias。先前通過依賴該 alias，不得再當成可發依據。",
         "accepted_warns": [
           "0.25 「有個網友，他看到我們的文章之後」: 14 chars>12 (font shrinks)",
           "28.03 「破三千萬、四千萬、五千萬的時候」: 13 chars>12 (font shrinks)",
@@ -8487,7 +8487,10 @@
         "mtime_taipei": "2026-11-14 04:36"
       },
       "historical": null,
-      "hold": null,
+      "hold": {
+        "label": "不可發佈",
+        "reason": "使用者已拒絕 qc_short 的「科技工作講」ASR alias。工具已從備份還原。"
+      },
       "schedule_label": "",
       "schedule_readonly": true,
       "media": {
@@ -8606,7 +8609,7 @@
       ],
       "still_id": null,
       "related_notes": [
-        "QC passed with alias change pending user decision：qc_short 的「科技工作講」ASR alias 變更待使用者決定。"
+        "不可發佈：使用者已拒絕 qc_short 的「科技工作講」ASR alias。QC 工具已從備份還原，本頁未改工具。"
       ],
       "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
@@ -9108,7 +9111,7 @@
     "cut:EP220/不升我就走.mp4": {
       "id": "cut:EP220/不升我就走.mp4",
       "kind": "cut",
-      "section": "cut",
+      "section": "published",
       "ep": "EP220",
       "title": "不升我就走",
       "flags": {
@@ -9126,23 +9129,23 @@
           "published": false,
           "verification": "unverified",
           "date": null,
-          "source": null,
+          "source": "這次立即分享沒有上傳 YouTube。沒有另作未發核實，維持未核實。",
           "url": null
         },
         "fb": {
           "label": "Facebook",
-          "published": false,
-          "verification": "unverified",
-          "date": null,
-          "source": null,
+          "published": true,
+          "verification": "published",
+          "date": "2026-11-14",
+          "source": "2026-11-14 約 12:15 台北，立即分享後於 Meta Business Suite 已發佈核實（FB 與 IG 圖示皆已發佈）。YouTube 未上傳。",
           "url": null
         },
         "ig": {
           "label": "Instagram",
-          "published": false,
-          "verification": "unverified",
-          "date": null,
-          "source": null,
+          "published": true,
+          "verification": "published",
+          "date": "2026-11-14",
+          "source": "2026-11-14 約 12:15 台北，立即分享後於 Meta Business Suite 已發佈核實（FB 與 IG 圖示皆已發佈）。YouTube 未上傳。",
           "url": null
         }
       },
@@ -9194,7 +9197,7 @@
           "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+        "block_reason": "已在 Facebook 與 Instagram 發佈。YouTube 未核實。沒有另開發佈核准旗標。",
         "accepted_warns": [
           "0.05 「其實我們就會看說，從後面回來看」: 14 chars>12 (font shrinks)",
           "2.07 「就看出他這個能力會有一些落差」: 14 chars>12 (font shrinks)",
@@ -9355,7 +9358,9 @@
         }
       ],
       "still_id": null,
-      "related_notes": [],
+      "related_notes": [
+        "已於 2026-11-14 約 12:15 台北以立即分享發到 Facebook 與 Instagram，並在 Meta Business Suite 已發佈核實（兩個圖示）。YouTube 未上傳，維持未核實。沒有把其他成片標成已發。"
+      ],
       "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
         "access": "private_owner_sign_in",

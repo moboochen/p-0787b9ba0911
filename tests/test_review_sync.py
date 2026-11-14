@@ -70,13 +70,26 @@ def test_views_and_platforms():
     assert MODEL["items"]["script:C"]["flags"]["script_approved"] is False
     previews = [it for it in items if (it.get("preview") or {}).get("access") == "private_owner_sign_in"]
     assert len(previews) == 14
-    assert all(it["media"]["video_label"] == "開啟Drive審片" and it["media"]["video"].startswith("https://drive.google.com/") for it in previews)
+    assert all(str(it["media"]["video_label"]).startswith("開啟Drive審片") and it["media"]["video"].startswith("https://drive.google.com/") for it in previews)
     assert all(not it["flags"]["publish_approved"] and not it["qc"]["ready"] for it in previews)
     assert "4年升Meta主管" not in json.dumps(MODEL, ensure_ascii=False)
-    oct29 = [it for it in items if it["id"].startswith("cut:") and it["platforms"]["fb"]["published"]]
-    assert len(oct29) == 3
-    assert all(it["platforms"]["ig"]["published"] and not it["platforms"]["yt"]["published"] for it in oct29)
-    assert all(it["section"] == "published" for it in oct29)
+    fb_pub = [it for it in items if it["id"].startswith("cut:") and it["platforms"]["fb"]["published"]]
+    assert len(fb_pub) == 4
+    assert all(it["platforms"]["ig"]["published"] and not it["platforms"]["yt"]["published"] for it in fb_pub)
+    assert all(it["section"] == "published" for it in fb_pub)
+    a1 = MODEL["items"]["cut:EP220/不升我就走.mp4"]
+    assert a1["section"] == "published"
+    assert a1["platforms"]["fb"]["date"] == "2026-11-14"
+    assert a1["platforms"]["ig"]["date"] == "2026-11-14"
+    assert a1["platforms"]["yt"]["verification"] == "unverified"
+    assert a1["flags"]["publish_approved"] is False
+    a8 = MODEL["items"]["cut:EP198/資產五千萬錢自己滾_延長.mp4"]
+    assert a8["section"] == "cut"
+    assert a8["qc"]["ready"] is False
+    assert a8["flags"]["publish_approved"] is False
+    assert not rv.any_platform_published(a8)
+    assert "不可發佈" in (a8.get("hold") or {}).get("label", "")
+    assert "拒絕" in ((a8.get("hold") or {}).get("reason") or "") or "拒絕" in (a8.get("qc") or {}).get("block_reason", "")
     assert sum(1 for it in items if all((it.get("platforms") or {}).get(k, {}).get("published") for k in ("yt", "fb", "ig"))) == 3
     assert all(not it["qc"]["ready"] for it in items)
     assert all(not it["flags"]["publish_approved"] for it in items)
