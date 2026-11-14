@@ -985,9 +985,35 @@ def invariants(model: dict) -> list[str]:
             problems.append(it["id"] + " preview implied release")
         if "4年升Meta主管" in json.dumps(it, ensure_ascii=False):
             problems.append("withheld title leaked")
-    oct29 = [it for it in items if it["id"].startswith("cut:") and it["platforms"]["fb"]["published"] and it["platforms"]["ig"]["published"]]
-    if len(oct29) != 3 or any(it["platforms"]["yt"]["published"] or it["platforms"]["yt"].get("verification") != "unverified" for it in oct29):
+    fb_ig = [it for it in items if it["id"].startswith("cut:") and it["platforms"]["fb"]["published"] and it["platforms"]["ig"]["published"]]
+    if len(fb_ig) != 4 or any(it["platforms"]["yt"]["published"] or it["platforms"]["yt"].get("verification") != "unverified" for it in fb_ig):
+        problems.append("fb+ig published platforms")
+    oct29_ids = {
+        "cut:EP183/伊隆的偏執狂_Chaio.mp4",
+        "cut:EP198/不知道買哪支就買大盤.mp4",
+        "cut:EP220/選對部門比努力重要.mp4",
+    }
+    if {it["id"] for it in fb_ig if it["platforms"]["fb"].get("date") == "2026-10-29"} != oct29_ids:
         problems.append("oct29 platforms")
+    a1 = model["items"].get("cut:EP220/不升我就走.mp4")
+    if (
+        not a1
+        or a1.get("section") != "published"
+        or a1["platforms"]["fb"].get("date") != "2026-11-14"
+        or a1["platforms"]["ig"].get("date") != "2026-11-14"
+        or a1["flags"].get("publish_approved")
+    ):
+        problems.append("A1 publication")
+    a8 = model["items"].get("cut:EP198/資產五千萬錢自己滾_延長.mp4")
+    if (
+        not a8
+        or a8.get("section") != "cut"
+        or not (a8.get("hold") or {}).get("reason")
+        or a8.get("qc", {}).get("ready")
+        or a8["flags"].get("publish_approved")
+        or any_platform_published(a8)
+    ):
+        problems.append("A8 must stay blocked and unpublished")
     yt_bad = [
         it["id"] for it in items
         if it.get("platforms") and not it["platforms"]["yt"]["published"] and it["platforms"]["yt"].get("verification") == "not_published"
@@ -1006,7 +1032,7 @@ def invariants(model: dict) -> list[str]:
         if it.get("section") in ("new", "script", "approved", "cut", "recon") and any_platform_published(it):
             problems.append(it["id"] + " visible on a main tab")
     known = [it for it in items if it["id"].startswith("cut:") and not it["platforms"]["fb"]["published"]]
-    if len(known) != 14:
+    if len(known) != 13:
         problems.append("known unpublished cuts")
     recon = [it for it in items if it["section"] == "recon"]
     if len(recon) != 94:
