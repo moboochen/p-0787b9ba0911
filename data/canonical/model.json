@@ -8433,9 +8433,9 @@
           "at": "2026-11-14T06:58:00+08:00",
           "record_mtime": 1794602171,
           "file_mtime": 1794602171,
-          "state": "pass",
-          "pass": true,
-          "detail": "qc 通過且身份一致"
+          "state": "not_pass",
+          "pass": false,
+          "detail": "使用者已拒絕「科技工作講」ASR alias，先前那次通過不得再當成可發依據。"
         },
         "extra": {
           "identity_match": true,
@@ -8464,7 +8464,7 @@
           "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "短片通過／加驗警告已接受。QC 已過，但 qc_short 的「科技工作講」ASR alias 變更待使用者決定，不能標成可發。",
+        "block_reason": "不可發佈：使用者已拒絕 qc_short 的「科技工作講」ASR alias。先前通過依賴該 alias，不得再當成可發依據。",
         "accepted_warns": [
           "0.25 「有個網友，他看到我們的文章之後」: 14 chars>12 (font shrinks)",
           "28.03 「破三千萬、四千萬、五千萬的時候」: 13 chars>12 (font shrinks)",
@@ -8487,7 +8487,11 @@
         "mtime_taipei": "2026-11-14 04:36"
       },
       "historical": null,
-      "hold": null,
+      "hold": {
+        "label": "不可發佈",
+        "reason": "使用者已於 2026-11-14 拒絕 qc_short 的「科技工作講」ASR alias。先前通過不得再當成可發依據。工具已從備份還原。",
+        "since": "2026-11-14T12:00:00+08:00"
+      },
       "schedule_label": "",
       "schedule_readonly": true,
       "media": {
@@ -8555,9 +8559,9 @@
               "at": "2026-11-14T06:58:00+08:00",
               "record_mtime": 1794602171,
               "file_mtime": 1794602171,
-              "state": "pass",
-              "pass": true,
-              "detail": "qc 通過且身份一致"
+              "state": "not_pass",
+              "pass": false,
+              "detail": "使用者已拒絕「科技工作講」ASR alias，先前那次通過不得再當成可發依據。"
             },
             "extra": {
               "identity_match": true,
@@ -8586,7 +8590,7 @@
               "detail": "警告已在這次事件裡明示接受"
             },
             "ready": false,
-            "block_reason": "短片通過／加驗警告已接受。QC 已過，但 qc_short 的「科技工作講」ASR alias 變更待使用者決定，不能標成可發。",
+            "block_reason": "不可發佈：使用者已拒絕 qc_short 的「科技工作講」ASR alias。先前通過依賴該 alias，不得再當成可發依據。",
             "accepted_warns": [
               "0.25 「有個網友，他看到我們的文章之後」: 14 chars>12 (font shrinks)",
               "28.03 「破三千萬、四千萬、五千萬的時候」: 13 chars>12 (font shrinks)",
@@ -8606,7 +8610,7 @@
       ],
       "still_id": null,
       "related_notes": [
-        "QC passed with alias change pending user decision：qc_short 的「科技工作講」ASR alias 變更待使用者決定。"
+        "不可發佈：使用者已拒絕 qc_short 的「科技工作講」ASR alias。先前通過不得再當成可發依據。QC 工具已從備份還原，本頁未改工具。"
       ],
       "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
@@ -9108,7 +9112,7 @@
     "cut:EP220/不升我就走.mp4": {
       "id": "cut:EP220/不升我就走.mp4",
       "kind": "cut",
-      "section": "cut",
+      "section": "published",
       "ep": "EP220",
       "title": "不升我就走",
       "flags": {
@@ -9126,7 +9130,7 @@
           "published": false,
           "verification": "unverified",
           "date": null,
-          "source": null,
+          "source": "沒有把 YouTube 標成未發。",
           "url": null
         },
         "fb": {
@@ -9134,7 +9138,7 @@
           "published": false,
           "verification": "unverified",
           "date": null,
-          "source": null,
+          "source": "2026-11-14 約 12:15 台北曾發到 Facebook，約 12:33 下架。目前不是已發佈。",
           "url": null
         },
         "ig": {
@@ -9142,7 +9146,7 @@
           "published": false,
           "verification": "unverified",
           "date": null,
-          "source": null,
+          "source": "2026-11-14 約 12:15 台北曾發到 Instagram，約 12:33 下架。目前不是已發佈。",
           "url": null
         }
       },
@@ -9194,7 +9198,7 @@
           "detail": "警告已在這次事件裡明示接受"
         },
         "ready": false,
-        "block_reason": "短片通過／加驗警告已接受。雙 QC 已過，尚未另有發佈核准，不能標成可發。",
+        "block_reason": "已下架，被 v2 取代",
         "accepted_warns": [
           "0.05 「其實我們就會看說，從後面回來看」: 14 chars>12 (font shrinks)",
           "2.07 「就看出他這個能力會有一些落差」: 14 chars>12 (font shrinks)",
@@ -9224,7 +9228,11 @@
         "mtime_taipei": "2026-11-14 03:45"
       },
       "historical": null,
-      "hold": null,
+      "hold": {
+        "label": "已下架",
+        "reason": "2026-11-14 約 12:15 曾發到 Facebook 與 Instagram，約 12:33 依使用者要求下架（缺邏輯、字幕錯字）。已下架，被 v2 取代。",
+        "since": "2026-11-14T12:33:00+08:00"
+      },
       "schedule_label": "",
       "schedule_readonly": true,
       "media": {
@@ -9355,7 +9363,9 @@
         }
       ],
       "still_id": null,
-      "related_notes": [],
+      "related_notes": [
+        "2026-11-14 約 12:15 台北曾發到 Facebook 與 Instagram，約 12:33 依使用者要求下架（缺邏輯、字幕錯字）。已下架，被 v2 取代。publish_approved 維持否，不能再發。"
+      ],
       "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
         "access": "private_owner_sign_in",
@@ -9365,7 +9375,9 @@
       },
       "withheld_label": null,
       "subtitle_note": "字幕依本輪現檔（近逐字跟語音）。與核准稿用詞差異已另外紀錄，未默改。",
-      "script_note": "現檔沒有繼承發佈核准。腳本核准只涵蓋先前那一版文字。"
+      "script_note": "現檔沒有繼承發佈核准。腳本核准只涵蓋先前那一版文字。",
+      "archived_as_duplicate": true,
+      "archive_reason": "已下架，被 v2 取代"
     },
     "cut:EP220/先找正在擴張的組織.mp4": {
       "id": "cut:EP220/先找正在擴張的組織.mp4",
@@ -33496,6 +33508,193 @@
         "subs": [],
         "copy": null,
         "missing": null
+      }
+    },
+    "cut:EP220/不升我就走_v2_final.mp4": {
+      "id": "cut:EP220/不升我就走_v2_final.mp4",
+      "title": "不升我就走",
+      "ep": "EP220",
+      "script_review_status": "none",
+      "script_complete": false,
+      "script_final": false,
+      "artifact": {
+        "id": "不升我就走_v2_final.mp4",
+        "label": "A1 v2 不升我就走_v2_final.mp4",
+        "bytes": null,
+        "mtime_taipei": null
+      },
+      "media": {
+        "video": "https://drive.google.com/file/d/1-9Sd91QLhQngAphca5O7Bm-rt3ME3k06/view?usp=drivesdk",
+        "video_label": "私人 Drive 預覽（未分享）",
+        "doc": null,
+        "subs": [],
+        "copy": null,
+        "missing": null,
+        "playback_note": "私人 Drive 預覽，未對他人分享。需登入後開啟。權限沒有改。串流播放與轉碼都沒有驗證。"
+      },
+      "schedule_label": "",
+      "schedule_readonly": true,
+      "historical": null,
+      "hold": null,
+      "related_notes": [
+        "A1 v2。2026-11-14 約 23:01–23:03 台北以立即分享發到 Facebook 與 Instagram，已核實。YouTube 未上傳，維持未核實，不標未發。",
+        "QC：qc_short 只在 ASR 行失敗（#24「說你不給我這個薪水我就走」、#28「對，情勒，就就是情勒」，使用者確認用字）。qc_extra 一則 CPS 9.6 警告（「有人會建議說，那你就跟老闆講」）已接受。響度與輸出通過。使用者接受並同意發佈。未繼承舊 A1 的核准，publish_approved 維持否。"
+      ],
+      "cut_file_note": "A1 v2 新檔身份。不繼承舊 A1（cut:EP220/不升我就走.mp4）的腳本核准或發佈核准。",
+      "qc": {
+        "short": {
+          "state": "fail",
+          "pass": false,
+          "identity_match": false,
+          "result_raw": "FAIL",
+          "fails": [
+            "#24「說你不給我這個薪水我就走」ASR-only，使用者確認用字",
+            "#28「對，情勒，就就是情勒」ASR-only，使用者確認用字"
+          ],
+          "warns": [],
+          "detail": "只在 ASR 行失敗：#24「說你不給我這個薪水我就走」、#28「對，情勒，就就是情勒」。用字經使用者確認。",
+          "at": "2026-11-14T23:02:00+08:00"
+        },
+        "extra": {
+          "state": "warn_accepted",
+          "pass": true,
+          "identity_match": false,
+          "result_raw": "WARN",
+          "fails": [],
+          "warns": [
+            "CPS 9.6 「有人會建議說，那你就跟老闆講」"
+          ],
+          "detail": "一則 CPS 9.6 警告已接受。響度與輸出通過。",
+          "at": "2026-11-14T23:02:00+08:00"
+        },
+        "ready": false,
+        "block_reason": "qc_short 只在 ASR 行失敗，用字已由使用者確認；qc_extra 的 CPS 9.6 已接受；響度與輸出通過。使用者接受並同意發佈。未繼承舊 A1 核准，不能用這個紀錄把 qc.ready 或 publish_approved 打開。",
+        "accepted_warns": [
+          "CPS 9.6 「有人會建議說，那你就跟老闆講」"
+        ]
+      },
+      "kind": "cut",
+      "section": "published",
+      "flags": {
+        "proposal_selected": false,
+        "script_approved": false,
+        "cut_authorized": false,
+        "publish_approved": false
+      },
+      "platforms": {
+        "yt": {
+          "label": "YouTube",
+          "published": false,
+          "verification": "unverified",
+          "date": null,
+          "source": "這次立即分享沒有上傳 YouTube。沒有正面的未發證據，維持未核實，不標未發。",
+          "url": null
+        },
+        "fb": {
+          "label": "Facebook",
+          "published": true,
+          "verification": "published",
+          "date": "2026-11-14",
+          "source": "2026-11-14 約 23:01–23:03 台北，立即分享後核實已發到 Facebook。",
+          "url": null
+        },
+        "ig": {
+          "label": "Instagram",
+          "published": true,
+          "verification": "published",
+          "date": "2026-11-14",
+          "source": "2026-11-14 約 23:01–23:03 台北，立即分享後核實已發到 Instagram。",
+          "url": null
+        }
+      },
+      "preview": {
+        "url": "https://drive.google.com/file/d/1-9Sd91QLhQngAphca5O7Bm-rt3ME3k06/view?usp=drivesdk",
+        "artifact_id": "不升我就走_v2_final.mp4",
+        "event_id": "a1v2-preview-20261114"
+      }
+    },
+    "cut:EP251/像我是砲兵就是開砲嗎_orig_qc.mp4": {
+      "id": "cut:EP251/像我是砲兵就是開砲嗎_orig_qc.mp4",
+      "title": "打靶開砲",
+      "ep": "EP251",
+      "episode_note": "EP251 | 15年軍旅，退伍連長轉戰半導體業務年薪百萬 Feat. Jacob",
+      "script_review_status": "none",
+      "script_complete": false,
+      "script_final": false,
+      "artifact": {
+        "id": "像我是砲兵就是開砲嗎_orig_qc.mp4",
+        "label": "像我是砲兵就是開砲嗎_orig_qc.mp4",
+        "bytes": null,
+        "mtime_taipei": null
+      },
+      "media": {
+        "video": null,
+        "video_label": null,
+        "doc": null,
+        "subs": [],
+        "copy": null,
+        "missing": "沒有可公開的預覽網址。不附先前被拒的收緊版。"
+      },
+      "schedule_label": "",
+      "schedule_readonly": true,
+      "historical": null,
+      "hold": null,
+      "related_notes": [
+        "2026-11-14 約 23:01–23:03 台北以立即分享發到 Facebook 與 Instagram，已核實。YouTube 未上傳，維持未核實，不標未發。沒有 Drive 預覽。"
+      ],
+      "cut_file_note": "新成片。只依這次立即分享的發布事實。不附先前被拒的收緊版。",
+      "qc": {
+        "short": {
+          "state": "absent",
+          "pass": false,
+          "identity_match": false,
+          "result_raw": null,
+          "detail": "沒有紀錄"
+        },
+        "extra": {
+          "state": "absent",
+          "pass": false,
+          "identity_match": false,
+          "result_raw": null,
+          "detail": "沒有 qc_extra 台帳"
+        },
+        "ready": false,
+        "block_reason": "已在 Facebook 與 Instagram 發佈。YouTube 未核實。這頁沒有這支的 QC 台帳，不能因此把 qc.ready 打開。",
+        "accepted_warns": []
+      },
+      "kind": "cut",
+      "section": "published",
+      "flags": {
+        "proposal_selected": false,
+        "script_approved": false,
+        "cut_authorized": false,
+        "publish_approved": false
+      },
+      "platforms": {
+        "yt": {
+          "label": "YouTube",
+          "published": false,
+          "verification": "unverified",
+          "date": null,
+          "source": "這次立即分享沒有上傳 YouTube。沒有正面的未發證據，維持未核實，不標未發。",
+          "url": null
+        },
+        "fb": {
+          "label": "Facebook",
+          "published": true,
+          "verification": "published",
+          "date": "2026-11-14",
+          "source": "2026-11-14 約 23:01–23:03 台北，立即分享後核實已發到 Facebook。",
+          "url": null
+        },
+        "ig": {
+          "label": "Instagram",
+          "published": true,
+          "verification": "published",
+          "date": "2026-11-14",
+          "source": "2026-11-14 約 23:01–23:03 台北，立即分享後核實已發到 Instagram。",
+          "url": null
+        }
       }
     }
   },

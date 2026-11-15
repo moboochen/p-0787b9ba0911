@@ -70,13 +70,43 @@ def test_views_and_platforms():
     assert MODEL["items"]["script:C"]["flags"]["script_approved"] is False
     previews = [it for it in items if (it.get("preview") or {}).get("access") == "private_owner_sign_in"]
     assert len(previews) == 14
-    assert all(it["media"]["video_label"] == "開啟Drive審片" and it["media"]["video"].startswith("https://drive.google.com/") for it in previews)
+    assert all(str(it["media"]["video_label"]).startswith("開啟Drive審片") and it["media"]["video"].startswith("https://drive.google.com/") for it in previews)
     assert all(not it["flags"]["publish_approved"] and not it["qc"]["ready"] for it in previews)
     assert "4年升Meta主管" not in json.dumps(MODEL, ensure_ascii=False)
-    oct29 = [it for it in items if it["id"].startswith("cut:") and it["platforms"]["fb"]["published"]]
-    assert len(oct29) == 3
-    assert all(it["platforms"]["ig"]["published"] and not it["platforms"]["yt"]["published"] for it in oct29)
-    assert all(it["section"] == "published" for it in oct29)
+    fb_pub = [it for it in items if it["id"].startswith("cut:") and it["platforms"]["fb"]["published"]]
+    assert len(fb_pub) == 5
+    assert all(it["platforms"]["ig"]["published"] and not it["platforms"]["yt"]["published"] for it in fb_pub)
+    assert all(it["platforms"]["yt"]["verification"] == "unverified" for it in fb_pub)
+    assert all(it["section"] == "published" for it in fb_pub)
+    old = MODEL["items"]["cut:EP220/不升我就走.mp4"]
+    assert old["section"] == "published" and old.get("archived_as_duplicate") is True
+    assert old["archive_reason"] == "已下架，被 v2 取代"
+    assert old["flags"]["publish_approved"] is False and old["qc"]["ready"] is False
+    assert not rv.any_platform_published(old)
+    assert old["platforms"]["fb"]["verification"] == "unverified"
+    assert old["platforms"]["ig"]["verification"] == "unverified"
+    v2 = MODEL["items"]["cut:EP220/不升我就走_v2_final.mp4"]
+    assert v2["section"] == "published"
+    assert v2["artifact"]["id"] != old["artifact"]["id"]
+    assert v2["flags"]["publish_approved"] is False and v2["flags"]["script_approved"] is False
+    assert v2["qc"]["ready"] is False and v2["qc"]["short"]["state"] == "fail"
+    assert "說你不給我這個薪水我就走" in json.dumps(v2["qc"], ensure_ascii=False)
+    assert "對，情勒，就就是情勒" in json.dumps(v2["qc"], ensure_ascii=False)
+    assert "有人會建議說，那你就跟老闆講" in json.dumps(v2["qc"], ensure_ascii=False)
+    assert v2["media"]["video"] == "https://drive.google.com/file/d/1-9Sd91QLhQngAphca5O7Bm-rt3ME3k06/view?usp=drivesdk"
+    assert (v2.get("preview") or {}).get("access") != "private_owner_sign_in"
+    ep251 = MODEL["items"]["cut:EP251/像我是砲兵就是開砲嗎_orig_qc.mp4"]
+    assert ep251["title"] == "打靶開砲" and ep251["section"] == "published"
+    assert ep251["platforms"]["fb"]["published"] and ep251["platforms"]["ig"]["published"]
+    assert ep251["platforms"]["yt"]["verification"] == "unverified"
+    assert not ep251["media"].get("video")
+    assert ep251["flags"]["publish_approved"] is False
+    a8 = MODEL["items"]["cut:EP198/資產五千萬錢自己滾_延長.mp4"]
+    assert a8["section"] == "cut"
+    assert a8["qc"]["ready"] is False and a8["flags"]["publish_approved"] is False
+    assert a8["hold"]["label"] == "不可發佈"
+    assert "不得再當成可發依據" in a8["qc"]["block_reason"]
+    assert not rv.any_platform_published(a8)
     assert sum(1 for it in items if all((it.get("platforms") or {}).get(k, {}).get("published") for k in ("yt", "fb", "ig"))) == 3
     assert all(not it["qc"]["ready"] for it in items)
     assert all(not it["flags"]["publish_approved"] for it in items)
@@ -456,6 +486,90 @@ def test_shelve_does_not_touch_flags_or_unrelated_files():
     assert model["items"]["script"]["section"] == "script"
     for i, flags in before.items():
         assert model["items"][i]["flags"] == flags
+
+
+def test_public_record_cannot_mark_ready(tmp_path: Path):
+    root = tmp_path
+    model = rv.empty_model()
+    item = _base_item()
+    model["items"]["X1"] = item
+    sync.dumpj(sync.paths(root)["model"], model)
+    sync.dumpj(sync.paths(root)["stills"], {})
+    for name in ("applied", "inbox", "results"):
+        sync.write_jsonl(sync.paths(root)[name], [])
+    html = tmp_path / "index.html"
+    event = {
+        "event_id": "qc-public-x1",
+        "type": "QC_completed",
+        "occurred_at": "2026-11-14T23:02:00+08:00",
+        "payload": {
+            "item_id": "X1",
+            "artifact_id": "art-1",
+            "public_record": {
+                "ready": True,
+                "short_state": "fail",
+                "short_detail": "ASR",
+                "block_reason": "不能放行",
+            },
+        },
+    }
+    sync.apply_bundle(root, {"bundle_version": 1, "events": [event]}, html)
+    item = json.loads(sync.paths(root)["model"].read_text())["items"]["X1"]
+    assert item["qc"]["ready"] is False
+    assert item["flags"]["publish_approved"] is False
+    sync.apply_bundle(root, {"bundle_version": 1, "events": [event]}, html)
+    applied = sync.read_jsonl(sync.paths(root)["applied"])
+    assert [r["event_id"] for r in applied].count("qc-public-x1") == 1
+
+
+def test_built_page_tabs():
+    import subprocess
+    script = r"""
+const fs = require("fs");
+const html = fs.readFileSync("Cdj1cq3x3gEFyC5WbNqRdjoU/index.html", "utf8");
+const m = html.match(/<script id="payload" type="application\/json">([\s\S]*?)<\/script>/);
+const payload = m[1];
+const parts = html.split("<script>\n");
+const js = parts[parts.length - 1].split("</script>")[0];
+function el() {
+  return { textContent: "", value: "", dataset: {}, classList: { toggle() {} }, innerHTML: "", addEventListener() {} };
+}
+global.document = {
+  getElementById(id) { return id === "payload" ? { textContent: payload } : el(); },
+  querySelectorAll() { return []; },
+  documentElement: { dataset: {} },
+};
+global.localStorage = { getItem() { return null; }, setItem() {} };
+global.location = { hash: "#published", search: "", href: "" };
+global.history = { replaceState() {} };
+global.navigator = {};
+global.window = global;
+eval(js);
+const ids = window.__review.ids;
+const hidden = window.__review.hiddenIds();
+const tabs = ["new", "script", "approved", "cut", "published", "recon"];
+const oldId = "cut:EP220/不升我就走.mp4";
+const v2 = "cut:EP220/不升我就走_v2_final.mp4";
+const ep = "cut:EP251/像我是砲兵就是開砲嗎_orig_qc.mp4";
+const a8 = "cut:EP198/資產五千萬錢自己滾_延長.mp4";
+const problems = [];
+for (const t of tabs) if (ids(t).includes(oldId)) problems.push("old in " + t);
+if (!hidden.includes(oldId) || hidden.length !== 1) problems.push("hidden " + JSON.stringify(hidden));
+for (const t of tabs) {
+  if (t !== "published" && ids(t).includes(v2)) problems.push("v2 in " + t);
+  if (t !== "published" && ids(t).includes(ep)) problems.push("ep in " + t);
+  if (t !== "cut" && ids(t).includes(a8)) problems.push("a8 in " + t);
+}
+if (!ids("published").includes(v2) || !ids("published").includes(ep)) problems.push("published missing");
+if (!ids("cut").includes(a8)) problems.push("a8 not in cut");
+if (!window.__review.qcBlocks(a8) || !window.__review.qcBlocks(oldId) || !window.__review.qcBlocks(v2)) problems.push("qc ready");
+const rev = html.match(/name="review-revision" content="([0-9a-f]+)"/)[1];
+if (rev !== window.__review.revision) problems.push("revision");
+console.log(JSON.stringify({ ok: problems.length === 0, problems, rev }));
+process.exit(problems.length ? 1 : 0);
+"""
+    proc = subprocess.run(["node", "-e", script], cwd=ROOT, text=True, capture_output=True)
+    assert proc.returncode == 0, proc.stdout + "\n" + proc.stderr
 
 
 def test_deploy_refuses_force_and_main():

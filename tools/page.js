@@ -36,8 +36,13 @@
     if (it.flags && it.flags.script_approved) return true;
     return (it.approved_versions || []).some(function (v) { return v.script_approved; });
   }
+  function takenDownArchive(it) {
+    var label = it.hold && it.hold.label ? String(it.hold.label) : "";
+    return !!(it.archived_as_duplicate && label.indexOf("已下架") >= 0);
+  }
   function pool(tab) {
     return DATA.items.filter(function (it) {
+      if (takenDownArchive(it)) return false;
       if (tab === "published") return inPublished(it);
       if (inPublished(it)) return false;
       if (tab === "approved") return hasApprovedVersion(it);
@@ -192,7 +197,14 @@
     var empty = TAB === "approved"
       ? '<p class="miss">還沒有可顯示的已核准腳本。review_20261026 與 review_EP198_finance_20261027 的原文不在這份資料裡，不能把選片或舊的發佈「可發」填進來。下一份對到文字版本的 JSON 可以補上。</p>'
       : '<p class="miss">這一頁沒有符合的項目。</p>';
-    document.getElementById("list").innerHTML = '<p class="intro">' + intros[TAB] + "</p>" + (body || empty);
+    var hiddenHtml = "";
+    if (TAB === "published") {
+      var hidden = DATA.items.filter(function (it) { return takenDownArchive(it) && show(it, ep, q); });
+      if (hidden.length) {
+        hiddenHtml = '<details class="taken-down"><summary>已下架或被取代（' + hidden.length + '，預設收合，不在主要分頁）</summary>' + hidden.map(card).join("") + "</details>";
+      }
+    }
+    document.getElementById("list").innerHTML = '<p class="intro">' + intros[TAB] + "</p>" + (body || (hiddenHtml ? "" : empty)) + hiddenHtml;
     document.querySelectorAll(".tabs button").forEach(function (b) {
       var n = pool(b.dataset.tab).length;
       b.classList.toggle("on", b.dataset.tab === TAB);
@@ -314,6 +326,8 @@
       return !it || !it.qc || !it.qc.ready;
     },
     poolSize: function (tab) { return pool(tab).length; },
+    ids: function (tab) { return pool(tab).map(function (it) { return it.id; }); },
+    hiddenIds: function () { return DATA.items.filter(takenDownArchive).map(function (it) { return it.id; }); },
     ignoredLegacy: ignored
   };
 })();
