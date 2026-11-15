@@ -1,2 +1,14 @@
 {"event_id": "baseline-ddbccd4bdc313adc", "status": "applied", "effect": {"effect": "baseline_upsert"}}
 {"event_id": "baseline-4c024c3ef6d8ce18", "status": "applied", "effect": {"effect": "baseline_upsert"}}
+{"event_id": "a1v2-artifact-20261114", "status": "applied", "effect": {"effect": "artifact_created", "id": "cut:EP220/不升我就走_v2_final.mp4", "qc_ready": false}}
+{"event_id": "a1v2-qc-public-20261114", "status": "applied", "effect": {"effect": "qc_public_record", "id": "cut:EP220/不升我就走_v2_final.mp4", "ready": false}}
+{"event_id": "a1v2-preview-20261114", "status": "applied", "effect": {"effect": "preview_attached", "id": "cut:EP220/不升我就走_v2_final.mp4"}}
+{"event_id": "a1v2-pub-fb-20261114", "status": "applied", "effect": {"effect": "platform_only", "id": "cut:EP220/不升我就走_v2_final.mp4", "platform": "fb", "unchanged": ["yt", "ig"]}}
+{"event_id": "a1v2-pub-ig-20261114", "status": "applied", "effect": {"effect": "platform_only", "id": "cut:EP220/不升我就走_v2_final.mp4", "platform": "ig", "unchanged": ["yt", "fb"]}}
+{"event_id": "a1v2-pub-yt-20261114", "status": "applied", "effect": {"effect": "platform_only", "id": "cut:EP220/不升我就走_v2_final.mp4", "platform": "yt", "unchanged": ["fb", "ig"]}}
+{"event_id": "ep251-artifact-20261114", "status": "applied", "effect": {"effect": "artifact_created", "id": "cut:EP251/像我是砲兵就是開砲嗎_orig_qc.mp4", "qc_ready": false}}
+{"event_id": "ep251-pub-fb-20261114", "status": "applied", "effect": {"effect": "platform_only", "id": "cut:EP251/像我是砲兵就是開砲嗎_orig_qc.mp4", "platform": "fb", "unchanged": ["yt", "ig"]}}
+{"event_id": "ep251-pub-ig-20261114", "status": "applied", "effect": {"effect": "platform_only", "id": "cut:EP251/像我是砲兵就是開砲嗎_orig_qc.mp4", "platform": "ig", "unchanged": ["yt", "fb"]}}
+{"event_id": "ep251-pub-yt-20261114", "status": "applied", "effect": {"effect": "platform_only", "id": "cut:EP251/像我是砲兵就是開砲嗎_orig_qc.mp4", "platform": "yt", "unchanged": ["fb", "ig"]}}
+{"event_id": "a1-old-takedown-20261114", "status": "applied", "effect": {"effect": "archived_superseded", "id": "cut:EP220/不升我就走.mp4"}}
+{"event_id": "a8-alias-rejected-20261114", "status": "applied", "effect": {"effect": "held_not_publishable", "id": "cut:EP198/資產五千萬錢自己滾_延長.mp4", "section": "cut"}}
