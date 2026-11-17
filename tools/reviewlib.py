@@ -961,16 +961,18 @@ def invariants(model: dict) -> list[str]:
         problems.append("C4 range")
     if any(it["flags"]["publish_approved"] or it["flags"]["cut_authorized"] for it in items):
         problems.append("publish or cut was authorized")
-    if any(it["flags"]["script_approved"] and it.get("section") != "approved" for it in items):
+    if any(it["flags"]["script_approved"] and it.get("section") not in ("approved", "published") for it in items):
         problems.append("script approved outside 已審核")
     new_ids = {it["id"] for it in items if it["section"] == "new"}
     if set(PICK_IDS) & new_ids:
         problems.append("selected proposal still in new")
     script_ids = {it["id"] for it in items if it["section"] == "script"}
-    if not set(PICK_IDS) <= script_ids:
+    # EP220-H7 is the same clip as the published A3 cut, so it leaves 腳本待審.
+    stay_picks = [pid for pid in PICK_IDS if pid != "EP220-H7"]
+    if not set(stay_picks) <= script_ids:
         problems.append("pick ids missing from script review")
     approved = [it for it in items if it["section"] == "approved"]
-    if len(approved) not in (0, 16):
+    if len(approved) not in (0, 12):
         problems.append(f"approved count {len(approved)}")
     for it in approved:
         if not it["flags"]["script_approved"] or it["flags"]["cut_authorized"] or it["flags"]["publish_approved"]:
@@ -986,7 +988,7 @@ def invariants(model: dict) -> list[str]:
         if "4年升Meta主管" in json.dumps(it, ensure_ascii=False):
             problems.append("withheld title leaked")
     fb_ig = [it for it in items if it["id"].startswith("cut:") and it["platforms"]["fb"]["published"] and it["platforms"]["ig"]["published"]]
-    if len(fb_ig) != 5 or any(it["platforms"]["yt"]["published"] or it["platforms"]["yt"].get("verification") != "unverified" for it in fb_ig):
+    if len(fb_ig) != 9 or any(it["platforms"]["yt"]["published"] or it["platforms"]["yt"].get("verification") != "unverified" for it in fb_ig):
         problems.append("fb+ig published platforms")
     oct29_ids = {
         "cut:EP183/伊隆的偏執狂_Chaio.mp4",
@@ -1001,6 +1003,60 @@ def invariants(model: dict) -> list[str]:
         problems.append("oct29 platforms")
     if {it["id"] for it in fb_ig if it["platforms"]["fb"].get("date") == "2026-11-14"} != nov14_ids:
         problems.append("20261114 platforms")
+    nov17 = {
+        "cut:EP198/第一份薪水4萬5.mp4": ["approved-script:A5", "EP198-H5"],
+        "cut:EP220/先找正在擴張的組織.mp4": ["approved-script:A3", "EP220-H7"],
+        "cut:EP198/有F-U_money也沒走.mp4": ["approved-script:A7", "EP198-H2"],
+        "cut:EP198/錯過大漲明年就不投資嗎.mp4": ["approved-script:F2"],
+    }
+    if {it["id"] for it in fb_ig if it["platforms"]["fb"].get("date") == "2026-11-17"} != set(nov17):
+        problems.append("20261117 platforms")
+    for cut_id, companions in nov17.items():
+        cut = model["items"].get(cut_id)
+        if (
+            not cut
+            or cut.get("section") != "published"
+            or cut["flags"].get("publish_approved")
+            or cut.get("qc", {}).get("ready")
+            or not cut["platforms"]["fb"]["published"]
+            or not cut["platforms"]["ig"]["published"]
+            or cut["platforms"]["yt"].get("verification") != "unverified"
+            or cut["platforms"]["yt"].get("published")
+        ):
+            problems.append(cut_id + " publication")
+            continue
+        for cid in companions:
+            other = model["items"].get(cid)
+            if (
+                not other
+                or other.get("section") != "published"
+                or any_platform_published(other)
+                or other["flags"].get("publish_approved")
+            ):
+                problems.append(cid + " still in a review queue")
+    a5 = model["items"].get("cut:EP198/第一份薪水4萬5.mp4")
+    if not a5 or not any("限時動態" in n for n in (a5.get("related_notes") or [])):
+        problems.append("A5 story note")
+    for iid in (
+        "cut:EP198/員工配股拿到就賣.mp4",
+        "cut:EP198/抱十年就會發.mp4",
+        "cut:EP198/長期投資靠穩定收入.mp4",
+        "cut:EP198/投資沒有致勝公式.mp4",
+    ):
+        held = model["items"].get(iid)
+        if not held or held.get("section") != "cut" or any_platform_published(held):
+            problems.append(iid + " must stay in 成片待審")
+    for pid in (
+        "EP220-Q2", "EP220-Q3", "EP220-Q4", "EP220-Q5", "EP220-Q6", "EP220-Q7",
+        "EP220-H1", "EP220-H2", "EP220-H5", "EP198-H7",
+    ):
+        queued = model["items"].get(pid)
+        if not queued or queued.get("section") != "script":
+            problems.append(pid + " queued selection changed")
+    for sid in ("approved-script:F3", "approved-script:F4", "approved-script:F6", "approved-script:F8"):
+        kept = model["items"].get(sid)
+        if not kept or kept.get("section") != "approved":
+            problems.append(sid + " must stay approved")
     old_a1 = model["items"].get("cut:EP220/不升我就走.mp4")
     if (
         not old_a1
@@ -1065,7 +1121,7 @@ def invariants(model: dict) -> list[str]:
         if it.get("section") in ("new", "script", "approved", "cut", "recon") and any_platform_published(it):
             problems.append(it["id"] + " visible on a main tab")
     known = [it for it in items if it["id"].startswith("cut:") and not it["platforms"]["fb"]["published"]]
-    if len(known) != 14:
+    if len(known) != 10:
         problems.append("known unpublished cuts")
     recon = [it for it in items if it["section"] == "recon"]
     if len(recon) != 94:
@@ -1082,6 +1138,31 @@ def empty_model() -> dict:
 
 def upsert_item(model: dict, item: dict) -> None:
     model["items"][item["id"]] = item
+
+
+def _append_note(item: dict, note: str | None) -> None:
+    if not note:
+        return
+    notes = list(item.get("related_notes") or [])
+    if note not in notes:
+        notes.append(note)
+    item["related_notes"] = notes
+
+
+def _retire_same_clip(model: dict, source_id: str, companion_ids, note: str | None) -> list[str]:
+    """Move same-clip review cards to 已發佈. Flags and platform slots stay as they are."""
+    moved = []
+    for cid in companion_ids or []:
+        if cid == source_id:
+            continue
+        other = model["items"].get(cid)
+        if other is None:
+            raise ValueError("same clip item missing " + str(cid))
+        if other.get("section") != "published":
+            other["section"] = "published"
+        _append_note(other, note)
+        moved.append(cid)
+    return moved
 
 
 def apply_mutation(model: dict, event: dict) -> dict:
@@ -1299,7 +1380,17 @@ def apply_mutation(model: dict, event: dict) -> dict:
                 item["section"] = "published"
             elif item.get("section") == "published" and not item.get("archived_as_duplicate"):
                 item["section"] = "cut"
-        return {"effect": "platform_only", "id": item["id"], "platform": platform, "unchanged": [k for k in before if k != platform and before[k] == item["platforms"][k]]}
+        _append_note(item, payload.get("note"))
+        moved = []
+        if any_platform_published(item):
+            moved = _retire_same_clip(model, item["id"], payload.get("same_clip_ids"), payload.get("same_clip_note"))
+        return {
+            "effect": "platform_only",
+            "id": item["id"],
+            "platform": platform,
+            "unchanged": [k for k in before if k != platform and before[k] == item["platforms"][k]],
+            "same_clip": moved,
+        }
     if et == "preview_attached":
         item = model["items"].get(payload.get("item_id"))
         if not item:

@@ -1,0 +1,174 @@
+{
+  "bundle_version": 1,
+  "events": [
+    {
+      "event_id": "a5-pub-fb-20261117",
+      "type": "publication_verified",
+      "occurred_at": "2026-11-17T20:38:00+08:00",
+      "payload": {
+        "item_id": "cut:EP198/第一份薪水4萬5.mp4",
+        "artifact_id": "第一份薪水4萬5_fix3.mp4|7501740|1794600766",
+        "platform": "fb",
+        "published": true,
+        "date": "2026-11-17",
+        "evidence": "2026-11-17 20:38 台北，Meta Business Suite 立即分享後核實已發到 Facebook。",
+        "note": "2026-11-17 20:38 台北另誤發到 Facebook 限時動態。只是註記，不是另一個平台。",
+        "same_clip_ids": ["approved-script:A5", "EP198-H5"],
+        "same_clip_note": "同一支成片已在 Facebook 與 Instagram 發佈，這張卡只留在已發佈。這張卡的平台旗標沒有改。"
+      }
+    },
+    {
+      "event_id": "a5-pub-ig-20261117",
+      "type": "publication_verified",
+      "occurred_at": "2026-11-17T20:38:00+08:00",
+      "payload": {
+        "item_id": "cut:EP198/第一份薪水4萬5.mp4",
+        "artifact_id": "第一份薪水4萬5_fix3.mp4|7501740|1794600766",
+        "platform": "ig",
+        "published": true,
+        "date": "2026-11-17",
+        "evidence": "2026-11-17 20:38 台北，Meta Business Suite 立即分享後核實已發到 Instagram。",
+        "same_clip_ids": ["approved-script:A5", "EP198-H5"],
+        "same_clip_note": "同一支成片已在 Facebook 與 Instagram 發佈，這張卡只留在已發佈。這張卡的平台旗標沒有改。"
+      }
+    },
+    {
+      "event_id": "a5-pub-yt-20261117",
+      "type": "publication_verified",
+      "occurred_at": "2026-11-17T20:38:00+08:00",
+      "payload": {
+        "item_id": "cut:EP198/第一份薪水4萬5.mp4",
+        "artifact_id": "第一份薪水4萬5_fix3.mp4|7501740|1794600766",
+        "platform": "yt",
+        "published": false,
+        "evidence": "這次立即分享沒有上傳 YouTube。沒有正面的未發證據，維持未核實，不標未發。"
+      }
+    },
+    {
+      "event_id": "a3-pub-fb-20261117",
+      "type": "publication_verified",
+      "occurred_at": "2026-11-17T20:41:00+08:00",
+      "payload": {
+        "item_id": "cut:EP220/先找正在擴張的組織.mp4",
+        "artifact_id": "先找正在擴張的組織_fix3.mp4|14090528|1794597915",
+        "platform": "fb",
+        "published": true,
+        "date": "2026-11-17",
+        "evidence": "2026-11-17 20:41 台北，Meta Business Suite 立即分享後核實已發到 Facebook。",
+        "same_clip_ids": ["approved-script:A3", "EP220-H7"],
+        "same_clip_note": "同一支成片已在 Facebook 與 Instagram 發佈，這張卡只留在已發佈。這張卡的平台旗標沒有改。"
+      }
+    },
+    {
+      "event_id": "a3-pub-ig-20261117",
+      "type": "publication_verified",
+      "occurred_at": "2026-11-17T20:41:00+08:00",
+      "payload": {
+        "item_id": "cut:EP220/先找正在擴張的組織.mp4",
+        "artifact_id": "先找正在擴張的組織_fix3.mp4|14090528|1794597915",
+        "platform": "ig",
+        "published": true,
+        "date": "2026-11-17",
+        "evidence": "2026-11-17 20:41 台北，Meta Business Suite 立即分享後核實已發到 Instagram。",
+        "same_clip_ids": ["approved-script:A3", "EP220-H7"],
+        "same_clip_note": "同一支成片已在 Facebook 與 Instagram 發佈，這張卡只留在已發佈。這張卡的平台旗標沒有改。"
+      }
+    },
+    {
+      "event_id": "a3-pub-yt-20261117",
+      "type": "publication_verified",
+      "occurred_at": "2026-11-17T20:41:00+08:00",
+      "payload": {
+        "item_id": "cut:EP220/先找正在擴張的組織.mp4",
+        "artifact_id": "先找正在擴張的組織_fix3.mp4|14090528|1794597915",
+        "platform": "yt",
+        "published": false,
+        "evidence": "這次立即分享沒有上傳 YouTube。沒有正面的未發證據，維持未核實，不標未發。"
+      }
+    },
+    {
+      "event_id": "a7-pub-fb-20261117",
+      "type": "publication_verified",
+      "occurred_at": "2026-11-17T23:09:00+08:00",
+      "payload": {
+        "item_id": "cut:EP198/有F-U_money也沒走.mp4",
+        "artifact_id": "有F-U_money也沒走_fix4.mp4|6544613|1794601570",
+        "platform": "fb",
+        "published": true,
+        "date": "2026-11-17",
+        "evidence": "2026-11-17 23:09 台北，Meta Business Suite 立即分享後核實已發到 Facebook。",
+        "same_clip_ids": ["approved-script:A7", "EP198-H2"],
+        "same_clip_note": "同一支成片已在 Facebook 與 Instagram 發佈，這張卡只留在已發佈。這張卡的平台旗標沒有改。"
+      }
+    },
+    {
+      "event_id": "a7-pub-ig-20261117",
+      "type": "publication_verified",
+      "occurred_at": "2026-11-17T23:09:00+08:00",
+      "payload": {
+        "item_id": "cut:EP198/有F-U_money也沒走.mp4",
+        "artifact_id": "有F-U_money也沒走_fix4.mp4|6544613|1794601570",
+        "platform": "ig",
+        "published": true,
+        "date": "2026-11-17",
+        "evidence": "2026-11-17 23:09 台北，Meta Business Suite 立即分享後核實已發到 Instagram。",
+        "same_clip_ids": ["approved-script:A7", "EP198-H2"],
+        "same_clip_note": "同一支成片已在 Facebook 與 Instagram 發佈，這張卡只留在已發佈。這張卡的平台旗標沒有改。"
+      }
+    },
+    {
+      "event_id": "a7-pub-yt-20261117",
+      "type": "publication_verified",
+      "occurred_at": "2026-11-17T23:09:00+08:00",
+      "payload": {
+        "item_id": "cut:EP198/有F-U_money也沒走.mp4",
+        "artifact_id": "有F-U_money也沒走_fix4.mp4|6544613|1794601570",
+        "platform": "yt",
+        "published": false,
+        "evidence": "這次立即分享沒有上傳 YouTube。沒有正面的未發證據，維持未核實，不標未發。"
+      }
+    },
+    {
+      "event_id": "f2-pub-fb-20261117",
+      "type": "publication_verified",
+      "occurred_at": "2026-11-17T23:12:00+08:00",
+      "payload": {
+        "item_id": "cut:EP198/錯過大漲明年就不投資嗎.mp4",
+        "artifact_id": "錯過大漲明年就不投資嗎_fix4.mp4|10181238|1794604341",
+        "platform": "fb",
+        "published": true,
+        "date": "2026-11-17",
+        "evidence": "2026-11-17 23:12 台北，Meta Business Suite 立即分享後核實已發到 Facebook。",
+        "same_clip_ids": ["approved-script:F2"],
+        "same_clip_note": "同一支成片已在 Facebook 與 Instagram 發佈，這張卡只留在已發佈。這張卡的平台旗標沒有改。"
+      }
+    },
+    {
+      "event_id": "f2-pub-ig-20261117",
+      "type": "publication_verified",
+      "occurred_at": "2026-11-17T23:12:00+08:00",
+      "payload": {
+        "item_id": "cut:EP198/錯過大漲明年就不投資嗎.mp4",
+        "artifact_id": "錯過大漲明年就不投資嗎_fix4.mp4|10181238|1794604341",
+        "platform": "ig",
+        "published": true,
+        "date": "2026-11-17",
+        "evidence": "2026-11-17 23:12 台北，Meta Business Suite 立即分享後核實已發到 Instagram。",
+        "same_clip_ids": ["approved-script:F2"],
+        "same_clip_note": "同一支成片已在 Facebook 與 Instagram 發佈，這張卡只留在已發佈。這張卡的平台旗標沒有改。"
+      }
+    },
+    {
+      "event_id": "f2-pub-yt-20261117",
+      "type": "publication_verified",
+      "occurred_at": "2026-11-17T23:12:00+08:00",
+      "payload": {
+        "item_id": "cut:EP198/錯過大漲明年就不投資嗎.mp4",
+        "artifact_id": "錯過大漲明年就不投資嗎_fix4.mp4|10181238|1794604341",
+        "platform": "yt",
+        "published": false,
+        "evidence": "這次立即分享沒有上傳 YouTube。沒有正面的未發證據，維持未核實，不標未發。"
+      }
+    }
+  ]
+}

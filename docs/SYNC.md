@@ -58,6 +58,6 @@ python3 tools/sync_site.py import-safe --file /path/to/safe_site_import.json
 - `script_approved` 只核准 payload 裡那一份文字。文字不同就分開保留舊的已核准版，目前這份維持待審。
 - 檔案 mtime 不合只讓 QC 失效，不取消已經核准的那一版腳本。
 - `preview_attached` 只接受對到 `artifact_id` 的 https Drive / YouTube 連結。不合就不掛預覽，也不因此放行。
-- `publication_verified` 只改指名的一個平台。沒有正面「未發」證據時，YouTube 顯示未核實，不顯示未發。
+- `publication_verified` 只改指名的一個平台。沒有正面「未發」證據時，YouTube 顯示未核實，不顯示未發。`note` 只加在這張卡上，不是新平台。若這一支已經有任一平台發佈，`same_clip_ids` 只把那些同一支的提案或已核准腳本改到已發佈，不改它們的平台旗標與核准旗標。
 - `artifact_archived` 只處理指名的舊檔：標成已下架或被取代，`publish_approved` 維持否，目前平台不留成已發。頁面預設收合，不進新提案、腳本待審、已審核、成片待審。
 - `hold_not_publishable` 只把指名成片標成不可發佈（`qc.ready` 否、`publish_approved` 否）。先前的 QC 通過不得再當成可發依據。

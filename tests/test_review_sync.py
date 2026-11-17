@@ -62,10 +62,11 @@ def test_views_and_platforms():
     items = list(MODEL["items"].values())
     new = {it["id"] for it in items if it["section"] == "new"}
     script = {it["id"] for it in items if it["section"] == "script"}
-    assert len(new) == 48 and not (set(rv.PICK_IDS) & new)
-    assert set(rv.PICK_IDS) <= script
+    assert len(new) == 46 and not (set(rv.PICK_IDS) & new)
+    assert {pid for pid in rv.PICK_IDS if pid != "EP220-H7"} <= script
+    assert MODEL["items"]["EP220-H7"]["section"] == "published"
     approved = [it for it in items if it["section"] == "approved"]
-    assert len(approved) == 16
+    assert len(approved) == 12
     assert all(it["flags"]["script_approved"] and not it["flags"]["publish_approved"] and not it["flags"]["cut_authorized"] for it in approved)
     assert MODEL["items"]["script:C"]["flags"]["script_approved"] is False
     previews = [it for it in items if (it.get("preview") or {}).get("access") == "private_owner_sign_in"]
@@ -74,7 +75,7 @@ def test_views_and_platforms():
     assert all(not it["flags"]["publish_approved"] and not it["qc"]["ready"] for it in previews)
     assert "4年升Meta主管" not in json.dumps(MODEL, ensure_ascii=False)
     fb_pub = [it for it in items if it["id"].startswith("cut:") and it["platforms"]["fb"]["published"]]
-    assert len(fb_pub) == 5
+    assert len(fb_pub) == 9
     assert all(it["platforms"]["ig"]["published"] and not it["platforms"]["yt"]["published"] for it in fb_pub)
     assert all(it["platforms"]["yt"]["verification"] == "unverified" for it in fb_pub)
     assert all(it["section"] == "published" for it in fb_pub)
@@ -413,6 +414,87 @@ def test_preview_requires_matching_artifact_and_https(tmp_path: Path):
     assert item["flags"]["publish_approved"] is False
 
 
+def test_publication_retires_same_clip_without_changing_flags(tmp_path: Path):
+    root = tmp_path
+    model = rv.empty_model()
+    cut = _base_item()
+    script = {
+        "id": "approved-script:A5",
+        "kind": "script",
+        "section": "approved",
+        "title": "腳本",
+        "ep": "EP198",
+        "flags": rv.flags(selected=True, script=True),
+        "platforms": rv.empty_platforms(),
+        "qc": rv.not_run_qc("script"),
+        "artifact": {"id": "script-a5", "label": "a5"},
+        "sentences": [],
+    }
+    proposal = {
+        "id": "EP198-H5",
+        "kind": "proposal",
+        "section": "new",
+        "title": "提案",
+        "ep": "EP198",
+        "flags": rv.flags(),
+        "platforms": rv.empty_platforms(),
+        "qc": rv.not_run_qc("proposal"),
+        "artifact": {"id": "proposal-h5", "label": "h5"},
+    }
+    model["items"] = {"X1": cut, script["id"]: script, proposal["id"]: proposal}
+    sync.dumpj(sync.paths(root)["model"], model)
+    sync.dumpj(sync.paths(root)["stills"], {})
+    for name in ("applied", "inbox", "results"):
+        sync.write_jsonl(sync.paths(root)[name], [])
+    html = tmp_path / "index.html"
+    note = "同一支成片已在 Facebook 與 Instagram 發佈，這張卡只留在已發佈。這張卡的平台旗標沒有改。"
+    fb = {
+        "event_id": "pub-fb-same-clip",
+        "type": "publication_verified",
+        "occurred_at": "2026-11-17T20:38:00+08:00",
+        "payload": {
+            "item_id": "X1",
+            "platform": "fb",
+            "published": True,
+            "date": "2026-11-17",
+            "evidence": "立即分享",
+            "note": "另誤發到 Facebook 限時動態。只是註記，不是另一個平台。",
+            "same_clip_ids": [script["id"], proposal["id"]],
+            "same_clip_note": note,
+        },
+    }
+    yt = {
+        "event_id": "pub-yt-same-clip",
+        "type": "publication_verified",
+        "occurred_at": "2026-11-17T20:38:00+08:00",
+        "payload": {
+            "item_id": "X1",
+            "platform": "yt",
+            "published": False,
+            "evidence": "沒有上傳 YouTube。維持未核實，不標未發。",
+        },
+    }
+    status = sync.apply_bundle(root, {"bundle_version": 1, "events": [fb, yt]}, html)
+    assert status["error"] is None
+    items = json.loads(sync.paths(root)["model"].read_text())["items"]
+    assert items["X1"]["section"] == "published"
+    assert items["X1"]["platforms"]["fb"]["published"] is True
+    assert items["X1"]["platforms"]["yt"]["published"] is False
+    assert items["X1"]["platforms"]["yt"]["verification"] == "unverified"
+    assert items["X1"]["flags"]["publish_approved"] is False
+    assert any("限時動態" in n for n in items["X1"]["related_notes"])
+    for iid, flags in ((script["id"], script["flags"]), (proposal["id"], proposal["flags"])):
+        assert items[iid]["section"] == "published"
+        assert items[iid]["flags"] == flags
+        assert not rv.any_platform_published(items[iid])
+        assert items[iid]["platforms"]["yt"]["verification"] == "unverified"
+        assert note in items[iid]["related_notes"]
+    sync.apply_bundle(root, {"bundle_version": 1, "events": [fb, yt]}, html)
+    applied = sync.read_jsonl(sync.paths(root)["applied"])
+    assert [r["event_id"] for r in applied].count("pub-fb-same-clip") == 1
+    assert items["X1"]["related_notes"].count("另誤發到 Facebook 限時動態。只是註記，不是另一個平台。") == 1
+
+
 def test_build_does_not_mark_deployed(tmp_path: Path):
     root = tmp_path
     model = rv.empty_model()
@@ -552,6 +634,27 @@ const oldId = "cut:EP220/不升我就走.mp4";
 const v2 = "cut:EP220/不升我就走_v2_final.mp4";
 const ep = "cut:EP251/像我是砲兵就是開砲嗎_orig_qc.mp4";
 const a8 = "cut:EP198/資產五千萬錢自己滾_延長.mp4";
+const publishedOnly = [
+  "cut:EP198/第一份薪水4萬5.mp4",
+  "cut:EP220/先找正在擴張的組織.mp4",
+  "cut:EP198/有F-U_money也沒走.mp4",
+  "cut:EP198/錯過大漲明年就不投資嗎.mp4",
+  "approved-script:A5",
+  "approved-script:A3",
+  "approved-script:A7",
+  "approved-script:F2",
+  "EP198-H5",
+  "EP198-H2",
+  "EP220-H7",
+];
+const stayCut = [
+  "cut:EP198/員工配股拿到就賣.mp4",
+  "cut:EP198/抱十年就會發.mp4",
+  "cut:EP198/長期投資靠穩定收入.mp4",
+  "cut:EP198/投資沒有致勝公式.mp4",
+  a8,
+];
+const stayScript = ["EP220-Q2","EP220-Q3","EP220-Q4","EP220-Q5","EP220-Q6","EP220-Q7","EP220-H1","EP220-H2","EP220-H5","EP198-H7"];
 const problems = [];
 for (const t of tabs) if (ids(t).includes(oldId)) problems.push("old in " + t);
 if (!hidden.includes(oldId) || hidden.length !== 1) problems.push("hidden " + JSON.stringify(hidden));
@@ -559,8 +662,20 @@ for (const t of tabs) {
   if (t !== "published" && ids(t).includes(v2)) problems.push("v2 in " + t);
   if (t !== "published" && ids(t).includes(ep)) problems.push("ep in " + t);
   if (t !== "cut" && ids(t).includes(a8)) problems.push("a8 in " + t);
+  for (const id of publishedOnly) {
+    if (t !== "published" && ids(t).includes(id)) problems.push(id + " in " + t);
+  }
+  for (const id of stayCut) {
+    if (t !== "cut" && ids(t).includes(id)) problems.push(id + " left cut via " + t);
+  }
+  for (const id of stayScript) {
+    if (t !== "script" && ids(t).includes(id)) problems.push(id + " left script via " + t);
+  }
 }
 if (!ids("published").includes(v2) || !ids("published").includes(ep)) problems.push("published missing");
+for (const id of publishedOnly) if (!ids("published").includes(id)) problems.push("published missing " + id);
+for (const id of stayCut) if (!ids("cut").includes(id)) problems.push("cut missing " + id);
+for (const id of stayScript) if (!ids("script").includes(id)) problems.push("script missing " + id);
 if (!ids("cut").includes(a8)) problems.push("a8 not in cut");
 if (!window.__review.qcBlocks(a8) || !window.__review.qcBlocks(oldId) || !window.__review.qcBlocks(v2)) problems.push("qc ready");
 const rev = html.match(/name="review-revision" content="([0-9a-f]+)"/)[1];

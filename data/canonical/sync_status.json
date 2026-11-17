@@ -1,10 +1,10 @@
 {
-  "canonical_revision": "f77d081d0fc4383da382d46162c0253b41f8e8891da22924a077c4e5bd23275f",
-  "built_revision": "f77d081d0fc4383da382d46162c0253b41f8e8891da22924a077c4e5bd23275f",
+  "canonical_revision": "4159d1780310148c2e9070bab8cee8133917bd246ada24163a6f72fdcabdd159",
+  "built_revision": "4159d1780310148c2e9070bab8cee8133917bd246ada24163a6f72fdcabdd159",
   "last_successful_sync": null,
   "pending": {
-    "revision": "f77d081d0fc4383da382d46162c0253b41f8e8891da22924a077c4e5bd23275f",
-    "reason": "A1 v2 與 EP251 已發佈、舊 A1 已下架、A8 不可發佈已寫入並建頁。公開網址尚未驗證。這包取代 PR #4，不合併 PR #4。"
+    "revision": "4159d1780310148c2e9070bab8cee8133917bd246ada24163a6f72fdcabdd159",
+    "reason": "A5、A3、A7、F2 已在 Facebook 與 Instagram 發佈並建頁。YouTube 未核實。同一支的已核准腳本與對應提案只留在已發佈。公開網址尚未驗證。這包包含 PR #5，取代 #5 與 #4，不合併它們。"
   },
   "error": null,
   "outbox": [
@@ -46,16 +46,34 @@
         "a8-alias-rejected-20261114"
       ],
       "verified": false
+    },
+    {
+      "revision": "4159d1780310148c2e9070bab8cee8133917bd246ada24163a6f72fdcabdd159",
+      "event_ids": [
+        "a5-pub-fb-20261117",
+        "a5-pub-ig-20261117",
+        "a5-pub-yt-20261117",
+        "a3-pub-fb-20261117",
+        "a3-pub-ig-20261117",
+        "a3-pub-yt-20261117",
+        "a7-pub-fb-20261117",
+        "a7-pub-ig-20261117",
+        "a7-pub-yt-20261117",
+        "f2-pub-fb-20261117",
+        "f2-pub-ig-20261117",
+        "f2-pub-yt-20261117"
+      ],
+      "verified": false
     }
   ],
   "stages": {
     "persisted": {
-      "at": "2026-11-16T01:07:25+08:00",
-      "revision": "f77d081d0fc4383da382d46162c0253b41f8e8891da22924a077c4e5bd23275f"
+      "at": "2026-11-18T01:13:08+08:00",
+      "revision": "4159d1780310148c2e9070bab8cee8133917bd246ada24163a6f72fdcabdd159"
     },
     "built": {
-      "at": "2026-11-16T01:07:25+08:00",
-      "revision": "f77d081d0fc4383da382d46162c0253b41f8e8891da22924a077c4e5bd23275f"
+      "at": "2026-11-18T01:13:08+08:00",
+      "revision": "4159d1780310148c2e9070bab8cee8133917bd246ada24163a6f72fdcabdd159"
     },
     "pushed_branch": null,
     "pull_request": null,

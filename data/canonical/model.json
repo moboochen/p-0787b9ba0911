@@ -7470,7 +7470,7 @@
     "cut:EP198/有F-U_money也沒走.mp4": {
       "id": "cut:EP198/有F-U_money也沒走.mp4",
       "kind": "cut",
-      "section": "cut",
+      "section": "published",
       "ep": "EP198",
       "title": "有F-U_money也沒走",
       "flags": {
@@ -7488,23 +7488,23 @@
           "published": false,
           "verification": "unverified",
           "date": null,
-          "source": null,
+          "source": "這次立即分享沒有上傳 YouTube。沒有正面的未發證據，維持未核實，不標未發。",
           "url": null
         },
         "fb": {
           "label": "Facebook",
-          "published": false,
-          "verification": "unverified",
-          "date": null,
-          "source": null,
+          "published": true,
+          "verification": "published",
+          "date": "2026-11-17",
+          "source": "2026-11-17 23:09 台北，Meta Business Suite 立即分享後核實已發到 Facebook。",
           "url": null
         },
         "ig": {
           "label": "Instagram",
-          "published": false,
-          "verification": "unverified",
-          "date": null,
-          "source": null,
+          "published": true,
+          "verification": "published",
+          "date": "2026-11-17",
+          "source": "2026-11-17 23:09 台北，Meta Business Suite 立即分享後核實已發到 Instagram。",
           "url": null
         }
       },
@@ -7925,7 +7925,7 @@
     "cut:EP198/第一份薪水4萬5.mp4": {
       "id": "cut:EP198/第一份薪水4萬5.mp4",
       "kind": "cut",
-      "section": "cut",
+      "section": "published",
       "ep": "EP198",
       "title": "第一份薪水4萬5",
       "flags": {
@@ -7943,23 +7943,23 @@
           "published": false,
           "verification": "unverified",
           "date": null,
-          "source": null,
+          "source": "這次立即分享沒有上傳 YouTube。沒有正面的未發證據，維持未核實，不標未發。",
           "url": null
         },
         "fb": {
           "label": "Facebook",
-          "published": false,
-          "verification": "unverified",
-          "date": null,
-          "source": null,
+          "published": true,
+          "verification": "published",
+          "date": "2026-11-17",
+          "source": "2026-11-17 20:38 台北，Meta Business Suite 立即分享後核實已發到 Facebook。",
           "url": null
         },
         "ig": {
           "label": "Instagram",
-          "published": false,
-          "verification": "unverified",
-          "date": null,
-          "source": null,
+          "published": true,
+          "verification": "published",
+          "date": "2026-11-17",
+          "source": "2026-11-17 20:38 台北，Meta Business Suite 立即分享後核實已發到 Instagram。",
           "url": null
         }
       },
@@ -8117,7 +8117,9 @@
         }
       ],
       "still_id": null,
-      "related_notes": [],
+      "related_notes": [
+        "2026-11-17 20:38 台北另誤發到 Facebook 限時動態。只是註記，不是另一個平台。"
+      ],
       "cut_file_note": "這是 2026-11-14 步驟 2 的現檔新身份。舊官方成片未被覆蓋。",
       "preview": {
         "access": "private_owner_sign_in",
@@ -8626,7 +8628,7 @@
     "cut:EP198/錯過大漲明年就不投資嗎.mp4": {
       "id": "cut:EP198/錯過大漲明年就不投資嗎.mp4",
       "kind": "cut",
-      "section": "cut",
+      "section": "published",
       "ep": "EP198",
       "title": "錯過大漲明年就不投資嗎",
       "flags": {
@@ -8644,23 +8646,23 @@
           "published": false,
           "verification": "unverified",
           "date": null,
-          "source": null,
+          "source": "這次立即分享沒有上傳 YouTube。沒有正面的未發證據，維持未核實，不標未發。",
           "url": null
         },
         "fb": {
           "label": "Facebook",
-          "published": false,
-          "verification": "unverified",
-          "date": null,
-          "source": null,
+          "published": true,
+          "verification": "published",
+          "date": "2026-11-17",
+          "source": "2026-11-17 23:12 台北，Meta Business Suite 立即分享後核實已發到 Facebook。",
           "url": null
         },
         "ig": {
           "label": "Instagram",
-          "published": false,
-          "verification": "unverified",
-          "date": null,
-          "source": null,
+          "published": true,
+          "verification": "published",
+          "date": "2026-11-17",
+          "source": "2026-11-17 23:12 台北，Meta Business Suite 立即分享後核實已發到 Instagram。",
           "url": null
         }
       },
@@ -9382,7 +9384,7 @@
     "cut:EP220/先找正在擴張的組織.mp4": {
       "id": "cut:EP220/先找正在擴張的組織.mp4",
       "kind": "cut",
-      "section": "cut",
+      "section": "published",
       "ep": "EP220",
       "title": "先找正在擴張的組織",
       "flags": {
@@ -9400,23 +9402,23 @@
           "published": false,
           "verification": "unverified",
           "date": null,
-          "source": null,
+          "source": "這次立即分享沒有上傳 YouTube。沒有正面的未發證據，維持未核實，不標未發。",
           "url": null
         },
         "fb": {
           "label": "Facebook",
-          "published": false,
-          "verification": "unverified",
-          "date": null,
-          "source": null,
+          "published": true,
+          "verification": "published",
+          "date": "2026-11-17",
+          "source": "2026-11-17 20:41 台北，Meta Business Suite 立即分享後核實已發到 Facebook。",
           "url": null
         },
         "ig": {
           "label": "Instagram",
-          "published": false,
-          "verification": "unverified",
-          "date": null,
-          "source": null,
+          "published": true,
+          "verification": "published",
+          "date": "2026-11-17",
+          "source": "2026-11-17 20:41 台北，Meta Business Suite 立即分享後核實已發到 Instagram。",
           "url": null
         }
       },
@@ -21019,7 +21021,7 @@
     "EP220-H7": {
       "id": "EP220-H7",
       "kind": "proposal",
-      "section": "script",
+      "section": "published",
       "ep": "EP220",
       "episode_title": "外商科技業升遷底層邏輯",
       "title": "想升遷？先找正在擴張的組織",
@@ -21099,7 +21101,8 @@
       },
       "still_id": null,
       "related_notes": [
-        "標題裡看得到成片檔名「EP220/先找正在擴張的組織.mp4」。只是對照，不是同一張核准；YouTube 也沒有因此標成已發。"
+        "標題裡看得到成片檔名「EP220/先找正在擴張的組織.mp4」。只是對照，不是同一張核准；YouTube 也沒有因此標成已發。",
+        "同一支成片已在 Facebook 與 Instagram 發佈，這張卡只留在已發佈。這張卡的平台旗標沒有改。"
       ],
       "selection_note": "2026-11-09 02:18 選片信只授權選這段，不是腳本核准、不是開剪、不是發佈。完整逐句腳本還沒有附上。"
     },
@@ -21871,7 +21874,7 @@
     "EP198-H2": {
       "id": "EP198-H2",
       "kind": "proposal",
-      "section": "new",
+      "section": "published",
       "ep": "EP198",
       "episode_title": "科技業累積到美金三百萬的心得 Feat. 抹布Moboo",
       "title": "有了 F-U money，隨時可以拍桌閃人，但我沒有走",
@@ -21950,7 +21953,9 @@
         "missing": null
       },
       "still_id": null,
-      "related_notes": [],
+      "related_notes": [
+        "同一支成片已在 Facebook 與 Instagram 發佈，這張卡只留在已發佈。這張卡的平台旗標沒有改。"
+      ],
       "selection_note": ""
     },
     "EP198-H3": {
@@ -22126,7 +22131,7 @@
     "EP198-H5": {
       "id": "EP198-H5",
       "kind": "proposal",
-      "section": "new",
+      "section": "published",
       "ep": "EP198",
       "episode_title": "科技業累積到美金三百萬的心得 Feat. 抹布Moboo",
       "title": "第一份薪水 4 萬 5，我存到第一個 100 萬花了 3 年半",
@@ -22206,7 +22211,8 @@
       },
       "still_id": null,
       "related_notes": [
-        "標題裡看得到成片檔名「EP198/第一份薪水4萬5.mp4」。只是對照，不是同一張核准；YouTube 也沒有因此標成已發。"
+        "標題裡看得到成片檔名「EP198/第一份薪水4萬5.mp4」。只是對照，不是同一張核准；YouTube 也沒有因此標成已發。",
+        "同一支成片已在 Facebook 與 Instagram 發佈，這張卡只留在已發佈。這張卡的平台旗標沒有改。"
       ],
       "selection_note": ""
     },
@@ -26861,7 +26867,7 @@
     "approved-script:A3": {
       "id": "approved-script:A3",
       "kind": "script",
-      "section": "approved",
+      "section": "published",
       "ep": "EP220",
       "title": "想升遷？先找正在擴張的組織",
       "flags": {
@@ -27233,7 +27239,9 @@
       },
       "withheld_label": "需私下審核：腳本句 1。未放上公開頁，也不從缺漏還原。",
       "selection_note": "核准只涵蓋這一版文字，用來開剪。現檔若文字或檔案時間不同，沒有繼承這份核准，也不能發佈。",
-      "related_notes": []
+      "related_notes": [
+        "同一支成片已在 Facebook 與 Instagram 發佈，這張卡只留在已發佈。這張卡的平台旗標沒有改。"
+      ]
     },
     "approved-script:A4": {
       "id": "approved-script:A4",
@@ -27667,7 +27675,7 @@
     "approved-script:A5": {
       "id": "approved-script:A5",
       "kind": "script",
-      "section": "approved",
+      "section": "published",
       "ep": "EP198",
       "title": "第一份薪水 4 萬 5，存到第一個 100 萬花了 3 年半",
       "flags": {
@@ -28091,12 +28099,14 @@
       },
       "withheld_label": null,
       "selection_note": "核准只涵蓋這一版文字，用來開剪。現檔若文字或檔案時間不同，沒有繼承這份核准，也不能發佈。",
-      "related_notes": []
+      "related_notes": [
+        "同一支成片已在 Facebook 與 Instagram 發佈，這張卡只留在已發佈。這張卡的平台旗標沒有改。"
+      ]
     },
     "approved-script:A7": {
       "id": "approved-script:A7",
       "kind": "script",
-      "section": "approved",
+      "section": "published",
       "ep": "EP198",
       "title": "有了 F-U money，隨時可以拍桌閃人，但我沒有走",
       "flags": {
@@ -28416,7 +28426,9 @@
       },
       "withheld_label": "需私下審核：腳本句 1。未放上公開頁，也不從缺漏還原。",
       "selection_note": "核准只涵蓋這一版文字，用來開剪。現檔若文字或檔案時間不同，沒有繼承這份核准，也不能發佈。",
-      "related_notes": []
+      "related_notes": [
+        "同一支成片已在 Facebook 與 Instagram 發佈，這張卡只留在已發佈。這張卡的平台旗標沒有改。"
+      ]
     },
     "approved-script:A8": {
       "id": "approved-script:A8",
@@ -29864,7 +29876,7 @@
     "approved-script:F2": {
       "id": "approved-script:F2",
       "kind": "script",
-      "section": "approved",
+      "section": "published",
       "ep": "EP198",
       "title": "今年錯過大漲，明年就不投資了嗎？",
       "flags": {
@@ -30366,7 +30378,9 @@
       },
       "withheld_label": null,
       "selection_note": "核准只涵蓋這一版文字，用來開剪。現檔若文字或檔案時間不同，沒有繼承這份核准，也不能發佈。",
-      "related_notes": []
+      "related_notes": [
+        "同一支成片已在 Facebook 與 Instagram 發佈，這張卡只留在已發佈。這張卡的平台旗標沒有改。"
+      ]
     },
     "approved-script:F3": {
       "id": "approved-script:F3",
