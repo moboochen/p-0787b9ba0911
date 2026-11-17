@@ -1,10 +1,10 @@
 {
-  "canonical_revision": "b641e3cdd19c84aefa28c5bb2256c62b87875cf6482141dbcb6a54c7f1e83952",
-  "built_revision": "b641e3cdd19c84aefa28c5bb2256c62b87875cf6482141dbcb6a54c7f1e83952",
+  "canonical_revision": "4159d1780310148c2e9070bab8cee8133917bd246ada24163a6f72fdcabdd159",
+  "built_revision": "4159d1780310148c2e9070bab8cee8133917bd246ada24163a6f72fdcabdd159",
   "last_successful_sync": null,
   "pending": {
-    "revision": "b641e3cdd19c84aefa28c5bb2256c62b87875cf6482141dbcb6a54c7f1e83952",
-    "reason": "PR #3 已開，尚未合併，公開網址尚未驗證"
+    "revision": "4159d1780310148c2e9070bab8cee8133917bd246ada24163a6f72fdcabdd159",
+    "reason": "A5、A3、A7、F2 已在 Facebook 與 Instagram 發佈並建頁。YouTube 未核實。同一支的已核准腳本與對應提案只留在已發佈。公開網址尚未驗證。這包包含 PR #5，取代 #5 與 #4，不合併它們。"
   },
   "error": null,
   "outbox": [
@@ -28,29 +28,55 @@
         "safe-import"
       ],
       "verified": false
+    },
+    {
+      "revision": "f77d081d0fc4383da382d46162c0253b41f8e8891da22924a077c4e5bd23275f",
+      "event_ids": [
+        "a1v2-artifact-20261114",
+        "a1v2-qc-public-20261114",
+        "a1v2-preview-20261114",
+        "a1v2-pub-fb-20261114",
+        "a1v2-pub-ig-20261114",
+        "a1v2-pub-yt-20261114",
+        "ep251-artifact-20261114",
+        "ep251-pub-fb-20261114",
+        "ep251-pub-ig-20261114",
+        "ep251-pub-yt-20261114",
+        "a1-old-takedown-20261114",
+        "a8-alias-rejected-20261114"
+      ],
+      "verified": false
+    },
+    {
+      "revision": "4159d1780310148c2e9070bab8cee8133917bd246ada24163a6f72fdcabdd159",
+      "event_ids": [
+        "a5-pub-fb-20261117",
+        "a5-pub-ig-20261117",
+        "a5-pub-yt-20261117",
+        "a3-pub-fb-20261117",
+        "a3-pub-ig-20261117",
+        "a3-pub-yt-20261117",
+        "a7-pub-fb-20261117",
+        "a7-pub-ig-20261117",
+        "a7-pub-yt-20261117",
+        "f2-pub-fb-20261117",
+        "f2-pub-ig-20261117",
+        "f2-pub-yt-20261117"
+      ],
+      "verified": false
     }
   ],
   "stages": {
     "persisted": {
-      "at": "2026-11-14T06:58:00+08:00",
-      "revision": "b641e3cdd19c84aefa28c5bb2256c62b87875cf6482141dbcb6a54c7f1e83952",
-      "event": "approved16-step2-qc-20261114"
+      "at": "2026-11-18T01:13:08+08:00",
+      "revision": "4159d1780310148c2e9070bab8cee8133917bd246ada24163a6f72fdcabdd159"
     },
     "built": {
-      "at": "2026-11-14T06:58:00+08:00",
-      "revision": "b641e3cdd19c84aefa28c5bb2256c62b87875cf6482141dbcb6a54c7f1e83952"
+      "at": "2026-11-18T01:13:08+08:00",
+      "revision": "4159d1780310148c2e9070bab8cee8133917bd246ada24163a6f72fdcabdd159"
     },
-    "pushed_branch": {
-      "at": "2026-11-14T06:59:18+08:00",
-      "revision": "b641e3cdd19c84aefa28c5bb2256c62b87875cf6482141dbcb6a54c7f1e83952",
-      "branch": "cursor/approved16-step2-qc-20261114"
-    },
-    "pull_request": {
-      "at": "2026-11-14T06:59:18+08:00",
-      "revision": "b641e3cdd19c84aefa28c5bb2256c62b87875cf6482141dbcb6a54c7f1e83952",
-      "url": "https://github.com/moboochen/p-0787b9ba0911/pull/3",
-      "number": 3
-    },
+    "pushed_branch": null,
+    "pull_request": null,
     "merged": null,
     "deployed": null,
     "verified": null

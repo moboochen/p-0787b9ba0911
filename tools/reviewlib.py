@@ -961,16 +961,18 @@ def invariants(model: dict) -> list[str]:
         problems.append("C4 range")
     if any(it["flags"]["publish_approved"] or it["flags"]["cut_authorized"] for it in items):
         problems.append("publish or cut was authorized")
-    if any(it["flags"]["script_approved"] and it.get("section") != "approved" for it in items):
+    if any(it["flags"]["script_approved"] and it.get("section") not in ("approved", "published") for it in items):
         problems.append("script approved outside 已審核")
     new_ids = {it["id"] for it in items if it["section"] == "new"}
     if set(PICK_IDS) & new_ids:
         problems.append("selected proposal still in new")
     script_ids = {it["id"] for it in items if it["section"] == "script"}
-    if not set(PICK_IDS) <= script_ids:
+    # EP220-H7 is the same clip as the published A3 cut, so it leaves 腳本待審.
+    stay_picks = [pid for pid in PICK_IDS if pid != "EP220-H7"]
+    if not set(stay_picks) <= script_ids:
         problems.append("pick ids missing from script review")
     approved = [it for it in items if it["section"] == "approved"]
-    if len(approved) not in (0, 16):
+    if len(approved) not in (0, 12):
         problems.append(f"approved count {len(approved)}")
     for it in approved:
         if not it["flags"]["script_approved"] or it["flags"]["cut_authorized"] or it["flags"]["publish_approved"]:
@@ -985,9 +987,122 @@ def invariants(model: dict) -> list[str]:
             problems.append(it["id"] + " preview implied release")
         if "4年升Meta主管" in json.dumps(it, ensure_ascii=False):
             problems.append("withheld title leaked")
-    oct29 = [it for it in items if it["id"].startswith("cut:") and it["platforms"]["fb"]["published"] and it["platforms"]["ig"]["published"]]
-    if len(oct29) != 3 or any(it["platforms"]["yt"]["published"] or it["platforms"]["yt"].get("verification") != "unverified" for it in oct29):
+    fb_ig = [it for it in items if it["id"].startswith("cut:") and it["platforms"]["fb"]["published"] and it["platforms"]["ig"]["published"]]
+    if len(fb_ig) != 9 or any(it["platforms"]["yt"]["published"] or it["platforms"]["yt"].get("verification") != "unverified" for it in fb_ig):
+        problems.append("fb+ig published platforms")
+    oct29_ids = {
+        "cut:EP183/伊隆的偏執狂_Chaio.mp4",
+        "cut:EP198/不知道買哪支就買大盤.mp4",
+        "cut:EP220/選對部門比努力重要.mp4",
+    }
+    nov14_ids = {
+        "cut:EP220/不升我就走_v2_final.mp4",
+        "cut:EP251/像我是砲兵就是開砲嗎_orig_qc.mp4",
+    }
+    if {it["id"] for it in fb_ig if it["platforms"]["fb"].get("date") == "2026-10-29"} != oct29_ids:
         problems.append("oct29 platforms")
+    if {it["id"] for it in fb_ig if it["platforms"]["fb"].get("date") == "2026-11-14"} != nov14_ids:
+        problems.append("20261114 platforms")
+    nov17 = {
+        "cut:EP198/第一份薪水4萬5.mp4": ["approved-script:A5", "EP198-H5"],
+        "cut:EP220/先找正在擴張的組織.mp4": ["approved-script:A3", "EP220-H7"],
+        "cut:EP198/有F-U_money也沒走.mp4": ["approved-script:A7", "EP198-H2"],
+        "cut:EP198/錯過大漲明年就不投資嗎.mp4": ["approved-script:F2"],
+    }
+    if {it["id"] for it in fb_ig if it["platforms"]["fb"].get("date") == "2026-11-17"} != set(nov17):
+        problems.append("20261117 platforms")
+    for cut_id, companions in nov17.items():
+        cut = model["items"].get(cut_id)
+        if (
+            not cut
+            or cut.get("section") != "published"
+            or cut["flags"].get("publish_approved")
+            or cut.get("qc", {}).get("ready")
+            or not cut["platforms"]["fb"]["published"]
+            or not cut["platforms"]["ig"]["published"]
+            or cut["platforms"]["yt"].get("verification") != "unverified"
+            or cut["platforms"]["yt"].get("published")
+        ):
+            problems.append(cut_id + " publication")
+            continue
+        for cid in companions:
+            other = model["items"].get(cid)
+            if (
+                not other
+                or other.get("section") != "published"
+                or any_platform_published(other)
+                or other["flags"].get("publish_approved")
+            ):
+                problems.append(cid + " still in a review queue")
+    a5 = model["items"].get("cut:EP198/第一份薪水4萬5.mp4")
+    if not a5 or not any("限時動態" in n for n in (a5.get("related_notes") or [])):
+        problems.append("A5 story note")
+    for iid in (
+        "cut:EP198/員工配股拿到就賣.mp4",
+        "cut:EP198/抱十年就會發.mp4",
+        "cut:EP198/長期投資靠穩定收入.mp4",
+        "cut:EP198/投資沒有致勝公式.mp4",
+    ):
+        held = model["items"].get(iid)
+        if not held or held.get("section") != "cut" or any_platform_published(held):
+            problems.append(iid + " must stay in 成片待審")
+    for pid in (
+        "EP220-Q2", "EP220-Q3", "EP220-Q4", "EP220-Q5", "EP220-Q6", "EP220-Q7",
+        "EP220-H1", "EP220-H2", "EP220-H5", "EP198-H7",
+    ):
+        queued = model["items"].get(pid)
+        if not queued or queued.get("section") != "script":
+            problems.append(pid + " queued selection changed")
+    for sid in ("approved-script:F3", "approved-script:F4", "approved-script:F6", "approved-script:F8"):
+        kept = model["items"].get(sid)
+        if not kept or kept.get("section") != "approved":
+            problems.append(sid + " must stay approved")
+    old_a1 = model["items"].get("cut:EP220/不升我就走.mp4")
+    if (
+        not old_a1
+        or old_a1.get("section") != "published"
+        or not old_a1.get("archived_as_duplicate")
+        or any_platform_published(old_a1)
+        or old_a1["flags"].get("publish_approved")
+        or old_a1.get("qc", {}).get("ready")
+        or "已下架，被 v2 取代" not in (old_a1.get("archive_reason") or "")
+    ):
+        problems.append("old A1 must stay taken down")
+    a1v2 = model["items"].get("cut:EP220/不升我就走_v2_final.mp4")
+    if (
+        not a1v2
+        or a1v2.get("section") != "published"
+        or a1v2.get("artifact", {}).get("id") == (old_a1 or {}).get("artifact", {}).get("id")
+        or a1v2["flags"].get("publish_approved")
+        or a1v2.get("qc", {}).get("ready")
+        or not a1v2["platforms"]["fb"]["published"]
+        or not a1v2["platforms"]["ig"]["published"]
+        or a1v2["platforms"]["yt"].get("verification") != "unverified"
+    ):
+        problems.append("A1 v2 publication")
+    ep251 = model["items"].get("cut:EP251/像我是砲兵就是開砲嗎_orig_qc.mp4")
+    if (
+        not ep251
+        or ep251.get("section") != "published"
+        or ep251["flags"].get("publish_approved")
+        or ep251.get("qc", {}).get("ready")
+        or not ep251["platforms"]["fb"]["published"]
+        or not ep251["platforms"]["ig"]["published"]
+        or ep251["platforms"]["yt"].get("verification") != "unverified"
+        or (ep251.get("media") or {}).get("video")
+    ):
+        problems.append("EP251 publication")
+    a8 = model["items"].get("cut:EP198/資產五千萬錢自己滾_延長.mp4")
+    if (
+        not a8
+        or a8.get("section") != "cut"
+        or not (a8.get("hold") or {}).get("reason")
+        or a8.get("qc", {}).get("ready")
+        or a8["flags"].get("publish_approved")
+        or any_platform_published(a8)
+        or (a8.get("hold") or {}).get("label") != "不可發佈"
+    ):
+        problems.append("A8 must stay blocked and unpublished")
     yt_bad = [
         it["id"] for it in items
         if it.get("platforms") and not it["platforms"]["yt"]["published"] and it["platforms"]["yt"].get("verification") == "not_published"
@@ -1006,7 +1121,7 @@ def invariants(model: dict) -> list[str]:
         if it.get("section") in ("new", "script", "approved", "cut", "recon") and any_platform_published(it):
             problems.append(it["id"] + " visible on a main tab")
     known = [it for it in items if it["id"].startswith("cut:") and not it["platforms"]["fb"]["published"]]
-    if len(known) != 14:
+    if len(known) != 10:
         problems.append("known unpublished cuts")
     recon = [it for it in items if it["section"] == "recon"]
     if len(recon) != 94:
@@ -1023,6 +1138,31 @@ def empty_model() -> dict:
 
 def upsert_item(model: dict, item: dict) -> None:
     model["items"][item["id"]] = item
+
+
+def _append_note(item: dict, note: str | None) -> None:
+    if not note:
+        return
+    notes = list(item.get("related_notes") or [])
+    if note not in notes:
+        notes.append(note)
+    item["related_notes"] = notes
+
+
+def _retire_same_clip(model: dict, source_id: str, companion_ids, note: str | None) -> list[str]:
+    """Move same-clip review cards to 已發佈. Flags and platform slots stay as they are."""
+    moved = []
+    for cid in companion_ids or []:
+        if cid == source_id:
+            continue
+        other = model["items"].get(cid)
+        if other is None:
+            raise ValueError("same clip item missing " + str(cid))
+        if other.get("section") != "published":
+            other["section"] = "published"
+        _append_note(other, note)
+        moved.append(cid)
+    return moved
 
 
 def apply_mutation(model: dict, event: dict) -> dict:
@@ -1158,6 +1298,9 @@ def apply_mutation(model: dict, event: dict) -> dict:
         file_mtime = payload.get("file_mtime")
         file_size = payload.get("file_size")
         gate = qc_gate(payload.get("qc_short"), payload.get("qc_extra"), file_mtime, file_size, payload.get("accepted_warns"))
+        if not gate["ready"] and payload.get("block_reason"):
+            _reject_private({"block_reason": payload.get("block_reason")})
+            gate["block_reason"] = payload["block_reason"]
         item["qc"] = gate
         item["kind"] = "cut"
         item["section"] = "cut"
@@ -1172,6 +1315,38 @@ def apply_mutation(model: dict, event: dict) -> dict:
             return {"effect": "rejected", "reason": "missing item"}
         if payload.get("artifact_id") != item.get("artifact", {}).get("id"):
             return {"effect": "rejected", "reason": "artifact mismatch"}
+        public = payload.get("public_record")
+        if public:
+            if public.get("ready") is True:
+                return {"effect": "rejected", "reason": "public record cannot set ready"}
+            _reject_private(public)
+            item["qc"] = {
+                "short": {
+                    "state": public.get("short_state") or "fail",
+                    "pass": False,
+                    "identity_match": False,
+                    "result_raw": public.get("short_result") or "FAIL",
+                    "fails": list(public.get("fails") or []),
+                    "warns": [],
+                    "detail": public.get("short_detail") or "",
+                    "at": public.get("at"),
+                },
+                "extra": {
+                    "state": public.get("extra_state") or "warn_accepted",
+                    "pass": bool(public.get("extra_pass")),
+                    "identity_match": False,
+                    "result_raw": public.get("extra_result") or "WARN",
+                    "fails": [],
+                    "warns": list(public.get("warns") or []),
+                    "detail": public.get("extra_detail") or "",
+                    "at": public.get("at"),
+                },
+                "ready": False,
+                "block_reason": public.get("block_reason") or "不能放行",
+                "accepted_warns": list(public.get("accepted_warns") or []),
+            }
+            item["flags"]["publish_approved"] = False
+            return {"effect": "qc_public_record", "id": item["id"], "ready": False}
         gate = qc_gate(
             payload.get("qc_short"),
             payload.get("qc_extra"),
@@ -1205,7 +1380,17 @@ def apply_mutation(model: dict, event: dict) -> dict:
                 item["section"] = "published"
             elif item.get("section") == "published" and not item.get("archived_as_duplicate"):
                 item["section"] = "cut"
-        return {"effect": "platform_only", "id": item["id"], "platform": platform, "unchanged": [k for k in before if k != platform and before[k] == item["platforms"][k]]}
+        _append_note(item, payload.get("note"))
+        moved = []
+        if any_platform_published(item):
+            moved = _retire_same_clip(model, item["id"], payload.get("same_clip_ids"), payload.get("same_clip_note"))
+        return {
+            "effect": "platform_only",
+            "id": item["id"],
+            "platform": platform,
+            "unchanged": [k for k in before if k != platform and before[k] == item["platforms"][k]],
+            "same_clip": moved,
+        }
     if et == "preview_attached":
         item = model["items"].get(payload.get("item_id"))
         if not item:
@@ -1224,7 +1409,96 @@ def apply_mutation(model: dict, event: dict) -> dict:
         item["media"]["missing"] = None
         item["preview"] = {"url": url, "artifact_id": art.get("id"), "event_id": event.get("event_id")}
         return {"effect": "preview_attached", "id": item["id"]}
+    if et == "artifact_archived":
+        item = model["items"].get(payload.get("item_id"))
+        if not item:
+            return {"effect": "rejected", "reason": "missing item"}
+        if payload.get("artifact_id") != (item.get("artifact") or {}).get("id"):
+            return {"effect": "rejected", "reason": "artifact mismatch"}
+        _reject_private(payload)
+        item["flags"]["publish_approved"] = False
+        item["flags"]["cut_authorized"] = False
+        item["section"] = "published"
+        item["archived_as_duplicate"] = True
+        item["archive_reason"] = payload.get("archive_reason") or "已下架，被取代"
+        item["hold"] = {
+            "label": payload.get("hold_label") or "已下架",
+            "reason": payload.get("hold_reason") or "",
+            "since": payload.get("since") or event.get("occurred_at"),
+        }
+        if payload.get("clear_current_publication"):
+            notes = payload.get("platform_notes") or {}
+            item["platforms"] = {
+                "yt": platform_slot("YouTube", published=False, source=notes.get("yt")),
+                "fb": platform_slot("Facebook", published=False, source=notes.get("fb")),
+                "ig": platform_slot("Instagram", published=False, source=notes.get("ig")),
+            }
+        if item.get("qc") is not None:
+            item["qc"]["ready"] = False
+            if payload.get("block_reason"):
+                item["qc"]["block_reason"] = payload["block_reason"]
+        note = payload.get("note")
+        if note:
+            notes_list = list(item.get("related_notes") or [])
+            if note not in notes_list:
+                notes_list.append(note)
+            item["related_notes"] = notes_list
+        return {"effect": "archived_superseded", "id": item["id"]}
+    if et == "hold_not_publishable":
+        item = model["items"].get(payload.get("item_id"))
+        if not item:
+            return {"effect": "rejected", "reason": "missing item"}
+        if payload.get("artifact_id") != (item.get("artifact") or {}).get("id"):
+            return {"effect": "rejected", "reason": "artifact mismatch"}
+        _reject_private(payload)
+        item["flags"]["publish_approved"] = False
+        qc = item.setdefault("qc", not_run_qc("不可發佈"))
+        qc["ready"] = False
+        if payload.get("block_reason"):
+            qc["block_reason"] = payload["block_reason"]
+        short = qc.setdefault("short", {})
+        short["state"] = payload.get("short_state") or "not_pass"
+        short["pass"] = False
+        if payload.get("short_detail"):
+            short["detail"] = payload["short_detail"]
+        item["hold"] = {
+            "label": payload.get("hold_label") or "不可發佈",
+            "reason": payload.get("hold_reason") or "",
+            "since": payload.get("since") or event.get("occurred_at"),
+        }
+        if item.get("section") == "published" and not any_platform_published(item):
+            item["section"] = "cut"
+        note = payload.get("note")
+        if note:
+            kept = []
+            for existing in item.get("related_notes") or []:
+                if "待使用者決定" in existing or "alias change pending" in existing:
+                    continue
+                kept.append(existing)
+            if note not in kept:
+                kept.append(note)
+            item["related_notes"] = kept
+        for ident in item.get("local_identities") or []:
+            nested = ident.get("qc")
+            if not isinstance(nested, dict):
+                continue
+            nested["ready"] = False
+            nested["block_reason"] = qc.get("block_reason")
+            nested_short = nested.get("short")
+            if isinstance(nested_short, dict):
+                nested_short["state"] = short["state"]
+                nested_short["pass"] = False
+                if payload.get("short_detail"):
+                    nested_short["detail"] = payload["short_detail"]
+        return {"effect": "held_not_publishable", "id": item["id"], "section": item.get("section")}
     raise ValueError("unsupported event " + et)
+
+
+def _reject_private(payload) -> None:
+    blob = json.dumps(payload, ensure_ascii=False)
+    for banned in ("/workspace/", "local://", "x-access-token"):
+        if banned in blob:
+            raise ValueError("banned text in event")
 
 
 def _public_text(value: str) -> str | None:
